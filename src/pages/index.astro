@@ -7,11 +7,12 @@ import CursoCard from '../components/CursoCard.astro';
 import ProfessorCirculo from '../components/ProfessorCirculo.astro';
 import FaixaObras from '../components/FaixaObras.astro';
 import Contato from '../components/Contato.astro';
+import Oficinas from '../components/Oficinas.astro';
 import { cursos, PUBLICOS, type Publico } from '../content/cursos';
 import { professores, professorPorSlug } from '../content/professores';
 import { obras } from '../content/obras';
 import { TEXTOS } from '../content/textos';
-import { linkConsultaTurmas } from '../config/contato';
+import { linkAulaExperimental } from '../config/contato';
 import fotoAbertura from '../assets/atelier/abertura.jpg';
 import fotoFundadora from '../assets/atelier/fundadora.jpg';
 
@@ -41,7 +42,7 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
       <p class="sub texto-suave">{TEXTOS.abertura.subtitulo}</p>
       <div class="acoes">
         <a class="botao" href="/aulas">Ver os cursos</a>
-        <a class="link-seta" href={linkConsultaTurmas()} target="_blank" rel="noopener">{TEXTOS.botaoTurmas} <span aria-hidden="true">→</span><span class="so-leitor"> (abre em nova aba)</span></a>
+        <a class="link-seta" href={linkAulaExperimental()} target="_blank" rel="noopener">{TEXTOS.botaoExperimental} <span aria-hidden="true">→</span><span class="so-leitor"> (abre em nova aba)</span></a>
       </div>
       <nav class="para-quem" aria-label="Aulas por público">
         <span class="texto-suave">{TEXTOS.paraQuem}</span>
@@ -61,14 +62,11 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
       </div>
       <div class="grade-cursos">
         {cursos.map((curso) => <CursoCard curso={curso} />)}
-        <article class="cartao oficinas" aria-labelledby="titulo-oficinas">
-          <h3 id="titulo-oficinas"><Destaque texto={TEXTOS.oficinas.titulo} /></h3>
-          <p>{TEXTOS.oficinas.resumo}</p>
-          <a class="link-seta" href="/aulas#oficinas">Saber das próximas oficinas <span aria-hidden="true">→</span></a>
-        </article>
       </div>
     </div>
   </section>
+
+  <Oficinas />
 
   <section class="conteiner atelier" aria-labelledby="titulo-atelier">
     <Image
@@ -227,25 +225,11 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
     gap: 24px;
   }
 
-  .oficinas {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-    padding: 22px 28px;
-    border: 1.5px dashed var(--linha-forte);
-    background: transparent;
-    box-shadow: none;
+  /* Número ímpar de cursos: o último ocupa a linha inteira. */
+  .grade-cursos > :global(:last-child:nth-child(odd)) {
+    grid-column: 1 / -1;
   }
 
-  .oficinas h3 {
-    font-size: 25px;
-    font-weight: 500;
-  }
-
-  .oficinas p {
-    font-size: 16px;
-  }
 
   .atelier {
     max-width: 860px;

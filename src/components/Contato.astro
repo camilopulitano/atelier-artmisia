@@ -1,7 +1,7 @@
 ---
 import Destaque from './Destaque.astro';
 import Preencher from './Preencher.astro';
-import { CIDADE, ENDERECO, ESTADO, HORARIO, INSTAGRAM_URL, INSTAGRAM_USUARIO, linkConsultaTurmas, linkWhatsApp, WHATSAPP_LEGIVEL } from '../config/contato';
+import { CIDADE, ENDERECO, ESTADO, HORARIO, INSTAGRAM_URL, INSTAGRAM_USUARIO, linkAulaExperimental, linkConsultaTurmas, linkWhatsApp, WHATSAPP_LEGIVEL } from '../config/contato';
 import { TEXTOS } from '../content/textos';
 
 /** Seção de contato (home e página do atelier). */
@@ -17,7 +17,10 @@ const { fundo = 'padrao' } = Astro.props;
     <div class="chamada">
       <h2 id="titulo-contato" class="titulo-secao"><Destaque texto={TEXTOS.contato.titulo} /></h2>
       <p class="texto-suave">{TEXTOS.contato.texto}</p>
-      <a class="botao" href={linkConsultaTurmas()} target="_blank" rel="noopener">{TEXTOS.botaoTurmas}<span class="so-leitor"> (abre em nova aba)</span></a>
+      <div class="botoes">
+        <a class="botao" href={linkConsultaTurmas()} target="_blank" rel="noopener">{TEXTOS.botaoTurmas}<span class="so-leitor"> (abre em nova aba)</span></a>
+        <a class="botao botao--contorno" href={linkAulaExperimental()} target="_blank" rel="noopener">{TEXTOS.botaoExperimental}<span class="so-leitor"> (abre em nova aba)</span></a>
+      </div>
     </div>
     <dl class="cartao dados">
       <div><dt>Endereço</dt><dd>{ENDERECO ?? <>{CIDADE}, {ESTADO} <Preencher o="rua e número" /></>}</dd></div>
@@ -46,6 +49,12 @@ const { fundo = 'padrao' } = Astro.props;
     flex-direction: column;
     align-items: flex-start;
     gap: 18px;
+  }
+
+  .botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   .chamada p {
@@ -84,6 +93,7 @@ const { fundo = 'padrao' } = Astro.props;
   }
 
   @media (max-width: 520px) {
+    .botoes,
     .chamada .botao {
       width: 100%;
     }

@@ -4,10 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Destaque from '../components/Destaque.astro';
 import Preencher from '../components/Preencher.astro';
 import TurmasTabela from '../components/TurmasTabela.astro';
+import Oficinas from '../components/Oficinas.astro';
 import { cursos, idadeRotulo, professorDe, PUBLICOS, SITUACOES_TURMA, turmas, type Publico } from '../content/cursos';
 import { retratoDe } from '../content/professores';
 import { TEXTOS, semMarcas } from '../content/textos';
-import { linkConsultaTurmas, linkOficinas } from '../config/contato';
+import { linkAulaExperimental, linkConsultaTurmas } from '../config/contato';
 
 const publicos = Object.entries(PUBLICOS) as [Publico, string][];
 const temSituacao = turmas.some((t) => t.situacao);
@@ -90,13 +91,7 @@ const temSituacao = turmas.some((t) => t.situacao);
     </div>
   </section>
 
-  <section id="oficinas" class="conteiner oficinas" aria-labelledby="titulo-oficinas">
-    <div class="pilha">
-      <h2 id="titulo-oficinas" class="titulo-secao"><Destaque texto={TEXTOS.oficinas.titulo} /></h2>
-      <p class="texto-leitura">{TEXTOS.oficinas.texto}</p>
-    </div>
-    <a class="botao botao--contorno" href={linkOficinas()} target="_blank" rel="noopener">Perguntar sobre as próximas oficinas<span class="so-leitor"> (abre em nova aba)</span></a>
-  </section>
+  <Oficinas />
 
   <section class="faixa-secao" aria-labelledby="titulo-chamada">
   <div class="conteiner chamada">
@@ -104,7 +99,10 @@ const temSituacao = turmas.some((t) => t.situacao);
       <h2 id="titulo-chamada" class="titulo-secao"><Destaque texto={TEXTOS.aulas.inscricoesTitulo} /></h2>
       <p class="texto-suave">{TEXTOS.aulas.horarios}</p>
     </div>
-    <a class="botao" href={linkConsultaTurmas()} target="_blank" rel="noopener">{TEXTOS.botaoTurmas}<span class="so-leitor"> (abre em nova aba)</span></a>
+    <div class="botoes">
+      <a class="botao" href={linkConsultaTurmas()} target="_blank" rel="noopener">{TEXTOS.botaoTurmas}<span class="so-leitor"> (abre em nova aba)</span></a>
+      <a class="botao botao--contorno" href={linkAulaExperimental()} target="_blank" rel="noopener">{TEXTOS.botaoExperimental}<span class="so-leitor"> (abre em nova aba)</span></a>
+    </div>
   </div>
   </section>
 </BaseLayout>
@@ -292,7 +290,12 @@ const temSituacao = turmas.some((t) => t.situacao);
     color: var(--texto);
   }
 
-  .oficinas,
+  .botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   .chamada {
     display: flex;
     flex-wrap: wrap;
@@ -330,8 +333,8 @@ const temSituacao = turmas.some((t) => t.situacao);
       height: 56px;
     }
 
-    .chamada .botao,
-    .oficinas .botao {
+    .botoes,
+    .chamada .botao {
       width: 100%;
     }
   }

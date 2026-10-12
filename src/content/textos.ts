@@ -27,12 +27,16 @@ export const TEXTOS = {
   /** Rótulo do botão principal de contato (pedido da Ana). */
   botaoTurmas: 'Consultar turmas pelo WhatsApp',
 
+  /** Rótulo do botão de aula experimental. */
+  botaoExperimental: 'Marcar aula experimental',
+
   oficinas: {
+    rotulo: 'Em datas específicas',
     titulo: '*Oficinas*',
-    /** Primeira frase do texto, para o cartão da home. */
-    resumo: 'Também realizamos oficinas em datas específicas, com propostas como pintura e vinho, aquarela e cerâmica.',
     texto:
-      'Também realizamos oficinas em datas específicas, com propostas como pintura e vinho, aquarela e cerâmica. Cada oficina tem sua própria programação, público e condições de participação, divulgados conforme a abertura das inscrições.',
+      'Além dos cursos, o atelier realiza oficinas em datas específicas. Cada oficina tem sua própria programação, público e condições de participação, divulgados conforme a abertura das inscrições.',
+    /** Tipos de oficina (Ana, 12/10/2026). */
+    tipos: ['Aquarela', 'Pintura ao vivo', 'Cerâmica', 'Colagem'],
   },
 
   atelier: {
@@ -78,10 +82,9 @@ export const TEXTOS = {
     consulta: 'Pelo WhatsApp',
     /** Texto da Ana: horários e inscrições. */
     horarios: 'Para consultar os horários, valores e a disponibilidade de vagas, entre em contato com o ateliê pelo WhatsApp.',
-    /** TODO(conteudo): existe aula experimental? Como funciona? */
-    aulaExperimental: undefined as string | undefined,
-    /** TODO(conteudo): o material é incluso ou o aluno traz? */
-    material: undefined as string | undefined,
+    /** Ana, 12/10/2026. */
+    aulaExperimental: 'Tem: é só marcar o horário pelo WhatsApp' as string | undefined,
+    material: 'Não incluso' as string | undefined,
     inscricoesTitulo: 'Horários e *inscrições*',
   },
 

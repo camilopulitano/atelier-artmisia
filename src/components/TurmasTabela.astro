@@ -1,6 +1,6 @@
 ---
 import Preencher from './Preencher.astro';
-import { linkTurma } from '../config/contato';
+import { linkAulaExperimental, linkTurma } from '../config/contato';
 import { SITUACOES_TURMA, turmasDe, type Curso } from '../content/cursos';
 import type { Professor } from '../content/professores';
 import { TEXTOS } from '../content/textos';
@@ -28,6 +28,10 @@ const whatsapp = linkTurma(curso, professor);
     <div class="consulta">
       <a class="botao" href={whatsapp} target="_blank" rel="noopener">
         {TEXTOS.botaoTurmas}
+        <span class="so-leitor"> — {curso.nome} (abre em nova aba)</span>
+      </a>
+      <a class="botao botao--contorno" href={linkAulaExperimental(curso)} target="_blank" rel="noopener">
+        {TEXTOS.botaoExperimental}
         <span class="so-leitor"> — {curso.nome} (abre em nova aba)</span>
       </a>
     </div>
@@ -72,6 +76,7 @@ const whatsapp = linkTurma(curso, professor);
   .consulta {
     display: flex;
     flex-wrap: wrap;
+    gap: 12px;
     padding-top: 4px;
   }
 

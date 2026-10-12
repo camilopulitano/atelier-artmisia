@@ -33,16 +33,15 @@ Em `textos.ts`, a palavra entre `*asteriscos*` aparece em itálico verde no tít
 
 Procure `TODO(conteudo)` no código. Hoje:
 
-1. Confirmar WhatsApp e Instagram do atelier; rua e número em Medianeira; horário de funcionamento.
+1. Rua e número em Medianeira; horário de funcionamento.
 2. Ano de abertura do atelier.
-3. Aula experimental? Material incluso?
-4. Fotos do espaço, de aula acontecendo e da exposição Brasilidade.
-5. O que a seção Obras mostra (hoje: 6 obras da Ana).
-6. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; uma obra autoral do Edison para a capa do curso.
-7. Fotos dos quatro professores numa sessão só.
-8. Domínio próprio, se houver (trocar em `src/config/site.ts` e `astro.config.mjs`).
+3. Fotos do espaço, de aula acontecendo e da exposição Brasilidade.
+4. O que a seção Obras mostra (hoje: 6 obras da Ana).
+5. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; uma obra autoral do Edison para a capa do curso.
+6. Fotos dos quatro professores numa sessão só.
+7. Domínio próprio, se houver (trocar em `src/config/site.ts` e `astro.config.mjs`).
 
-Cursos, idades, textos dos cursos, oficinas e o parágrafo sobre o atelier já vieram da Ana (11/10/2026).
+Já vieram da Ana: cursos, idades e textos, oficinas (aquarela, pintura ao vivo, cerâmica, colagem), parágrafo sobre o atelier, aula experimental (marcar pelo WhatsApp), material não incluso, WhatsApp e Instagram confirmados.
 
 Lista completa e a mensagem para a Ana: `claude/conteudo-atelier.md` no Project.
 

@@ -1,0 +1,223 @@
+---
+import Destaque from './Destaque.astro';
+import { linkOficinas, WHATSAPP_E164 } from '../config/contato';
+import { SITE } from '../config/site';
+import { TEXTOS } from '../content/textos';
+
+/**
+ * Seção de oficinas (home e página de aulas). Lista em textos.ts → oficinas.tipos.
+ * Formulário de interesse: monta a mensagem e abre o WhatsApp do atelier.
+ * Nada é guardado no site; os dados só saem quando a pessoa envia a mensagem.
+ */
+interface Props {
+  /** Nível do título: h2 na página, mesmo estilo. */
+  fundo?: 'padrao' | 'secao';
+}
+const { fundo = 'padrao' } = Astro.props;
+const { tipos } = TEXTOS.oficinas;
+---
+
+<section id="oficinas" class:list={['oficinas', { 'faixa-secao': fundo === 'secao' }]} aria-labelledby="titulo-oficinas">
+  <div class="conteiner grade">
+    <div class="pilha">
+      <p class="sobrancelha">{TEXTOS.oficinas.rotulo}</p>
+      <h2 id="titulo-oficinas" class="titulo-secao"><Destaque texto={TEXTOS.oficinas.titulo} /></h2>
+      <p class="texto-leitura">{TEXTOS.oficinas.texto}</p>
+      <ul class="tipos" role="list">
+        {tipos.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+
+    <form class="cartao form-oficina" data-whatsapp={WHATSAPP_E164} data-site={SITE.nome} aria-labelledby="titulo-form-oficina">
+      <h3 id="titulo-form-oficina">Quero saber da próxima oficina</h3>
+      <p class="texto-suave">Deixe seu contato e o atelier avisa quando abrirem as inscrições.</p>
+
+      <fieldset>
+        <legend>Qual oficina te interessa?</legend>
+        <div class="opcoes">
+          {tipos.map((t) => (
+            <label class="opcao">
+              <input type="checkbox" name="oficina" value={t} />
+              <span>{t}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <label class="campo">
+        <span>Nome</span>
+        <input type="text" name="nome" autocomplete="name" required />
+      </label>
+      <label class="campo">
+        <span>WhatsApp</span>
+        <input type="tel" name="numero" autocomplete="tel" inputmode="tel" placeholder="(45) 99999-9999" required pattern="[0-9()+\-\s]{10,20}" />
+      </label>
+      <label class="campo">
+        <span>Instagram</span>
+        <input type="text" name="instagram" placeholder="@seuperfil" autocapitalize="none" autocomplete="off" />
+      </label>
+
+      <p class="erro" role="alert" hidden>Escolha pelo menos uma oficina.</p>
+      <button type="submit" class="botao">Enviar pelo WhatsApp</button>
+      <p class="nota texto-suave">
+        O botão abre o WhatsApp do atelier com a mensagem pronta; é só enviar.
+        <noscript>Sem JavaScript? <a href={linkOficinas()}>Fale com o atelier pelo WhatsApp</a>.</noscript>
+      </p>
+    </form>
+  </div>
+</section>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('form.form-oficina')) {
+    const erro = form.querySelector<HTMLElement>('.erro')!;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const dados = new FormData(form);
+      const oficinas = dados.getAll('oficina').map(String);
+      erro.hidden = oficinas.length > 0;
+      if (!oficinas.length) {
+        form.querySelector<HTMLInputElement>('input[name=oficina]')?.focus();
+        return;
+      }
+      const nome = String(dados.get('nome') ?? '').trim();
+      const numero = String(dados.get('numero') ?? '').trim();
+      let insta = String(dados.get('instagram') ?? '').trim().replace(/^@+/, '');
+      const linhas = [
+        `Olá! Vim pelo site do ${form.dataset.site} e quero saber da próxima oficina.`,
+        `Oficina: ${oficinas.join(', ')}`,
+        `Nome: ${nome}`,
+        `WhatsApp: ${numero}`,
+      ];
+      if (insta) linhas.push(`Instagram: @${insta}`);
+      const url = `https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(linhas.join('\n'))}`;
+      window.open(url, '_blank', 'noopener');
+    });
+  }
+</script>
+
+<style>
+  .oficinas {
+    scroll-margin-top: 24px;
+  }
+
+  .grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 32px clamp(32px, 6vw, 96px);
+    align-items: start;
+    padding-block: clamp(56px, 8vw, 104px);
+  }
+
+  .pilha {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .tipos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--serif);
+    font-size: clamp(20px, 2vw, 24px);
+    font-style: italic;
+    color: var(--oliva);
+  }
+
+  .form-oficina {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: clamp(20px, 3vw, 32px);
+  }
+
+  .form-oficina h3 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend,
+  .campo > span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .opcao {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1.5px solid var(--linha-forte);
+    border-radius: var(--raio);
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .opcao:has(input:checked) {
+    border-color: var(--oliva);
+    background: var(--secao);
+  }
+
+  .opcao input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--oliva);
+  }
+
+  .campo input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--linha-forte);
+    border-radius: var(--raio);
+    background: var(--fundo);
+    color: var(--texto);
+    font: inherit;
+    font-size: 16px;
+  }
+
+  .campo input:focus-visible,
+  .opcao:has(input:focus-visible) {
+    outline: 3px solid var(--oliva);
+    outline-offset: 2px;
+  }
+
+  .erro {
+    color: var(--vendida);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .form-oficina .botao {
+    align-self: flex-start;
+  }
+
+  .nota {
+    font-size: 14px;
+  }
+
+  @media (max-width: 520px) {
+    .form-oficina .botao {
+      align-self: stretch;
+    }
+  }
+</style>

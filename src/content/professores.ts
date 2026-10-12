@@ -61,7 +61,7 @@ export const professores: Professor[] = [
       { alt: 'Ana segurando uma tela horizontal com a paisagem de um cânion de paredes claras e vegetação verde' },
     ],
     bio: [
-      'Artista plástica, professora de pintura e fundadora do Atelier Artmisia, Ana iniciou sua trajetória na pintura em 2015, quando aprendeu com Daine Mari Chibiaqui. Desde então, buscou formação com diferentes artistas e técnicas, construindo uma trajetória marcada pelo estudo constante e pelo desejo de ensinar.',
+      'Artista plástica, professora de pintura e fundadora do Atelier Artmisia, Ana iniciou sua trajetória na pintura em 2015. Desde então, buscou formação com diferentes artistas e técnicas, construindo uma trajetória marcada pelo estudo constante e pelo desejo de ensinar.',
       'Sua pintura tem forte ligação com o naturalismo, mas sua curiosidade pela arte a levou a explorar diferentes linguagens e estilos, ampliando também sua forma de ensinar.',
       'Filha de Anilfa Quintanas Morais e Julio Morais, Ana cresceu em uma família que, mesmo com uma trajetória marcada por desafios, sempre encontrou espaço para incentivar sua criatividade e seu interesse pela arte. Desde criança, foi estimulada a criar e encontrou na arte muito mais do que uma profissão. Hoje, entre a pintura, a maternidade, a família e o ensino, dedica-se a compartilhar aquilo que ama com crianças, adolescentes e adultos.',
     ],

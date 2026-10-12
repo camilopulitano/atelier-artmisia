@@ -7,10 +7,10 @@ import { SITE } from './site';
  * publicar um botão de WhatsApp que não abre.
  */
 
-// TODO(conteudo): confirmar com a Ana se o WhatsApp do atelier é o dela, (45) 99859-3078.
+// WhatsApp do atelier, (45) 99859-3078 (confirmado em 12/10/2026).
 const WHATSAPP_BRUTO = '5545998593078'; // 55 + DDD + 9 + número, só dígitos
 
-// TODO(conteudo): confirmar o Instagram do atelier (aparece no banner da Brasilidade).
+// Instagram do atelier (confirmado em 12/10/2026).
 export const INSTAGRAM_USUARIO = 'artmisia.atelier'; // sem o @
 
 /** Cidade do atelier (texto da Ana, 11/10/2026). */
@@ -48,6 +48,12 @@ export function linkWhatsApp(mensagem = `Olá! Vim pelo site do ${SITE.nome} e g
 /** Botão geral "Consultar turmas pelo WhatsApp". */
 export function linkConsultaTurmas(): string {
   return linkWhatsApp(`Olá! Vim pelo site do ${SITE.nome} e gostaria de consultar as turmas: horários, valores e vagas.`);
+}
+
+/** Marcar aula experimental (geral ou de um curso). */
+export function linkAulaExperimental(curso?: { nome: string }): string {
+  const qual = curso ? ` de ${curso.nome}` : '';
+  return linkWhatsApp(`Olá! Vim pelo site do ${SITE.nome} e gostaria de marcar uma aula experimental${qual}. Quais horários vocês têm?`);
 }
 
 /** Pergunta sobre as próximas oficinas. */
