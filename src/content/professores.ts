@@ -66,7 +66,10 @@ export const professores: Professor[] = [
       'Filha de Anilfa Quintanas Morais e Julio Morais, Ana cresceu em uma família que, mesmo com uma trajetória marcada por desafios, sempre encontrou espaço para incentivar sua criatividade e seu interesse pela arte. Desde criança, foi estimulada a criar e encontrou na arte muito mais do que uma profissão. Hoje, entre a pintura, a maternidade, a família e o ensino, dedica-se a compartilhar aquilo que ama com crianças, adolescentes e adultos.',
     ],
     citacoes: [],
-    links: [{ rotulo: 'Portfólio da Ana', url: 'https://site-anamorais.vercel.app' }],
+    links: [
+      { rotulo: 'Portfólio da Ana', url: 'https://site-anamorais.vercel.app' },
+      { rotulo: 'Instagram: @ana.quintanas', url: 'https://www.instagram.com/ana.quintanas/' },
+    ],
   },
   {
     slug: 'edison-marsan',
@@ -96,7 +99,10 @@ export const professores: Professor[] = [
       'Acredito que a arte é para todos. Mais do que dom, é a dedicação e a vontade de aprender que fazem alguém evoluir.',
     ],
     // TODO(conteudo): confirmar o endereço exato do canal com o Edison.
-    links: [{ rotulo: 'Canal no YouTube: @edisonmarsanart', url: 'https://www.youtube.com/@edisonmarsanart' }],
+    links: [
+      { rotulo: 'Canal no YouTube: @edisonmarsanart', url: 'https://www.youtube.com/@edisonmarsanart' },
+      { rotulo: 'Instagram: @edisonmarsanart', url: 'https://www.instagram.com/edisonmarsanart/' },
+    ],
   },
   {
     slug: 'fabiana-de-zorzi',
@@ -121,7 +127,7 @@ export const professores: Professor[] = [
       'A infância é um chão que pisamos por toda a vida. É nela que construímos referências, descobrimos possibilidades e aprendemos a olhar o mundo. O contato com as diferentes formas de arte desde cedo amplia o olhar, desperta a sensibilidade, estimula a criatividade e fortalece a autonomia, permitindo que cada criança encontre suas próprias formas de expressar, criar e transformar.',
       'Em muitos momentos da minha vida, quando me faltaram palavras, caminhos e até força, a arte permaneceu. E talvez seja por isso que hoje eu tenha tanto desejo de compartilhá-la com outras pessoas.',
     ],
-    links: [],
+    links: [{ rotulo: 'Instagram: @fabianadezorzi', url: 'https://www.instagram.com/fabianadezorzi/' }],
   },
   {
     slug: 'camilo-pulitano',
