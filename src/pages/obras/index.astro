@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Destaque from '../../components/Destaque.astro';
+import ObraCard from '../../components/ObraCard.astro';
+import { obras, TEMAS, type Tema } from '../../content/obras';
+import { TEXTOS, semMarcas } from '../../content/textos';
+
+const situacoes = [
+  { valor: 'todas', rotulo: 'Todas' },
+  { valor: 'disponivel', rotulo: 'Disponíveis' },
+  { valor: 'vendida', rotulo: 'Vendidas' },
+];
+// Só os temas que têm obra: filtro que leva a lista vazia não ajuda ninguém.
+const temasUsados = (Object.keys(TEMAS) as Tema[]).filter((t) => obras.some((o) => o.tema === t));
+const temas: { valor: 'todos' | Tema; rotulo: string }[] = [
+  { valor: 'todos', rotulo: 'Todos os temas' },
+  ...temasUsados.map((t) => ({ valor: t, rotulo: TEMAS[t] })),
+];
+---
+
+<BaseLayout titulo={semMarcas(TEXTOS.obras.titulo)} descricao={TEXTOS.obras.intro} paginaAtual="obras">
+  <div class="conteiner pagina">
+    <header class="topo">
+      <nav class="trilha" aria-label="Você está aqui"><a href="/">Início</a> / <span aria-current="page">Obras</span></nav>
+      <h1 class="titulo-pagina"><Destaque texto={TEXTOS.obras.titulo} /></h1>
+      <p class="texto-suave">{TEXTOS.obras.intro}</p>
+    </header>
+
+    <div class="filtros">
+      <div class="grupo" role="group" aria-label="Situação">
+        {
+          situacoes.map((s, i) => (
+            <button type="button" class="pilula" data-filtro="situacao" data-valor={s.valor} aria-pressed={i === 0 ? 'true' : 'false'}>
+              {s.valor !== 'todas' && <span class:list={['marca', s.valor]} aria-hidden="true" />}
+              {s.rotulo}
+            </button>
+          ))
+        }
+      </div>
+      <div class="grupo" role="group" aria-label="Tema">
+        {
+          temas.map((t, i) => (
+            <button type="button" class="aba" data-filtro="tema" data-valor={t.valor} aria-pressed={i === 0 ? 'true' : 'false'}>
+              {t.rotulo}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <p class="so-leitor" aria-live="polite" id="resumo">Mostrando {obras.length} obras</p>
+    <p class="vazio" id="vazio" hidden>Nenhuma obra com essa combinação. Tente outro tema.</p>
+
+    <ul class="mural" role="list">
+      {
+        obras.map((obra, i) => (
+          <li data-situacao={obra.situacao} data-tema={obra.tema}>
+            <ObraCard
+              obra={obra}
+              legenda="linha"
+              prioridade={i === 0}
+              sizes="(max-width: 560px) 92vw, (max-width: 900px) 45vw, (max-width: 1200px) 30vw, 300px"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
+
+<script>
+  type Filtro = 'situacao' | 'tema';
+  const padrao: Record<Filtro, string> = { situacao: 'todas', tema: 'todos' };
+  const estado: Record<Filtro, string> = { ...padrao };
+
+  const itens = Array.from(document.querySelectorAll<HTMLLIElement>('.mural > li'));
+  const botoes = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filtro]'));
+  const resumo = document.getElementById('resumo')!;
+  const vazio = document.getElementById('vazio')!;
+
+  // Só aceita valores que existem nos botões — nada vindo da URL entra cru na página.
+  const validos = (f: Filtro) => new Set(botoes.filter((b) => b.dataset.filtro === f).map((b) => b.dataset.valor));
+
+  function aplicar(atualizarUrl: boolean) {
+    let visiveis = 0;
+    for (const li of itens) {
+      const mostra =
+        (estado.situacao === 'todas' || li.dataset.situacao === estado.situacao) &&
+        (estado.tema === 'todos' || li.dataset.tema === estado.tema);
+      li.hidden = !mostra;
+      if (mostra) visiveis++;
+    }
+    for (const b of botoes) {
+      const f = b.dataset.filtro as Filtro;
+      b.setAttribute('aria-pressed', String(estado[f] === b.dataset.valor));
+    }
+    resumo.textContent = visiveis === 1 ? 'Mostrando 1 obra' : `Mostrando ${visiveis} obras`;
+    vazio.hidden = visiveis > 0;
+
+    if (atualizarUrl) {
+      const url = new URL(window.location.href);
+      (Object.keys(estado) as Filtro[]).forEach((f) => {
+        if (estado[f] === padrao[f]) url.searchParams.delete(f);
+        else url.searchParams.set(f, estado[f]);
+      });
+      history.replaceState(null, '', url);
+    }
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  (Object.keys(estado) as Filtro[]).forEach((f) => {
+    const v = params.get(f);
+    if (v && validos(f).has(v)) estado[f] = v;
+  });
+  aplicar(false);
+
+  for (const b of botoes) {
+    b.addEventListener('click', () => {
+      estado[b.dataset.filtro as Filtro] = b.dataset.valor!;
+      aplicar(true);
+    });
+  }
+</script>
+
+<style>
+  .pagina {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-block: clamp(32px, 5vw, 64px) clamp(64px, 9vw, 120px);
+  }
+
+  .topo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 880px;
+  }
+
+  .trilha {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .topo > p {
+    font-size: clamp(17px, 1.6vw, 20px);
+  }
+
+  .filtros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    padding-block: 18px;
+    border-block: 1px solid var(--linha);
+  }
+
+  .grupo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 4px;
+  }
+
+  .pilula {
+    margin-right: 4px;
+  }
+
+  /* Marcador da situação: ponto cheio (disponível) × anel (vendida). */
+  .marca {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+
+  .marca.disponivel {
+    background: var(--disponivel);
+  }
+
+  .marca.vendida {
+    border: 2px solid var(--vendida);
+  }
+
+  .pilula[aria-pressed='true'] .marca {
+    background: var(--branco);
+    border-color: var(--branco);
+  }
+
+  .aba {
+    min-height: 44px;
+    padding: 0 12px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--texto-suave);
+    font-family: var(--sans);
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .aba:hover {
+    color: var(--texto);
+  }
+
+  .aba[aria-pressed='true'] {
+    border-bottom-color: var(--oliva);
+    color: var(--oliva);
+    font-weight: 600;
+  }
+
+  .vazio {
+    padding-block: 64px;
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--texto-suave);
+  }
+
+  /* Mural em colunas: cada pintura na proporção dela, sem corte. */
+  .mural {
+    columns: 4 260px;
+    column-gap: clamp(20px, 3vw, 40px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mural li {
+    break-inside: avoid;
+    margin-bottom: 44px;
+    animation: entrar 360ms var(--entrada) both;
+  }
+
+  .mural li[hidden] {
+    display: none;
+  }
+
+  @keyframes entrar {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+</style>

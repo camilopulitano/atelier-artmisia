@@ -1,0 +1,364 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Selo from '../../components/Selo.astro';
+import FaixaObras from '../../components/FaixaObras.astro';
+import InstagramEmbed from '../../components/InstagramEmbed.astro';
+import { autorDe, fotosDe, imagemDe, obras, TEMAS, type Obra } from '../../content/obras';
+import { linkObra } from '../../config/contato';
+
+export function getStaticPaths() {
+  return obras.map((obra, i) => ({
+    params: { slug: obra.slug },
+    props: {
+      obra,
+      anterior: obras[(i - 1 + obras.length) % obras.length],
+      proxima: obras[(i + 1) % obras.length],
+    },
+  }));
+}
+
+interface Props {
+  obra: Obra;
+  anterior: Obra;
+  proxima: Obra;
+}
+
+const { obra, anterior, proxima } = Astro.props;
+const imagem = imagemDe(obra);
+const autor = autorDe(obra);
+const disponivel = obra.situacao === 'disponivel';
+const whatsapp = linkObra(obra, autor.nome);
+const fotos = fotosDe(obra);
+
+// Até 4 obras do mesmo tema; completa com outras se faltar.
+const mesmoTema = obras.filter((o) => o.tema === obra.tema && o.slug !== obra.slug);
+const outras = obras.filter((o) => o.tema !== obra.tema);
+const relacionadas = [...mesmoTema, ...outras].slice(0, 4);
+const tituloRelacionadas = mesmoTema.length >= 2 ? `Mais — ${TEMAS[obra.tema]}` : 'Outras obras';
+
+const ficha = [
+  { rotulo: 'Técnica', valor: obra.tecnica },
+  { rotulo: 'Dimensões', valor: obra.dimensoes },
+  { rotulo: 'Ano', valor: obra.ano?.toString() },
+  { rotulo: 'Tema', valor: TEMAS[obra.tema] },
+].filter((l) => l.valor);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VisualArtwork',
+  name: obra.titulo,
+  creator: { '@type': 'Person', name: autor.nome },
+  image: new URL(imagem.src, Astro.site).toString(),
+  description: obra.sobre ?? obra.alt,
+  ...(obra.tecnica && { artMedium: obra.tecnica }),
+  ...(obra.ano && { dateCreated: String(obra.ano) }),
+  // Sem preço: só a disponibilidade.
+  offers: {
+    '@type': 'Offer',
+    availability: disponivel ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+  },
+};
+---
+
+<BaseLayout
+  titulo={obra.titulo}
+  descricao={`${obra.titulo}, obra de ${autor.nome}. ${disponivel ? 'Obra disponível.' : 'Obra vendida.'} ${obra.sobre ?? obra.alt + '.'}`}
+  imagem={imagem}
+  jsonLd={jsonLd}
+  paginaAtual="obras"
+>
+  <div class="conteiner">
+    <nav class="trilha" aria-label="Você está aqui">
+      <a href="/obras">Obras</a>
+      <span aria-hidden="true">/</span>
+      <a href={`/obras?tema=${obra.tema}`}>{TEMAS[obra.tema]}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{obra.titulo}</span>
+    </nav>
+
+    <article class="ficha">
+      <div class="imagens">
+        <div class="palco">
+          <Image
+            src={imagem}
+            alt={obra.alt}
+            widths={[480, 800, 1200, 1600]}
+            sizes="(max-width: 900px) 92vw, 760px"
+            quality={80}
+            format="webp"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+
+        {
+          fotos.length > 0 && (
+            <section class="mais-fotos" aria-label="Mais fotos da obra">
+              {fotos.map((f) => (
+                <figure>
+                  {f.legenda && <figcaption class="sobrancelha">{f.legenda}</figcaption>}
+                  <Image src={f.src} alt={f.alt} widths={[360, 560, 800]} sizes="(max-width: 900px) 92vw, 380px" quality={74} format="webp" loading="lazy" data-fade="" />
+                </figure>
+              ))}
+            </section>
+          )
+        }
+      </div>
+
+      <div class="dados">
+        <header class="pilha">
+          <h1>{obra.titulo}</h1>
+          <a class="autor" href={`/professores/${autor.slug}`}>{autor.nome}</a>
+        </header>
+
+        <Selo situacao={obra.situacao} destaque />
+
+        <section class="sobre-obra" aria-labelledby="titulo-sobre-obra">
+          <h2 id="titulo-sobre-obra" class="sobrancelha">Sobre a obra</h2>
+          {obra.sobre && <p class="texto-leitura">{obra.sobre}</p>}
+          <dl>
+            {
+              ficha.map((l) => (
+                <div class="linha-ficha">
+                  <dt>{l.rotulo}</dt>
+                  <dd>{l.valor}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          {
+            obra.certificado && (
+              <p class="certificado">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                  <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M12 2.8l2.1 1.6 2.6-.2.9 2.5 2.3 1.2-.4 2.6 1.2 2.3-1.9 1.8-.1 2.6-2.6.5-1.5 2.2-2.5-.8-2.5.8-1.5-2.2-2.6-.5-.1-2.6-1.9-1.8 1.2-2.3-.4-2.6 2.3-1.2.9-2.5 2.6.2z" />
+                  <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M8.6 12.2l2.3 2.3 4.5-4.6" />
+                </svg>
+                <span><strong>Obra original</strong>, acompanhada de certificado de autenticidade assinado pel{autor.artigo} artista.</span>
+              </p>
+            )
+          }
+        </section>
+
+        <div class="acoes">
+          {!disponivel && <p class="nota">Esta obra já foi vendida, mas dá para conversar sobre ela e sobre outras obras.</p>}
+          <a class="botao" href={whatsapp} target="_blank" rel="noopener">Consultar valor pelo WhatsApp</a>
+          {!disponivel && <a class="botao botao--contorno" href="/obras?situacao=disponivel">Ver obras disponíveis</a>}
+        </div>
+
+        {
+          obra.instagram && (
+            <section class="no-instagram" aria-labelledby="titulo-instagram">
+              <h2 id="titulo-instagram" class="sobrancelha">No Instagram</h2>
+              <InstagramEmbed url={obra.instagram} rotulo="Ver esta obra no Instagram" />
+            </section>
+          )
+        }
+
+        <nav class="vizinhas" aria-label="Outras obras">
+          <a href={`/obras/${anterior.slug}`} rel="prev">← {anterior.titulo}</a>
+          <a href={`/obras/${proxima.slug}`} rel="next">{proxima.titulo} →</a>
+        </nav>
+      </div>
+    </article>
+  </div>
+
+  <section class="faixa-secao" aria-labelledby="titulo-relacionadas">
+    <div class="conteiner secao">
+      <div class="cabeca">
+        <h2 id="titulo-relacionadas" class="titulo-secao">{tituloRelacionadas}</h2>
+        <a class="link-seta" href="/obras">Ver todas <span aria-hidden="true">→</span></a>
+      </div>
+      <FaixaObras obras={relacionadas} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .trilha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    padding-top: 28px;
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .trilha a {
+    color: var(--texto-suave);
+  }
+
+  .ficha {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+    padding-block: 32px clamp(64px, 9vw, 112px);
+  }
+
+  .imagens {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 0;
+  }
+
+  .palco {
+    display: flex;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 52px);
+    border-radius: var(--raio-cartao);
+    background: var(--secao);
+  }
+
+  .palco :global(img) {
+    max-height: 78vh;
+    width: auto;
+    box-shadow: var(--sombra-obra);
+  }
+
+  .mais-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 380px));
+    gap: 20px;
+  }
+
+  .mais-fotos figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mais-fotos :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .dados {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .pilha {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  h1 {
+    font-size: clamp(34px, 4vw, 50px);
+  }
+
+  .autor {
+    font-size: 17px;
+  }
+
+  .sobre-obra {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  dl {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid var(--linha);
+  }
+
+  .linha-ficha {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    padding-block: 12px;
+    border-top: 1px solid var(--linha);
+    font-size: 15px;
+  }
+
+  dt {
+    color: var(--texto-suave);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .certificado {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--raio);
+    background: var(--secao);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .certificado svg {
+    flex-shrink: 0;
+    color: var(--oliva);
+  }
+
+  .acoes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nota {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .no-instagram {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .vizinhas {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 15px;
+  }
+
+  .vizinhas a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .secao {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding-block: clamp(56px, 8vw, 104px);
+  }
+
+  .cabeca {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+  }
+
+  @media (max-width: 900px) {
+    .ficha {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 20px;
+    }
+
+    .palco :global(img) {
+      max-height: none;
+      width: 100%;
+    }
+  }
+</style>

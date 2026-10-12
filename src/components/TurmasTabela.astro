@@ -1,0 +1,172 @@
+---
+import Preencher from './Preencher.astro';
+import { linkTurma } from '../config/contato';
+import { SITUACOES_TURMA, turmasDe, type Curso } from '../content/cursos';
+import type { Professor } from '../content/professores';
+
+/**
+ * Turmas de um curso: tabela no computador, cartões no celular (mesmo HTML).
+ * Campo vazio aparece como [PREENCHER]. Sem preço: o valor vai pelo WhatsApp.
+ */
+interface Props {
+  curso: Curso;
+  professor: Professor;
+  /** Mostra a coluna "Curso" (página do professor, que lista vários cursos). */
+  comCurso?: boolean;
+}
+const { curso, professor, comCurso = false } = Astro.props;
+const turmas = turmasDe(curso);
+const whatsapp = linkTurma(curso, professor);
+---
+
+<div class="turmas">
+  <table>
+    <caption class="so-leitor">Turmas de {curso.nome}</caption>
+    <thead>
+      <tr>
+        {comCurso && <th scope="col">Curso</th>}
+        <th scope="col">Dia</th>
+        <th scope="col">Horário</th>
+        <th scope="col">Idade</th>
+        <th scope="col">Vagas</th>
+        <th scope="col"><span class="so-leitor">Perguntar</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        turmas.map((t) => (
+          <tr>
+            {comCurso && <td data-rotulo="Curso" class="curso">{curso.nome}</td>}
+            <td data-rotulo="Dia">{t.dia ?? <Preencher />}</td>
+            <td data-rotulo="Horário">{t.horario ?? <Preencher />}</td>
+            <td data-rotulo="Idade">{t.idade ?? <Preencher />}</td>
+            <td data-rotulo="Vagas">
+              {t.situacao ? <span class:list={['situacao', t.situacao]}>{SITUACOES_TURMA[t.situacao]}</span> : <Preencher />}
+            </td>
+            <td class="acao">
+              <a class="botao botao--pequeno" href={whatsapp} target="_blank" rel="noopener">
+                Perguntar sobre a turma<span class="so-leitor"> de {curso.nome} no WhatsApp (abre em nova aba)</span>
+              </a>
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  /* A tabela vira cartões pela largura DELA (container query), não da tela:
+     o mesmo componente aparece em colunas de larguras diferentes. */
+  .turmas {
+    container-type: inline-size;
+    overflow-x: auto;
+    border-radius: var(--raio);
+    background: var(--fundo);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+
+  th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--texto-suave);
+  }
+
+  td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--linha);
+    vertical-align: middle;
+  }
+
+  .curso {
+    font-weight: 600;
+  }
+
+  .acao {
+    text-align: right;
+    padding-block: 8px;
+  }
+
+  .acao .botao {
+    white-space: nowrap;
+  }
+
+  .situacao {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: var(--raio);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .situacao.vagas {
+    background: var(--oliva);
+    color: var(--branco);
+  }
+
+  .situacao.espera {
+    border: 1.5px solid var(--texto-suave);
+    color: var(--texto);
+  }
+
+  /* Espaço estreito: cada turma vira um cartão com rótulos. */
+  @container (max-width: 860px) {
+    table,
+    tbody {
+      display: block;
+    }
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    tr {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 12px;
+      padding: 14px;
+    }
+
+    tr + tr {
+      border-top: 1px solid var(--linha);
+    }
+
+    td {
+      padding: 0;
+      border: 0;
+      font-size: 15px;
+    }
+
+    td[data-rotulo]::before {
+      content: attr(data-rotulo);
+      display: block;
+      font-size: 13px;
+      color: var(--texto-suave);
+    }
+
+    .curso {
+      grid-column: 1 / -1;
+    }
+
+    .acao {
+      grid-column: 1 / -1;
+      text-align: left;
+      padding: 4px 0 0;
+    }
+
+    .acao .botao {
+      width: 100%;
+      white-space: normal;
+    }
+  }
+</style>

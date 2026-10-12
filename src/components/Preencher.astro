@@ -1,0 +1,13 @@
+---
+/**
+ * Marca visível de conteúdo que ainda falta. Some quando o dado chega.
+ * Cada uso corresponde a um TODO(conteudo) nos arquivos de src/content ou src/config.
+ */
+interface Props {
+  /** O que falta, em poucas palavras. */
+  o?: string;
+}
+const { o } = Astro.props;
+---
+
+<span class="preencher">[PREENCHER{o ? `: ${o}` : ''}]</span>

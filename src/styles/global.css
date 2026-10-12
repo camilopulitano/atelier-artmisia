@@ -1,0 +1,316 @@
+/*
+ * Identidade do Atelier Artmisia — estilo "Sálvia" (escolhido pela Ana em 11/10/2026).
+ * Cor e fonte SÓ por estes tokens: componente nenhum escreve cor ou família de fonte solta.
+ *
+ * Contrastes medidos (WCAG):
+ *   --texto        sobre fundo 11,95 · seção 10,71 · cartão 12,98
+ *   --texto-suave  sobre fundo  5,77 · seção  5,17 · cartão  6,27
+ *   --oliva        sobre fundo  7,11 · seção  6,37 · cartão  7,73   (links, destaques, títulos em itálico)
+ *   --vendida      sobre fundo  6,01 · seção  5,38 · cartão  6,53
+ *   --branco sobre --oliva 7,73 · sobre --oliva-escuro 10,51 · sobre --vendida 6,53
+ */
+:root {
+  --fundo: #f5f6f1;
+  --secao: #e6ebe0;
+  --cartao: #ffffff;
+  --texto: #2e3326;
+  --texto-suave: #5b6352;
+  --oliva: #475920;
+  --oliva-escuro: #36441a;
+  --branco: #ffffff;
+
+  /* Situação das obras: diferem na cor E na forma do marcador (ponto × anel). */
+  --disponivel: var(--oliva);
+  --vendida: #8a4b55;
+
+  --linha: rgba(46, 51, 38, 0.12);
+  --linha-forte: rgba(46, 51, 38, 0.3);
+  --sombra-obra: 0 1px 2px rgba(46, 51, 38, 0.12), 0 10px 24px rgba(46, 51, 38, 0.12);
+  --sombra-menu: 0 12px 32px rgba(46, 51, 38, 0.16);
+
+  /* Fontes hospedadas no site (@fontsource, importadas no BaseLayout). */
+  --marca: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif; /* só no nome do atelier */
+  --serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif; /* títulos e texto longo */
+  --sans: 'Source Sans 3 Variable', system-ui, -apple-system, 'Segoe UI', sans-serif; /* interface */
+
+  --raio: 6px;
+  --raio-cartao: 8px;
+  --margem: clamp(16px, 5vw, 56px);
+  --largura: 1312px;
+
+  /* Movimento: entrada 180–260ms, curva que desacelera. */
+  --entrada: cubic-bezier(0.16, 1, 0.3, 1);
+  --duracao: 220ms;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--oliva);
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  color: var(--texto);
+}
+
+:focus-visible {
+  outline: 3px solid var(--oliva);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* A palavra em destaque de cada título (ver components/Destaque.astro). */
+h1 em,
+h2 em,
+h3 em {
+  color: var(--oliva);
+  font-style: italic;
+}
+
+p {
+  margin: 0;
+}
+
+.pular {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 30;
+  padding: 12px 18px;
+  background: var(--oliva);
+  color: var(--branco);
+  border-radius: var(--raio);
+  text-decoration: none;
+}
+
+.pular:focus {
+  top: 12px;
+}
+
+.conteiner {
+  width: 100%;
+  max-width: var(--largura);
+  margin-inline: auto;
+  padding-inline: var(--margem);
+}
+
+.faixa-secao {
+  background: var(--secao);
+}
+
+.sobrancelha {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oliva);
+}
+
+.titulo-pagina {
+  font-size: clamp(44px, 5.6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.titulo-secao {
+  font-size: clamp(30px, 3.2vw, 44px);
+}
+
+.texto-leitura {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.72;
+}
+
+.texto-suave {
+  color: var(--texto-suave);
+}
+
+.cartao {
+  background: var(--cartao);
+  border-radius: var(--raio-cartao);
+}
+
+/* Botão principal: oliva com texto branco (7,73:1). */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1.5px solid var(--oliva);
+  border-radius: var(--raio);
+  background: var(--oliva);
+  color: var(--branco);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duracao) var(--entrada), color var(--duracao) var(--entrada),
+    border-color var(--duracao) var(--entrada);
+}
+
+.botao:hover {
+  background: var(--oliva-escuro);
+  border-color: var(--oliva-escuro);
+  color: var(--branco);
+}
+
+.botao--contorno {
+  background: transparent;
+  color: var(--oliva);
+}
+
+.botao--contorno:hover {
+  background: var(--oliva);
+  color: var(--branco);
+}
+
+.botao--pequeno {
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+/* Pílula de escolha (público da aula, filtros). */
+.pilula {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--raio);
+  background: var(--secao);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duracao) var(--entrada), color var(--duracao) var(--entrada);
+}
+
+.pilula:hover {
+  background: var(--linha-forte);
+  color: var(--texto);
+}
+
+.pilula[aria-pressed='true'] {
+  background: var(--oliva);
+  color: var(--branco);
+}
+
+.link-seta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Conteúdo que ainda falta. Visível de propósito: some quando o dado chega. */
+.preencher {
+  display: inline-block;
+  padding: 0 8px;
+  border: 1.5px dashed var(--linha-forte);
+  border-radius: 4px;
+  color: var(--texto-suave);
+  font-family: var(--sans);
+  font-size: 0.9em;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* Imagem entra com fade assim que carrega; o espaço já está reservado
+   (width/height no <img>), então nada pula. */
+img[data-fade] {
+  opacity: 0;
+  transition: opacity 420ms var(--entrada);
+}
+
+img[data-fade].carregada {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  img[data-fade] {
+    opacity: 1;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Transição suave entre páginas (navegadores que suportam; os outros ignoram). */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+/* Texto só para leitor de tela. */
+.so-leitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

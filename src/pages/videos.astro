@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InstagramEmbed from '../components/InstagramEmbed.astro';
+import { videos } from '../content/videos';
+import { TEXTOS } from '../content/textos';
+import { SITE } from '../config/site';
+import { INSTAGRAM_URL, INSTAGRAM_USUARIO } from '../config/contato';
+---
+
+<BaseLayout titulo="Vídeos" descricao={`Vídeos do ${SITE.nome}: ${TEXTOS.introVideos}`} paginaAtual="videos">
+  <div class="conteiner pagina">
+    <header class="topo">
+      <p class="sobrancelha">No atelier</p>
+      <h1 class="titulo-pagina"><em>Vídeos</em></h1>
+      <p class="texto-suave">{TEXTOS.introVideos}</p>
+    </header>
+
+    {videos.length === 0 && <p class="texto-suave">Em breve.</p>}
+
+    <ul class="grade" role="list">
+      {
+        videos.map((v) => (
+          <li>
+            <InstagramEmbed url={v.url} rotulo="Ver o vídeo no Instagram" />
+            <p class="legenda">{v.legenda}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a class="botao botao--contorno mais" href={INSTAGRAM_URL} target="_blank" rel="noopener">
+      Mais no Instagram · @{INSTAGRAM_USUARIO}
+    </a>
+  </div>
+</BaseLayout>
+
+<style>
+  .pagina {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-block: clamp(32px, 5vw, 64px) clamp(64px, 9vw, 120px);
+  }
+
+  .topo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 760px;
+  }
+
+  .topo p:not(.sobrancelha) {
+    font-size: clamp(17px, 1.6vw, 20px);
+  }
+
+  .grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 44px clamp(24px, 4vw, 56px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .grade li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .legenda {
+    max-width: 420px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--texto-suave);
+  }
+
+  .mais {
+    align-self: flex-start;
+  }
+
+  @media (max-width: 560px) {
+    .mais {
+      align-self: stretch;
+    }
+  }
+</style>

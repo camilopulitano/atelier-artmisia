@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import Preencher from './Preencher.astro';
+import { professorDe, turmasDe, type Curso } from '../content/cursos';
+
+/**
+ * Cartão de curso da home: imagem inteira (nunca cortada), nome, professor,
+ * descrição, resumo das turmas e o link para os horários.
+ */
+interface Props {
+  curso: Curso;
+}
+const { curso } = Astro.props;
+const professor = professorDe(curso);
+const resumo = turmasDe(curso)
+  .filter((t) => t.dia && t.horario)
+  .map((t) => `${t.dia} · ${t.horario}`);
+---
+
+<article class="cartao curso">
+  <div class="capa">
+    <Image
+      src={curso.capa}
+      alt={curso.capaAlt}
+      widths={[180, 300, 420]}
+      sizes="150px"
+      quality={74}
+      format="webp"
+      loading="lazy"
+      data-fade=""
+    />
+  </div>
+  <div class="texto">
+    <h3>{curso.nome}</h3>
+    <p class="texto-suave">com {professor.nome}</p>
+    <p>{curso.descricao}</p>
+    <p class="turmas texto-suave">
+      Turmas: {resumo.length > 0 ? resumo.join(' / ') : <Preencher />}
+    </p>
+    <a class="link-seta" href={`/aulas#${curso.slug}`}>Ver horários <span aria-hidden="true">→</span><span class="so-leitor"> de {curso.nome}</span></a>
+  </div>
+</article>
+
+<style>
+  .curso {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 22px;
+  }
+
+  .capa {
+    flex: 0 0 150px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 4px;
+    background: var(--fundo);
+  }
+
+  .capa :global(img) {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .texto {
+    flex: 1 1 220px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  h3 {
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .texto > p {
+    font-size: 16px;
+  }
+
+  .turmas {
+    font-size: 14px !important;
+  }
+
+  .link-seta {
+    margin-top: auto;
+    font-size: 15px;
+  }
+
+  @media (max-width: 520px) {
+    .curso {
+      flex-wrap: nowrap;
+      gap: 14px;
+      padding: 12px;
+    }
+
+    .capa {
+      flex-basis: 76px;
+      height: 92px;
+      padding: 5px;
+    }
+
+    h3 {
+      font-size: 21px;
+    }
+
+    .texto > p:not(.texto-suave) {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import ObraCard from './ObraCard.astro';
+import { imagemDe, type Obra } from '../content/obras';
+
+/**
+ * Uma fileira de obras com a MESMA altura e larguras proporcionais — como
+ * quadros pendurados na mesma linha. Nenhuma pintura é cortada: cada item
+ * cresce na proporção da própria tela (flex-grow = largura / altura).
+ * No celular vira duas colunas.
+ */
+interface Props {
+  obras: Obra[];
+}
+const { obras } = Astro.props;
+const total = obras.reduce((soma, o) => {
+  const img = imagemDe(o);
+  return soma + img.width / img.height;
+}, 0);
+---
+
+<ul class="faixa" role="list">
+  {
+    obras.map((obra) => {
+      const img = imagemDe(obra);
+      const proporcao = img.width / img.height;
+      const fracao = Math.round((proporcao / total) * 100);
+      return (
+        <li style={`--p: ${proporcao.toFixed(4)}`}>
+          <ObraCard obra={obra} sizes={`(max-width: 700px) 45vw, ${fracao}vw`} />
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .faixa {
+    display: flex;
+    gap: clamp(20px, 3vw, 40px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: flex-start;
+  }
+
+  .faixa li {
+    flex: var(--p) 1 0;
+    min-width: 0;
+  }
+
+  @media (max-width: 700px) {
+    .faixa {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px 16px;
+    }
+  }
+</style>

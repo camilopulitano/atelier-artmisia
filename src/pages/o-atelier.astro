@@ -1,0 +1,156 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Destaque from '../components/Destaque.astro';
+import Preencher from '../components/Preencher.astro';
+import ProfessorCirculo from '../components/ProfessorCirculo.astro';
+import Contato from '../components/Contato.astro';
+import { professores } from '../content/professores';
+import { TEXTOS } from '../content/textos';
+import fotoFundadora from '../assets/atelier/fundadora.jpg';
+
+const fundadora = professores.find((p) => p.fundadora)!;
+---
+
+<BaseLayout
+  titulo="O atelier"
+  descricao={`O Atelier Artmisia, fundado por ${fundadora.nome}. ${fundadora.bio[0]}`}
+  imagem={fotoFundadora}
+  paginaAtual="atelier"
+>
+  <section class="conteiner topo" aria-labelledby="titulo-atelier">
+    <div class="texto">
+      <nav class="trilha" aria-label="Você está aqui"><a href="/">Início</a> / <span aria-current="page">O atelier</span></nav>
+      <p class="sobrancelha">O atelier</p>
+      <h1 id="titulo-atelier" class="titulo-pagina"><Destaque texto={TEXTOS.atelier.titulo} /></h1>
+      <p class="texto-leitura">{TEXTOS.atelier.sobre ?? <Preencher o="um parágrafo da Ana sobre o atelier: quando abriu e como são as aulas" />}</p>
+      <p class="texto-suave">Aberto em {TEXTOS.atelier.fundacao ?? <Preencher o="ano" />}.</p>
+    </div>
+    <Image
+      src={fotoFundadora}
+      alt={TEXTOS.atelier.fotoAlt}
+      widths={[400, 640, 900]}
+      sizes="(max-width: 900px) 92vw, 460px"
+      quality={78}
+      format="webp"
+      loading="eager"
+      fetchpriority="high"
+      class="foto"
+    />
+  </section>
+
+  <section class="faixa-secao" aria-labelledby="titulo-fundadora">
+    <div class="conteiner secao fundadora">
+      <h2 id="titulo-fundadora" class="titulo-secao">A <em>fundadora</em></h2>
+      <div class="bio texto-leitura">
+        {fundadora.bio.map((paragrafo) => <p>{paragrafo}</p>)}
+      </div>
+      <a class="link-seta" href={`/professores/${fundadora.slug}`}>Ver a página d{fundadora.artigo} {fundadora.primeiroNome} <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="conteiner secao" aria-labelledby="titulo-espaco">
+    <h2 id="titulo-espaco" class="titulo-secao">O <em>espaço</em></h2>
+    <div class="espaco-fotos"><Preencher o="fotos do espaço e de aula acontecendo" /></div>
+  </section>
+
+  <section class="faixa-secao" aria-labelledby="titulo-equipe">
+    <div class="conteiner secao">
+      <h2 id="titulo-equipe" class="titulo-secao"><Destaque texto={TEXTOS.professores.titulo} /></h2>
+      <div class="grade-professores">
+        {professores.map((p) => <ProfessorCirculo professor={p} tamanho={160} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="conteiner secao mostra" aria-labelledby="titulo-mostra">
+    <p class="sobrancelha">{TEXTOS.mostra.rotulo}</p>
+    <h2 id="titulo-mostra" class="titulo-secao"><Destaque texto={TEXTOS.mostra.titulo} /></h2>
+    <p class="mostra-texto">{TEXTOS.mostra.texto}</p>
+    <p class="texto-suave">{TEXTOS.mostra.detalhe}</p>
+  </section>
+
+  <Contato fundo="secao" />
+</BaseLayout>
+
+<style>
+  .topo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: clamp(32px, 6vw, 88px);
+    align-items: center;
+    padding-block: clamp(32px, 5vw, 64px) clamp(56px, 8vw, 104px);
+  }
+
+  .texto {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .trilha {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  h1 {
+    font-size: clamp(38px, 4.6vw, 64px);
+  }
+
+  .topo :global(.foto) {
+    width: 100%;
+    max-width: 460px;
+    justify-self: center;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: var(--raio);
+  }
+
+  .secao {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: clamp(56px, 8vw, 104px);
+  }
+
+  .fundadora .bio {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 42em;
+  }
+
+  .espaco-fotos {
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    border: 1.5px dashed var(--linha-forte);
+    border-radius: var(--raio-cartao);
+    background: var(--secao);
+    text-align: center;
+  }
+
+  .grade-professores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 32px 20px;
+  }
+
+  .mostra {
+    gap: 14px;
+  }
+
+  .mostra-texto {
+    max-width: 36em;
+    font-size: 18px;
+  }
+
+  @media (max-width: 520px) {
+    .grade-professores {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

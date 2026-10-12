@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout titulo="Página não encontrada">
+  <section class="conteiner nada">
+    <p class="sobrancelha">Erro 404</p>
+    <h1 class="titulo-pagina">Essa página <em>não existe</em>.</h1>
+    <p class="texto-suave">O endereço pode ter mudado. As turmas e os professores estão a um clique daqui.</p>
+    <div class="acoes">
+      <a class="botao" href="/aulas">Ver as turmas</a>
+      <a class="botao botao--contorno" href="/">Ir para o início</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nada {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    padding-block: clamp(88px, 14vw, 180px);
+  }
+
+  .nada > p:not(.sobrancelha) {
+    font-size: 18px;
+  }
+
+  .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+// Fontes hospedadas no próprio site (sem Google Fonts): mais rápido, sem rastreio de terceiros.
+import '@fontsource/bebas-neue';
+import '@fontsource-variable/source-sans-3';
+import '@fontsource-variable/source-serif-4/wght.css';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+import { ENDERECO, INSTAGRAM_URL, WHATSAPP_E164 } from '../config/contato';
+import imagemPadrao from '../assets/atelier/abertura.jpg';
+import { SITE, type Pagina } from '../config/site';
+
+interface Props {
+  titulo?: string;
+  descricao?: string;
+  /** Imagem para compartilhamento (WhatsApp, redes). */
+  imagem?: ImageMetadata;
+  /** Dados estruturados extras da página (schema.org). */
+  jsonLd?: Record<string, unknown>;
+  paginaAtual?: Pagina;
+}
+
+const { titulo, descricao = SITE.descricao, imagem = imagemPadrao, jsonLd, paginaAtual } = Astro.props;
+
+const tituloFinal = titulo ? `${titulo} · ${SITE.nome}` : `${SITE.nome} — ${SITE.profissao.toLowerCase()}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const og = await getImage({ src: imagem, width: 1200, format: 'jpeg', quality: 80 });
+const ogUrl = new URL(og.src, Astro.site);
+
+const organizacao = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: SITE.nome,
+  description: SITE.descricao,
+  url: Astro.site?.toString(),
+  telephone: `+${WHATSAPP_E164}`,
+  sameAs: [INSTAGRAM_URL],
+  ...(ENDERECO && { address: ENDERECO }),
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloFinal}</title>
+    <meta name="description" content={descricao} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#F5F6F1" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={SITE.nome} />
+    <meta property="og:title" content={tituloFinal} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizacao)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <Cabecalho atual={paginaAtual} />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Rodape />
+
+    <script>
+      // Fade de entrada das imagens. Imagens já em cache aparecem na hora.
+      const revelar = (img: HTMLImageElement) => img.classList.add('carregada');
+      document.querySelectorAll<HTMLImageElement>('img[data-fade]').forEach((img) => {
+        if (img.complete && img.naturalWidth > 0) revelar(img);
+        else {
+          img.addEventListener('load', () => revelar(img), { once: true });
+          img.addEventListener('error', () => revelar(img), { once: true });
+        }
+      });
+    </script>
+    <noscript><style>img[data-fade]{opacity:1}</style></noscript>
+  </body>
+</html>

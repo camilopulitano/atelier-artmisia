@@ -1,0 +1,100 @@
+---
+import Destaque from './Destaque.astro';
+import Preencher from './Preencher.astro';
+import { ENDERECO, HORARIO, INSTAGRAM_URL, INSTAGRAM_USUARIO, linkWhatsApp, WHATSAPP_LEGIVEL } from '../config/contato';
+import { TEXTOS } from '../content/textos';
+
+/** Seção de contato (home e página do atelier). */
+interface Props {
+  /** Fundo da faixa: o padrão ou o verde-claro de seção. */
+  fundo?: 'padrao' | 'secao';
+}
+const { fundo = 'padrao' } = Astro.props;
+---
+
+<section id="contato" class:list={['contato', { 'faixa-secao': fundo === 'secao' }]} aria-labelledby="titulo-contato">
+  <div class="conteiner grade">
+    <div class="chamada">
+      <h2 id="titulo-contato" class="titulo-secao"><Destaque texto={TEXTOS.contato.titulo} /></h2>
+      <p class="texto-suave">{TEXTOS.contato.texto}</p>
+      <a class="botao" href={linkWhatsApp()} target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    </div>
+    <dl class="cartao dados">
+      <div><dt>Endereço</dt><dd>{ENDERECO ?? <Preencher />}</dd></div>
+      <div><dt>Horário</dt><dd>{HORARIO ?? <Preencher />}</dd></div>
+      <div><dt>WhatsApp</dt><dd><a href={linkWhatsApp()} target="_blank" rel="noopener">{WHATSAPP_LEGIVEL}</a></dd></div>
+      <div><dt>Instagram</dt><dd><a href={INSTAGRAM_URL} target="_blank" rel="noopener">@{INSTAGRAM_USUARIO}</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<style>
+  .contato {
+    scroll-margin-top: 24px;
+  }
+
+  .grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: 40px clamp(40px, 6vw, 96px);
+    align-items: start;
+    padding-block: clamp(64px, 9vw, 120px);
+  }
+
+  .chamada {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .chamada p {
+    font-size: 18px;
+  }
+
+  .dados {
+    margin: 0;
+    padding: 8px 24px;
+  }
+
+  .dados div {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 16px;
+    padding: 14px 0;
+  }
+
+  .dados div + div {
+    border-top: 1px solid var(--linha);
+  }
+
+  dt {
+    color: var(--texto-suave);
+  }
+
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  dd a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+  }
+
+  @media (max-width: 520px) {
+    .chamada .botao {
+      width: 100%;
+    }
+
+    .dados {
+      padding: 6px 16px;
+    }
+
+    .dados div {
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 12px;
+    }
+  }
+</style>

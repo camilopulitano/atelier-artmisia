@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import { retratoDe, type Professor } from '../content/professores';
+
+/** Retrato redondo + nome + o que ensina. Leva à página do professor. */
+interface Props {
+  professor: Professor;
+  /** Diâmetro em px no computador (no celular encolhe). */
+  tamanho?: number;
+}
+const { professor, tamanho = 200 } = Astro.props;
+---
+
+<a class="professor" href={`/professores/${professor.slug}`} style={`--tamanho: ${tamanho}px`}>
+  <Image
+    src={retratoDe(professor)}
+    alt={professor.retratoAlt}
+    widths={[160, 240, 400]}
+    sizes={`${tamanho}px`}
+    quality={74}
+    format="webp"
+    loading="lazy"
+    data-fade=""
+    style={`object-position: ${professor.foco}`}
+  />
+  <span class="nome">{professor.nome}</span>
+  <span class="ensina">{professor.ensina.join(' · ')}{professor.fundadora ? ' · fundadora' : ''}</span>
+</a>
+
+<style>
+  .professor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    color: var(--texto);
+    text-decoration: none;
+  }
+
+  .professor :global(img) {
+    width: min(var(--tamanho), 100%);
+    aspect-ratio: 1;
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 8px;
+  }
+
+  .nome {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.2;
+    transition: color var(--duracao) var(--entrada);
+  }
+
+  .professor:hover .nome {
+    color: var(--oliva);
+  }
+
+  .ensina {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  @media (max-width: 520px) {
+    .professor :global(img) {
+      width: min(120px, 100%);
+    }
+
+    .nome {
+      font-size: 18px;
+    }
+
+    .ensina {
+      font-size: 14px;
+    }
+  }
+</style>

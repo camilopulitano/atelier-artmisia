@@ -1,0 +1,93 @@
+---
+import { linkObra } from '../config/contato';
+import { autorDe, type Obra } from '../content/obras';
+
+/**
+ * Botão "Consultar valor" sobre a imagem de uma obra.
+ * Abre o WhatsApp do atelier com a mensagem pronta (obra, autor e link da ficha).
+ *
+ * A imagem em si leva à ficha da obra; este botão é um link à parte,
+ * posicionado por cima dela. O elemento que envolve imagem + botão
+ * recebe a classe `com-consultar`.
+ * No computador o botão surge ao passar o mouse sobre a obra (ou ao
+ * chegar nele pelo teclado); no celular fica sempre visível.
+ */
+interface Props {
+  obra: Obra;
+}
+const { obra } = Astro.props;
+const autor = autorDe(obra);
+---
+
+<a class="consultar" href={linkObra(obra, autor.nome)} target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false">
+    <path
+      fill="currentColor"
+      d="M12 3C7 3 3 6.6 3 11c0 2.2 1 4.2 2.7 5.6L5 21l4.3-2.2c.9.2 1.8.3 2.7.3 5 0 9-3.6 9-8s-4-8-9-8z"
+    ></path>
+  </svg>
+  Consultar valor<span class="so-leitor"> de “{obra.titulo}” no WhatsApp do atelier (abre em nova aba)</span>
+</a>
+
+<style>
+  :global(.com-consultar) {
+    position: relative;
+  }
+
+  .consultar {
+    position: absolute;
+    z-index: 1;
+    left: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    /* Em cartão estreito o rótulo quebra linha em vez de sair da obra. */
+    max-width: calc(100% - 24px);
+    min-height: 36px;
+    padding: 6px 14px 6px 11px;
+    border-radius: var(--raio);
+    background: var(--oliva);
+    color: var(--branco);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    box-shadow: var(--sombra-obra);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity var(--duracao) var(--entrada), transform var(--duracao) var(--entrada),
+      background-color var(--duracao) var(--entrada);
+  }
+
+  .consultar:hover {
+    background: var(--oliva-escuro);
+    color: var(--branco);
+  }
+
+  :global(.com-consultar:hover) .consultar,
+  .consultar:focus-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (hover: none) {
+    .consultar {
+      left: 8px;
+      bottom: 8px;
+      max-width: calc(100% - 16px);
+      padding: 6px 10px 6px 9px;
+      font-size: 12px;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .consultar {
+      transform: none;
+      transition: opacity var(--duracao) linear;
+    }
+  }
+</style>

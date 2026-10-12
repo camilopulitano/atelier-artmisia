@@ -1,0 +1,95 @@
+---
+import { SITE } from '../config/site';
+import { INSTAGRAM_URL, INSTAGRAM_USUARIO, linkWhatsApp, WHATSAPP_LEGIVEL } from '../config/contato';
+const ano = new Date().getFullYear();
+---
+
+<footer class="rodape">
+  <div class="conteiner linha">
+    <div class="assinatura">
+      <span class="nome"><span class="ponto" aria-hidden="true"></span>{SITE.nome}</span>
+      <span class="sub">{SITE.profissao}</span>
+    </div>
+    <nav aria-label="Rodapé">
+      <ul>
+        <li><a href="/aulas">Aulas</a></li>
+        <li><a href="/professores">Professores</a></li>
+        <li><a href="/o-atelier">O atelier</a></li>
+        <li><a href="/obras">Obras</a></li>
+      </ul>
+    </nav>
+    <ul class="contatos">
+      <li><a href={linkWhatsApp()} target="_blank" rel="noopener">WhatsApp {WHATSAPP_LEGIVEL}</a></li>
+      <li><a href={INSTAGRAM_URL} target="_blank" rel="noopener">Instagram @{INSTAGRAM_USUARIO}</a></li>
+    </ul>
+    <p class="direitos">© {ano} {SITE.nome}</p>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    border-top: 1px solid var(--linha);
+  }
+
+  .linha {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 40px;
+    padding-block: 36px;
+  }
+
+  .assinatura {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nome {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--marca);
+    font-size: 22px;
+    letter-spacing: 0.08em;
+  }
+
+  .ponto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--oliva);
+  }
+
+  .sub,
+  .direitos {
+    font-size: 14px;
+    color: var(--texto-suave);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  a:hover {
+    color: var(--oliva);
+  }
+
+  .direitos {
+    flex-basis: 100%;
+  }
+</style>

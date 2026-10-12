@@ -1,0 +1,13 @@
+---
+/**
+ * Título com uma palavra em destaque: o trecho entre *asteriscos* sai em <em>
+ * (itálico verde, ver global.css). Sem HTML cru: cada pedaço é texto.
+ *   <h2><Destaque texto="O que se *aprende* aqui" /></h2>
+ */
+interface Props {
+  texto: string;
+}
+const partes = Astro.props.texto.split('*');
+---
+
+{partes.map((parte, i) => (i % 2 === 1 ? <em>{parte}</em> : parte))}
