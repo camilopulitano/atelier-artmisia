@@ -21,6 +21,7 @@ npm run build    # gera a versão final em dist/
 |---|---|
 | WhatsApp, Instagram, cidade, endereço, horário | `src/config/contato.ts` |
 | Nome, idade, professor ou texto de um curso | `src/content/cursos.ts` → lista `cursos` |
+| Capa de um curso | `src/assets/cursos/<slug>.jpg` + import no topo de `cursos.ts` |
 | Publicar dias e horários (hoje vão pelo WhatsApp) | `src/content/cursos.ts` → lista `turmas` (a tabela aparece sozinha) |
 | Bio, fotos e citações dos professores | `src/content/professores.ts` + `src/assets/professores/<slug>.jpg` e `<slug>-1.jpg`, `-2`… |
 | Obras | `src/content/obras.ts` + `src/assets/obras/<slug>.jpg` |
@@ -37,7 +38,7 @@ Procure `TODO(conteudo)` no código. Hoje:
 2. Ano de abertura do atelier.
 3. Fotos do espaço, de aula acontecendo e da exposição Brasilidade.
 4. O que a seção Obras mostra (hoje: 6 obras da Ana).
-5. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; uma obra autoral do Edison para a capa do curso.
+5. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; capa do curso Desenho Infantil.
 6. Fotos dos quatro professores numa sessão só.
 7. Domínio próprio, se houver (trocar em `src/config/site.ts` e `astro.config.mjs`).
 
