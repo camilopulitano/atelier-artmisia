@@ -146,7 +146,10 @@ export const professores: Professor[] = [
       'No Atelier Artmisia, também atua presencialmente como professor de desenho para crianças, acompanhando de perto o desenvolvimento de cada aluno e incentivando a criatividade, a observação e a descoberta de novas possibilidades através da arte. Seu trabalho como professor une técnica, aprendizado e liberdade criativa, respeitando o ritmo e a individualidade de cada aluno.',
     ],
     citacoes: [],
-    links: [],
+    links: [
+      { rotulo: 'Canal no YouTube: @camilopulitano', url: 'https://www.youtube.com/@camilopulitano' },
+      { rotulo: 'Instagram: @camilopulitano', url: 'https://www.instagram.com/camilopulitano/' },
+    ],
   },
 ];
 
