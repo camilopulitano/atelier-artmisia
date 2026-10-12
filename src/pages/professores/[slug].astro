@@ -151,7 +151,7 @@ const jsonLd = {
           <ul class="cursos" role="list">
             {online.map((c) => (
               <li class="cartao curso">
-                <h3><a href="/online">{c.nome}</a></h3>
+                <h3>{c.link ? <a href={c.link} target="_blank" rel="noopener">{c.nome}</a> : <a href="/online">{c.nome}</a>}</h3>
                 {c.publico && <p class="idade">{c.publico}</p>}
                 <p class="texto-suave">{FORMATOS_ONLINE[c.formato]}{c.emBreve ? ' · em breve' : ''}</p>
               </li>

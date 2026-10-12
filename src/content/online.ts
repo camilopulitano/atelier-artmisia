@@ -23,12 +23,14 @@ export interface CursoOnline {
   formato: FormatoOnline;
   /** Ainda não lançado: aparece com "Em breve" e o botão pede para ser avisado. */
   emBreve?: boolean;
+  /** Página própria do curso (o botão leva para lá em vez do WhatsApp). */
+  link?: string;
 }
 
 export const cursosOnline: CursoOnline[] = [
   { slug: 'oleo-adultos-ana', nome: 'Pintura a óleo', professor: 'ana-quintanas', publico: 'Adultos', formato: 'turma' },
   { slug: 'oleo-12-ana', nome: 'Pintura a óleo', professor: 'ana-quintanas', publico: 'A partir de 12 anos', formato: 'turma' },
-  { slug: 'oleo-gravado-ana', nome: 'Pintura a óleo', professor: 'ana-quintanas', formato: 'gravado' },
+  { slug: 'oleo-gravado-ana', nome: 'Pintura a óleo', professor: 'ana-quintanas', formato: 'gravado', link: 'https://anaquintanas.netlify.app/' },
   { slug: 'anime-gravado-edison', nome: 'Anime', professor: 'edison-marsan', formato: 'gravado', emBreve: true },
   { slug: 'acrilica-criancas-camilo', nome: 'Pintura em acrílica', professor: 'camilo-pulitano', publico: 'Crianças de 7 a 12 anos', formato: 'turma' },
   { slug: 'desenho-camilo', nome: 'Desenho', professor: 'camilo-pulitano', publico: 'Crianças e adultos', formato: 'turma' },

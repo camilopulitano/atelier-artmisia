@@ -45,8 +45,8 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                     <span class="formato">{FORMATOS_ONLINE[c.formato]}{c.emBreve && <span class="em-breve">Em breve</span>}</span>
                     <h3>{c.nome}</h3>
                     {c.publico && <p class="publico">{c.publico}</p>}
-                    <a class="link-seta" href={linkOnline(c, p)} target="_blank" rel="noopener">
-                      {c.emBreve ? 'Quero ser avisado' : 'Consultar pelo WhatsApp'} <span aria-hidden="true">→</span>
+                    <a class="link-seta" href={c.link ?? linkOnline(c, p)} target="_blank" rel="noopener">
+                      {c.link ? 'Ver o curso' : c.emBreve ? 'Quero ser avisado' : 'Consultar pelo WhatsApp'} <span aria-hidden="true">→</span>
                       <span class="so-leitor"> — {c.nome}{c.publico ? `, ${c.publico}` : ''} (abre em nova aba)</span>
                     </a>
                   </li>
