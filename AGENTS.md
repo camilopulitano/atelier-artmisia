@@ -13,7 +13,7 @@ Site do **Atelier Artmisia**, atelier de pintura e desenho fundado por **Ana Qui
 | Nome e descrição do site | `src/config/site.ts` |
 | WhatsApp, Instagram, endereço, horário | `src/config/contato.ts` |
 | Professores (bio, fotos, citações, links) | `src/content/professores.ts` + `src/assets/professores/` |
-| Cursos e turmas (dia, horário, idade, vagas) | `src/content/cursos.ts` |
+| Cursos (nome, idade, professor, texto) e turmas | `src/content/cursos.ts` |
 | Obras | `src/content/obras.ts` + `src/assets/obras/` |
 | Textos das páginas | `src/content/textos.ts` |
 | Cores, fontes, botões | tokens no topo de `src/styles/global.css` |
@@ -34,7 +34,7 @@ Site do **Atelier Artmisia**, atelier de pintura e desenho fundado por **Ana Qui
 1. **Não invente** curso, horário, idade, preço, ano ou nome. Se falta, o dado fica `undefined` com um comentário `TODO(conteudo): …` e a página mostra **[PREENCHER]** (componente `Preencher.astro`).
 2. **Texto de pessoa vai na íntegra**, no tom dela (bios do `PROFESSORES A3.pdf`, citações). Não "melhorar".
 3. **Preço não aparece no site.** Valor é pelo WhatsApp.
-4. Botão diz o que acontece: "Perguntar sobre a turma", "Falar com o atelier", "Ver as turmas". Nunca "Clique aqui".
+4. Botão diz o que acontece: "Consultar turmas pelo WhatsApp" (rótulo pedido pela Ana, em `TEXTOS.botaoTurmas`), "Falar com o atelier", "Ver os cursos". Nunca "Clique aqui".
 5. Em título, a palavra entre `*asteriscos*` sai em itálico verde (`Destaque.astro`). Use uma por título, no máximo.
 
 ## Visual (estilo "Sálvia", escolhido pela Ana)

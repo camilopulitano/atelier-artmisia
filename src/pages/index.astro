@@ -11,6 +11,7 @@ import { cursos, PUBLICOS, type Publico } from '../content/cursos';
 import { professores, professorPorSlug } from '../content/professores';
 import { obras } from '../content/obras';
 import { TEXTOS } from '../content/textos';
+import { linkConsultaTurmas } from '../config/contato';
 import fotoAbertura from '../assets/atelier/abertura.jpg';
 import fotoFundadora from '../assets/atelier/fundadora.jpg';
 
@@ -39,8 +40,8 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
       <h1 id="titulo-heroi"><Destaque texto={TEXTOS.abertura.titulo} /></h1>
       <p class="sub texto-suave">{TEXTOS.abertura.subtitulo}</p>
       <div class="acoes">
-        <a class="botao" href="/aulas">Ver as turmas</a>
-        <a class="link-seta" href="#contato">Falar com o atelier <span aria-hidden="true">→</span></a>
+        <a class="botao" href="/aulas">Ver os cursos</a>
+        <a class="link-seta" href={linkConsultaTurmas()} target="_blank" rel="noopener">{TEXTOS.botaoTurmas} <span aria-hidden="true">→</span><span class="so-leitor"> (abre em nova aba)</span></a>
       </div>
       <nav class="para-quem" aria-label="Aulas por público">
         <span class="texto-suave">{TEXTOS.paraQuem}</span>
@@ -56,10 +57,15 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
           <h2 id="titulo-cursos" class="titulo-secao"><Destaque texto={TEXTOS.cursos.titulo} /></h2>
           <p class="texto-suave">{TEXTOS.cursos.intro}</p>
         </div>
-        <a class="link-seta" href="/aulas">Ver todas as turmas <span aria-hidden="true">→</span></a>
+        <a class="link-seta" href="/aulas">Ver todos os cursos <span aria-hidden="true">→</span></a>
       </div>
       <div class="grade-cursos">
         {cursos.map((curso) => <CursoCard curso={curso} />)}
+        <article class="cartao oficinas" aria-labelledby="titulo-oficinas">
+          <h3 id="titulo-oficinas"><Destaque texto={TEXTOS.oficinas.titulo} /></h3>
+          <p>{TEXTOS.oficinas.resumo}</p>
+          <a class="link-seta" href="/aulas#oficinas">Saber das próximas oficinas <span aria-hidden="true">→</span></a>
+        </article>
       </div>
     </div>
   </section>
@@ -219,6 +225,26 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
     gap: 24px;
+  }
+
+  .oficinas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    padding: 22px 28px;
+    border: 1.5px dashed var(--linha-forte);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .oficinas h3 {
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .oficinas p {
+    font-size: 16px;
   }
 
   .atelier {

@@ -13,18 +13,18 @@ npm run build    # gera a versão final em dist/
 
 ## Páginas
 
-`/` Início · `/aulas` cursos e turmas (filtro Crianças / Adolescentes / Adultos) · `/professores` e uma página por professor · `/o-atelier` · `/obras` e a ficha de cada obra · `/videos` (aparece no menu quando houver vídeo) · 404.
+`/` Início · `/aulas` os cinco cursos e as oficinas (filtro Crianças / Adolescentes / Adultos) · `/professores` e uma página por professor · `/o-atelier` · `/obras` e a ficha de cada obra · `/videos` (aparece no menu quando houver vídeo) · 404.
 
 ## Onde trocar o conteúdo
 
 | Para mudar… | Edite |
 |---|---|
-| WhatsApp, Instagram, endereço, horário | `src/config/contato.ts` |
-| Turmas (dia, horário, idade, vagas) | `src/content/cursos.ts` → lista `turmas` |
-| Nome ou descrição de um curso | `src/content/cursos.ts` → lista `cursos` |
+| WhatsApp, Instagram, cidade, endereço, horário | `src/config/contato.ts` |
+| Nome, idade, professor ou texto de um curso | `src/content/cursos.ts` → lista `cursos` |
+| Publicar dias e horários (hoje vão pelo WhatsApp) | `src/content/cursos.ts` → lista `turmas` (a tabela aparece sozinha) |
 | Bio, fotos e citações dos professores | `src/content/professores.ts` + `src/assets/professores/<slug>.jpg` e `<slug>-1.jpg`, `-2`… |
 | Obras | `src/content/obras.ts` + `src/assets/obras/<slug>.jpg` |
-| Textos das páginas (títulos, chamadas) | `src/content/textos.ts` |
+| Textos das páginas (títulos, chamadas, oficinas, botão do WhatsApp) | `src/content/textos.ts` |
 | Cores e fontes | topo de `src/styles/global.css` |
 
 Em `textos.ts`, a palavra entre `*asteriscos*` aparece em itálico verde no título.
@@ -33,20 +33,21 @@ Em `textos.ts`, a palavra entre `*asteriscos*` aparece em itálico verde no tít
 
 Procure `TODO(conteudo)` no código. Hoje:
 
-1. Turmas: dia, horário, idade e vagas de cada curso; nomes definitivos dos cursos; para quem são Pintura e Desenho realista.
-2. Confirmar WhatsApp e Instagram do atelier; endereço e horário de funcionamento.
-3. Parágrafo da Ana sobre o atelier e o ano de abertura.
-4. Aula experimental? Material incluso?
-5. Fotos do espaço, de aula acontecendo e da exposição Brasilidade.
-6. O que a seção Obras mostra (hoje: 6 obras da Ana).
-7. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo.
-8. Fotos dos quatro professores numa sessão só.
-9. Domínio final (trocar em `src/config/site.ts` e `astro.config.mjs`).
+1. Confirmar WhatsApp e Instagram do atelier; rua e número em Medianeira; horário de funcionamento.
+2. Ano de abertura do atelier.
+3. Aula experimental? Material incluso?
+4. Fotos do espaço, de aula acontecendo e da exposição Brasilidade.
+5. O que a seção Obras mostra (hoje: 6 obras da Ana).
+6. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; uma obra autoral do Edison para a capa do curso.
+7. Fotos dos quatro professores numa sessão só.
+8. Domínio próprio, se houver (trocar em `src/config/site.ts` e `astro.config.mjs`).
+
+Cursos, idades, textos dos cursos, oficinas e o parágrafo sobre o atelier já vieram da Ana (11/10/2026).
 
 Lista completa e a mensagem para a Ana: `claude/conteudo-atelier.md` no Project.
 
 ## Publicar
 
-1. Crie um repositório no GitHub e suba esta pasta (GitHub Desktop: *Add → Add existing repository → Publish*).
-2. Na Vercel: **Add New → Project**, escolha o repositório, deixe tudo no padrão e clique em **Deploy**.
-3. Cada alteração enviada para a `main` vai ao ar sozinha.
+No ar em **https://atelier-artmisia.vercel.app** (Vercel, projeto `atelier-artmisia`), a partir do repositório privado `camilopulitano/atelier-artmisia` no GitHub.
+
+Cada alteração enviada para a `main` vai ao ar sozinha em cerca de um minuto.

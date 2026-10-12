@@ -3,10 +3,14 @@ import Preencher from './Preencher.astro';
 import { linkTurma } from '../config/contato';
 import { SITUACOES_TURMA, turmasDe, type Curso } from '../content/cursos';
 import type { Professor } from '../content/professores';
+import { TEXTOS } from '../content/textos';
 
 /**
- * Turmas de um curso: tabela no computador, cartões no celular (mesmo HTML).
- * Campo vazio aparece como [PREENCHER]. Sem preço: o valor vai pelo WhatsApp.
+ * Turmas de um curso.
+ * - Sem turma cadastrada (hoje): só o botão "Consultar turmas pelo WhatsApp",
+ *   já com o nome do curso e do professor na mensagem.
+ * - Com turmas em cursos.ts: tabela no computador, cartões no celular (mesmo HTML).
+ * Sem preço: o valor vai pelo WhatsApp.
  */
 interface Props {
   curso: Curso;
@@ -19,43 +23,64 @@ const turmas = turmasDe(curso);
 const whatsapp = linkTurma(curso, professor);
 ---
 
-<div class="turmas">
-  <table>
-    <caption class="so-leitor">Turmas de {curso.nome}</caption>
-    <thead>
-      <tr>
-        {comCurso && <th scope="col">Curso</th>}
-        <th scope="col">Dia</th>
-        <th scope="col">Horário</th>
-        <th scope="col">Idade</th>
-        <th scope="col">Vagas</th>
-        <th scope="col"><span class="so-leitor">Perguntar</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        turmas.map((t) => (
+{
+  turmas.length === 0 ? (
+    <div class="consulta">
+      <a class="botao" href={whatsapp} target="_blank" rel="noopener">
+        {TEXTOS.botaoTurmas}
+        <span class="so-leitor"> — {curso.nome} (abre em nova aba)</span>
+      </a>
+    </div>
+  ) : (
+    <div class="turmas">
+      <table>
+        <caption class="so-leitor">Turmas de {curso.nome}</caption>
+        <thead>
           <tr>
-            {comCurso && <td data-rotulo="Curso" class="curso">{curso.nome}</td>}
-            <td data-rotulo="Dia">{t.dia ?? <Preencher />}</td>
-            <td data-rotulo="Horário">{t.horario ?? <Preencher />}</td>
-            <td data-rotulo="Idade">{t.idade ?? <Preencher />}</td>
-            <td data-rotulo="Vagas">
-              {t.situacao ? <span class:list={['situacao', t.situacao]}>{SITUACOES_TURMA[t.situacao]}</span> : <Preencher />}
-            </td>
-            <td class="acao">
-              <a class="botao botao--pequeno" href={whatsapp} target="_blank" rel="noopener">
-                Perguntar sobre a turma<span class="so-leitor"> de {curso.nome} no WhatsApp (abre em nova aba)</span>
-              </a>
-            </td>
+            {comCurso && <th scope="col">Curso</th>}
+            <th scope="col">Dia</th>
+            <th scope="col">Horário</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Vagas</th>
+            <th scope="col"><span class="so-leitor">Perguntar</span></th>
           </tr>
-        ))
-      }
-    </tbody>
-  </table>
-</div>
+        </thead>
+        <tbody>
+          {turmas.map((t) => (
+            <tr>
+              {comCurso && <td data-rotulo="Curso" class="curso">{curso.nome}</td>}
+              <td data-rotulo="Dia">{t.dia ?? <Preencher />}</td>
+              <td data-rotulo="Horário">{t.horario ?? <Preencher />}</td>
+              <td data-rotulo="Idade">{t.idade ?? curso.idade}</td>
+              <td data-rotulo="Vagas">
+                {t.situacao ? <span class:list={['situacao', t.situacao]}>{SITUACOES_TURMA[t.situacao]}</span> : <Preencher />}
+              </td>
+              <td class="acao">
+                <a class="botao botao--pequeno" href={whatsapp} target="_blank" rel="noopener">
+                  Perguntar sobre a turma<span class="so-leitor"> de {curso.nome} no WhatsApp (abre em nova aba)</span>
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
 
 <style>
+  .consulta {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 4px;
+  }
+
+  @media (max-width: 520px) {
+    .consulta .botao {
+      width: 100%;
+    }
+  }
+
   /* A tabela vira cartões pela largura DELA (container query), não da tela:
      o mesmo componente aparece em colunas de larguras diferentes. */
   .turmas {

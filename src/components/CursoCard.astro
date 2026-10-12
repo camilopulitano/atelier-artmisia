@@ -1,20 +1,16 @@
 ---
 import { Image } from 'astro:assets';
-import Preencher from './Preencher.astro';
-import { professorDe, turmasDe, type Curso } from '../content/cursos';
+import { idadeRotulo, professorDe, type Curso } from '../content/cursos';
 
 /**
- * Cartão de curso da home: imagem inteira (nunca cortada), nome, professor,
- * descrição, resumo das turmas e o link para os horários.
+ * Cartão de curso da home: imagem inteira (nunca cortada), nome, idade,
+ * professor, uma frase do curso e o link para o curso na página de aulas.
  */
 interface Props {
   curso: Curso;
 }
 const { curso } = Astro.props;
 const professor = professorDe(curso);
-const resumo = turmasDe(curso)
-  .filter((t) => t.dia && t.horario)
-  .map((t) => `${t.dia} · ${t.horario}`);
 ---
 
 <article class="cartao curso">
@@ -32,12 +28,10 @@ const resumo = turmasDe(curso)
   </div>
   <div class="texto">
     <h3>{curso.nome}</h3>
+    <p class="idade">{idadeRotulo(curso)}</p>
     <p class="texto-suave">com {professor.nome}</p>
-    <p>{curso.descricao}</p>
-    <p class="turmas texto-suave">
-      Turmas: {resumo.length > 0 ? resumo.join(' / ') : <Preencher />}
-    </p>
-    <a class="link-seta" href={`/aulas#${curso.slug}`}>Ver horários <span aria-hidden="true">→</span><span class="so-leitor"> de {curso.nome}</span></a>
+    <p class="resumo">{curso.resumo}</p>
+    <a class="link-seta" href={`/aulas#${curso.slug}`}>Ver o curso <span aria-hidden="true">→</span><span class="so-leitor"> {curso.nome}</span></a>
   </div>
 </article>
 
@@ -85,8 +79,10 @@ const resumo = turmasDe(curso)
     font-size: 16px;
   }
 
-  .turmas {
-    font-size: 14px !important;
+  .idade {
+    font-size: 15px !important;
+    font-weight: 600;
+    color: var(--oliva);
   }
 
   .link-seta {
@@ -111,7 +107,7 @@ const resumo = turmasDe(curso)
       font-size: 21px;
     }
 
-    .texto > p:not(.texto-suave) {
+    .resumo {
       display: none;
     }
   }

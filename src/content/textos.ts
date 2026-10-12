@@ -21,13 +21,25 @@ export const TEXTOS = {
 
   cursos: {
     titulo: 'O que se *aprende* aqui',
-    intro: 'Escolha pelo que quer aprender. Dia, horário e idade de cada turma estão na página de aulas.',
+    intro: 'Escolha pelo que quer aprender e pela idade de quem vai fazer a aula.',
+  },
+
+  /** Rótulo do botão principal de contato (pedido da Ana). */
+  botaoTurmas: 'Consultar turmas pelo WhatsApp',
+
+  oficinas: {
+    titulo: '*Oficinas*',
+    /** Primeira frase do texto, para o cartão da home. */
+    resumo: 'Também realizamos oficinas em datas específicas, com propostas como pintura e vinho, aquarela e cerâmica.',
+    texto:
+      'Também realizamos oficinas em datas específicas, com propostas como pintura e vinho, aquarela e cerâmica. Cada oficina tem sua própria programação, público e condições de participação, divulgados conforme a abertura das inscrições.',
   },
 
   atelier: {
     titulo: 'Fundado por *Ana Quintanas*',
-    /** TODO(conteudo): um parágrafo da Ana sobre o atelier — quando abriu e como são as aulas. */
-    sobre: undefined as string | undefined,
+    /** Texto da Ana (11/10/2026). */
+    sobre:
+      'O Atelier Artmisia é um espaço de aprendizado e criação artística em Medianeira, com cursos para crianças, adolescentes e adultos. As aulas respeitam o ritmo de cada aluno, incentivando a criatividade, a expressão pessoal e o desenvolvimento das habilidades artísticas.' as string | undefined,
     /** TODO(conteudo): ano em que o atelier abriu. */
     fundacao: undefined as number | undefined,
     fotoAlt: 'Ana Quintanas sorrindo, encostada numa janela pintada com uma paisagem de ciprestes',
@@ -62,19 +74,20 @@ export const TEXTOS = {
 
   aulas: {
     titulo: '*Aulas*',
-    intro: 'Pintura e desenho para crianças, adolescentes e adultos. Escolha o curso, veja a turma e pergunte direto pelo WhatsApp.',
-    valores: 'Pelo WhatsApp, por turma',
+    intro: 'Pintura e desenho para crianças, adolescentes e adultos, com aulas que respeitam o ritmo de cada aluno.',
+    consulta: 'Pelo WhatsApp',
+    /** Texto da Ana: horários e inscrições. */
+    horarios: 'Para consultar os horários, valores e a disponibilidade de vagas, entre em contato com o ateliê pelo WhatsApp.',
     /** TODO(conteudo): existe aula experimental? Como funciona? */
     aulaExperimental: undefined as string | undefined,
     /** TODO(conteudo): o material é incluso ou o aluno traz? */
     material: undefined as string | undefined,
-    semTurma: 'Não achou a *turma certa*?',
-    semTurmaTexto: 'Conte o que quer aprender e a idade de quem vai fazer a aula.',
+    inscricoesTitulo: 'Horários e *inscrições*',
   },
 
   contato: {
     titulo: 'Venha ao *atelier*',
-    texto: 'Turmas, vagas e valores pelo WhatsApp.',
+    texto: 'Horários, valores e vagas pelo WhatsApp.',
   },
 
   introVideos: 'O atelier, as aulas e as obras em movimento, direto do Instagram.',

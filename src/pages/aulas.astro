@@ -4,12 +4,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Destaque from '../components/Destaque.astro';
 import Preencher from '../components/Preencher.astro';
 import TurmasTabela from '../components/TurmasTabela.astro';
-import { cursos, professorDe, PUBLICOS, SITUACOES_TURMA, type Publico } from '../content/cursos';
+import { cursos, idadeRotulo, professorDe, PUBLICOS, SITUACOES_TURMA, turmas, type Publico } from '../content/cursos';
 import { retratoDe } from '../content/professores';
 import { TEXTOS, semMarcas } from '../content/textos';
-import { linkWhatsApp } from '../config/contato';
+import { linkConsultaTurmas, linkOficinas } from '../config/contato';
 
 const publicos = Object.entries(PUBLICOS) as [Publico, string][];
+const temSituacao = turmas.some((t) => t.situacao);
 ---
 
 <BaseLayout
@@ -32,7 +33,7 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
 
   <section class="conteiner" aria-label="Antes de começar">
     <dl class="infos">
-      <div class="cartao"><dt>Valores</dt><dd>{TEXTOS.aulas.valores}</dd></div>
+      <div class="cartao"><dt>Horários, valores e vagas</dt><dd>{TEXTOS.aulas.consulta}</dd></div>
       <div class="cartao"><dt>Aula experimental</dt><dd>{TEXTOS.aulas.aulaExperimental ?? <Preencher />}</dd></div>
       <div class="cartao"><dt>Material</dt><dd>{TEXTOS.aulas.material ?? <Preencher o="incluso ou o aluno traz" />}</dd></div>
     </dl>
@@ -47,7 +48,7 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
             <article
               id={curso.slug}
               class="cartao curso"
-              data-publico={curso.publico?.join(' ') ?? 'indefinido'}
+              data-publico={curso.publico.join(' ')}
               aria-labelledby={`titulo-${curso.slug}`}
             >
               <a class="quem" href={`/professores/${professor.slug}`}>
@@ -66,11 +67,10 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
               </a>
               <div class="dados">
                 <h2 id={`titulo-${curso.slug}`}>{curso.nome}</h2>
-                <p class="texto-suave">{curso.descricao}</p>
-                <p class="publico">
-                  Para:{' '}
-                  {curso.publico ? curso.publico.map((p) => PUBLICOS[p].toLowerCase()).join(', ') : <Preencher o="para quem é" />}
-                </p>
+                <p class="idade">{idadeRotulo(curso)}</p>
+                <div class="descricao texto-suave">
+                  {curso.descricao.map((paragrafo) => <p>{paragrafo}</p>)}
+                </div>
                 <TurmasTabela curso={curso} professor={professor} />
               </div>
             </article>
@@ -78,20 +78,34 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
         })
       }
       <p class="vazio" id="vazio" hidden>Ainda não há turma cadastrada para esse público. Fale com o atelier.</p>
-      <div class="legenda texto-suave">
-        <span>Como a situação da turma aparece:</span>
-        <span class="situacao vagas">{SITUACOES_TURMA.vagas}</span>
-        <span class="situacao espera">{SITUACOES_TURMA.espera}</span>
-      </div>
+      {
+        temSituacao && (
+          <div class="legenda texto-suave">
+            <span>Como a situação da turma aparece:</span>
+            <span class="situacao vagas">{SITUACOES_TURMA.vagas}</span>
+            <span class="situacao espera">{SITUACOES_TURMA.espera}</span>
+          </div>
+        )
+      }
     </div>
   </section>
 
-  <section class="conteiner chamada" aria-labelledby="titulo-chamada">
+  <section id="oficinas" class="conteiner oficinas" aria-labelledby="titulo-oficinas">
     <div class="pilha">
-      <h2 id="titulo-chamada" class="titulo-secao"><Destaque texto={TEXTOS.aulas.semTurma} /></h2>
-      <p class="texto-suave">{TEXTOS.aulas.semTurmaTexto}</p>
+      <h2 id="titulo-oficinas" class="titulo-secao"><Destaque texto={TEXTOS.oficinas.titulo} /></h2>
+      <p class="texto-leitura">{TEXTOS.oficinas.texto}</p>
     </div>
-    <a class="botao" href={linkWhatsApp('Olá! Vim pelo site do Atelier Artmisia e quero saber qual turma serve para mim (ou para quem vai fazer a aula).')} target="_blank" rel="noopener">Falar com o atelier</a>
+    <a class="botao botao--contorno" href={linkOficinas()} target="_blank" rel="noopener">Perguntar sobre as próximas oficinas<span class="so-leitor"> (abre em nova aba)</span></a>
+  </section>
+
+  <section class="faixa-secao" aria-labelledby="titulo-chamada">
+  <div class="conteiner chamada">
+    <div class="pilha">
+      <h2 id="titulo-chamada" class="titulo-secao"><Destaque texto={TEXTOS.aulas.inscricoesTitulo} /></h2>
+      <p class="texto-suave">{TEXTOS.aulas.horarios}</p>
+    </div>
+    <a class="botao" href={linkConsultaTurmas()} target="_blank" rel="noopener">{TEXTOS.botaoTurmas}<span class="so-leitor"> (abre em nova aba)</span></a>
+  </div>
   </section>
 </BaseLayout>
 
@@ -233,8 +247,18 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
     font-weight: 500;
   }
 
-  .publico {
-    font-size: 15px;
+  .idade {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--oliva);
+  }
+
+  .descricao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 44em;
   }
 
   .vazio {
@@ -268,6 +292,7 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
     color: var(--texto);
   }
 
+  .oficinas,
   .chamada {
     display: flex;
     flex-wrap: wrap;
@@ -305,7 +330,8 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
       height: 56px;
     }
 
-    .chamada .botao {
+    .chamada .botao,
+    .oficinas .botao {
       width: 100%;
     }
   }

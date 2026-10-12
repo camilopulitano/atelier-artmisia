@@ -13,7 +13,11 @@ const WHATSAPP_BRUTO = '5545998593078'; // 55 + DDD + 9 + número, só dígitos
 // TODO(conteudo): confirmar o Instagram do atelier (aparece no banner da Brasilidade).
 export const INSTAGRAM_USUARIO = 'artmisia.atelier'; // sem o @
 
-/** TODO(conteudo): endereço público do atelier. Enquanto vazio, o site mostra [PREENCHER]. */
+/** Cidade do atelier (texto da Ana, 11/10/2026). */
+export const CIDADE = 'Medianeira';
+export const ESTADO = 'PR';
+
+/** TODO(conteudo): rua e número do atelier. Enquanto vazio, o site mostra a cidade e [PREENCHER]. */
 export const ENDERECO: string | undefined = undefined;
 
 /** TODO(conteudo): dias e horário em que o atelier fica aberto. */
@@ -41,11 +45,21 @@ export function linkWhatsApp(mensagem = `Olá! Vim pelo site do ${SITE.nome} e g
   return `https://wa.me/${WHATSAPP_E164}?text=${encodeURIComponent(mensagem)}`;
 }
 
+/** Botão geral "Consultar turmas pelo WhatsApp". */
+export function linkConsultaTurmas(): string {
+  return linkWhatsApp(`Olá! Vim pelo site do ${SITE.nome} e gostaria de consultar as turmas: horários, valores e vagas.`);
+}
+
+/** Pergunta sobre as próximas oficinas. */
+export function linkOficinas(): string {
+  return linkWhatsApp(`Olá! Vi no site do ${SITE.nome} que vocês fazem oficinas. Gostaria de saber das próximas datas.`);
+}
+
 /** Pergunta sobre a turma de um curso, já com o nome do curso e do professor. */
 export function linkTurma(curso: { nome: string }, professor: { primeiroNome: string; artigo: 'a' | 'o' }): string {
   return linkWhatsApp(
     `Olá! Vi no site do ${SITE.nome} o curso de ${curso.nome}, com ${professor.artigo} ${professor.primeiroNome}. ` +
-      'Gostaria de saber dias, horários, vagas e valores.',
+      'Gostaria de saber os horários, os valores e se há vagas.',
   );
 }
 

@@ -1,15 +1,14 @@
 import type { ImageMetadata } from 'astro';
 import { professorPorSlug, professores } from './professores';
-import capaPintura from '../assets/obras/hibiscos.jpg';
+import capaPinturaEmTela from '../assets/obras/hibiscos.jpg';
 import capaDesenhoRealista from '../assets/professores/edison-marsan-1.jpg';
-import capaArteCriancas from '../assets/professores/fabiana-de-zorzi.jpg';
-import capaDesenhoCriancas from '../assets/professores/camilo-pulitano-2.jpg';
+import capaIniciacao from '../assets/professores/fabiana-de-zorzi-1.jpg';
+import capaPinturaInfantil from '../assets/professores/fabiana-de-zorzi.jpg';
+import capaDesenhoInfantil from '../assets/professores/camilo-pulitano-2.jpg';
 
 /**
- * Cursos e turmas. Sem preço: o valor é passado pelo WhatsApp.
- *
- * TODO(conteudo): os NOMES dos cursos são provisórios — vieram do que cada
- * professor ensina (PROFESSORES A3.pdf). A Ana confirma os nomes reais.
+ * Cursos e turmas. Nomes, idades e textos enviados pela Ana (11/10/2026).
+ * Sem preço: horários, valores e vagas são passados pelo WhatsApp.
  *
  * A ordem da lista é a ordem da página de aulas e da home.
  */
@@ -27,10 +26,14 @@ export interface Curso {
   nome: string;
   /** slug do professor em professores.ts */
   professor: string;
-  /** Uma ou duas frases, a partir da bio do professor. */
-  descricao: string;
-  /** Para quem é. Vazio = ainda não informado: aparece em todos os filtros, com [PREENCHER]. */
-  publico?: Publico[];
+  /** Faixa etária, como o atelier escreve. Ex.: "de 4 a 7 anos". */
+  idade: string;
+  /** Usado nos filtros da página de aulas e nos atalhos da home. */
+  publico: Publico[];
+  /** Uma frase do texto do curso, para o cartão da home. */
+  resumo: string;
+  /** Texto completo do curso, um item por parágrafo (página de aulas). */
+  descricao: string[];
   /** Imagem do cartão. Sempre inteira, nunca cortada. */
   capa: ImageMetadata;
   capaAlt: string;
@@ -46,7 +49,7 @@ export const SITUACOES_TURMA: Record<SituacaoTurma, string> = {
 export interface Turma {
   /** slug do curso */
   curso: string;
-  /** Ex.: "Terça" ou "Terças e quintas". Vazio = [PREENCHER] na página. */
+  /** Ex.: "Terça" ou "Terças e quintas". */
   dia?: string;
   /** Ex.: "14h às 16h". */
   horario?: string;
@@ -57,52 +60,82 @@ export interface Turma {
 
 export const cursos: Curso[] = [
   {
-    slug: 'pintura',
-    nome: 'Pintura',
+    slug: 'iniciacao-as-artes',
+    nome: 'Iniciação às Artes',
+    professor: 'fabiana-de-zorzi',
+    idade: 'de 4 a 7 anos',
+    publico: ['criancas'],
+    resumo:
+      'Um primeiro contato com a arte por meio de atividades como desenho, pintura, colagem e exploração de cores, formas e materiais.',
+    descricao: [
+      'Um primeiro contato com a arte por meio de atividades como desenho, pintura, colagem e exploração de cores, formas e materiais. A proposta é desenvolver a coordenação motora, a criatividade e a expressão das crianças de maneira lúdica, respeitando sua idade.',
+      'É um curso de experimentação artística, sem o foco específico na pintura em tela.',
+    ],
+    capa: capaIniciacao,
+    capaAlt: 'Fabiana de Zorzi ao lado de um retrato de Frida Kahlo em cores vivas, com coroa de flores e fundo azul-turquesa',
+  },
+  {
+    slug: 'pintura-em-tela-infantil',
+    nome: 'Pintura em Tela Infantil',
+    professor: 'fabiana-de-zorzi',
+    idade: 'de 8 a 11 anos',
+    publico: ['criancas'],
+    resumo: 'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição.',
+    descricao: [
+      'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição. As propostas são adaptadas à faixa etária, com acompanhamento durante a criação dos trabalhos e espaço para desenvolver a própria criatividade.',
+    ],
+    capa: capaPinturaInfantil,
+    capaAlt: 'Fabiana de Zorzi sorrindo ao lado do cavalete, com uma pintura de girassóis num vaso',
+  },
+  {
+    slug: 'pintura-em-tela',
+    nome: 'Pintura em Tela',
     professor: 'ana-quintanas',
-    descricao: 'Óleo e acrílica, a partir do naturalismo e com espaço para outras linguagens.',
-    capa: capaPintura,
+    idade: 'a partir de 12 anos e adultos',
+    publico: ['adolescentes', 'adultos'],
+    resumo: 'Para quem deseja começar a pintar ou desenvolver seus conhecimentos.',
+    descricao: [
+      'Para quem deseja começar a pintar ou desenvolver seus conhecimentos. As aulas abordam as etapas da pintura, desde a preparação do desenho e as misturas de cores até a construção de luz, sombra, volume e detalhes. O acompanhamento respeita o nível e o ritmo de cada aluno.',
+    ],
+    capa: capaPinturaEmTela,
     capaAlt: 'Pintura de Ana Quintanas: hibiscos vermelhos sobre folhagem verde',
   },
   {
-    slug: 'desenho-realista',
-    nome: 'Desenho realista',
+    slug: 'desenho-infantil',
+    nome: 'Desenho Infantil',
+    professor: 'camilo-pulitano',
+    idade: 'de 8 a 11 anos',
+    publico: ['criancas'],
+    resumo: 'As aulas desenvolvem a observação, a criatividade e as habilidades de desenho.',
+    descricao: [
+      'As aulas desenvolvem a observação, a criatividade e as habilidades de desenho. As crianças exploram linhas, formas, proporções e sombras em atividades adequadas à idade, aprendendo a construir seus desenhos e expressar suas ideias.',
+    ],
+    capa: capaDesenhoInfantil,
+    capaAlt: 'Camilo Pulitano segurando uma pintura de um casal visto de costas, de frente para o mar',
+  },
+  {
+    slug: 'desenho-realista-e-anime',
+    nome: 'Desenho Realista e Anime',
     professor: 'edison-marsan',
-    descricao: 'Grafite, realismo em preto e branco e realismo colorido.',
+    idade: 'a partir de 12 anos e adultos',
+    publico: ['adolescentes', 'adultos'],
+    resumo: 'As aulas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra.',
+    descricao: [
+      'As aulas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra. Os alunos podem desenvolver trabalhos de desenho realista e anime, com orientação de acordo com seus interesses e nível de experiência.',
+    ],
     // TODO(conteudo): trocar por uma obra autoral do Edison (esta é de um personagem conhecido).
     capa: capaDesenhoRealista,
     capaAlt: 'Desenho realista em grafite de Edison Marsan, em preto e branco, com lápis ao lado da folha',
   },
-  {
-    slug: 'arte-para-criancas',
-    nome: 'Arte para crianças',
-    professor: 'fabiana-de-zorzi',
-    descricao: 'Experiências que estimulam a criatividade, a sensibilidade e a liberdade de expressão.',
-    publico: ['criancas'],
-    capa: capaArteCriancas,
-    capaAlt: 'Fabiana de Zorzi sorrindo ao lado do cavalete, com uma pintura de girassóis num vaso',
-  },
-  {
-    slug: 'desenho-para-criancas',
-    nome: 'Desenho para crianças',
-    professor: 'camilo-pulitano',
-    descricao: 'Observação, criatividade e descoberta, respeitando o ritmo e a individualidade de cada aluno.',
-    publico: ['criancas'],
-    capa: capaDesenhoCriancas,
-    capaAlt: 'Camilo Pulitano segurando uma pintura de um casal visto de costas, de frente para o mar',
-  },
 ];
 
 /**
- * TODO(conteudo): dia, horário, idade e situação de cada turma (pergunta 1 da mensagem para a Ana).
- * Um curso pode ter várias turmas: repita a linha com o mesmo `curso`.
+ * Turmas com dia e horário. Hoje vazia: o atelier passa horários, valores e
+ * vagas pelo WhatsApp, e cada curso mostra o botão "Consultar turmas pelo WhatsApp".
+ * Se um dia quiserem publicar os horários, é só preencher aqui (um curso pode
+ * ter várias turmas: repita a linha com o mesmo `curso`) e a tabela aparece sozinha.
  */
-export const turmas: Turma[] = [
-  { curso: 'pintura' },
-  { curso: 'desenho-realista' },
-  { curso: 'arte-para-criancas' },
-  { curso: 'desenho-para-criancas' },
-];
+export const turmas: Turma[] = [];
 
 /** Falha no build se um curso apontar para professor que não existe, ou uma turma para curso que não existe. */
 function validar(): void {
@@ -126,6 +159,11 @@ export function turmasDe(curso: Curso): Turma[] {
 
 export function cursosDe(professorSlug: string): Curso[] {
   return cursos.filter((c) => c.professor === professorSlug);
+}
+
+/** "de 4 a 7 anos" → "De 4 a 7 anos" (começo de linha). */
+export function idadeRotulo(curso: Curso): string {
+  return curso.idade.charAt(0).toUpperCase() + curso.idade.slice(1);
 }
 
 export function professorDe(curso: Curso) {

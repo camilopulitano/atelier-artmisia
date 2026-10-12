@@ -3,7 +3,8 @@ import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TurmasTabela from '../../components/TurmasTabela.astro';
 import { professores, retratoDe, rotuloNoAtelier, trabalhosDe, type Professor } from '../../content/professores';
-import { cursosDe } from '../../content/cursos';
+import { cursosDe, idadeRotulo, turmasDe } from '../../content/cursos';
+import { TEXTOS } from '../../content/textos';
 import { linkProfessor } from '../../config/contato';
 import { SITE } from '../../config/site';
 
@@ -129,9 +130,21 @@ const jsonLd = {
   }
 
   <section id="turmas" class="conteiner secao" aria-labelledby="titulo-turmas">
-    <h2 id="titulo-turmas" class="titulo-secao">Turmas d{p.artigo} <em>{p.primeiroNome}</em></h2>
-    {cursos.map((curso) => <TurmasTabela curso={curso} professor={p} comCurso />)}
-    <a class="botao" href={linkProfessor(p)} target="_blank" rel="noopener">Perguntar sobre as turmas d{p.artigo} {p.primeiroNome}</a>
+    <h2 id="titulo-turmas" class="titulo-secao">{cursos.length > 1 ? 'Cursos' : 'Curso'} d{p.artigo} <em>{p.primeiroNome}</em></h2>
+    <ul class="cursos" role="list">
+      {
+        cursos.map((curso) => (
+          <li class="cartao curso">
+            <h3><a href={`/aulas#${curso.slug}`}>{curso.nome}</a></h3>
+            <p class="idade">{idadeRotulo(curso)}</p>
+            <p class="texto-suave">{curso.resumo}</p>
+          </li>
+        ))
+      }
+    </ul>
+    {cursos.map((curso) => turmasDe(curso).length > 0 && <TurmasTabela curso={curso} professor={p} comCurso />)}
+    <p class="texto-suave">{TEXTOS.aulas.horarios}</p>
+    <a class="botao" href={linkProfessor(p)} target="_blank" rel="noopener">{TEXTOS.botaoTurmas}<span class="so-leitor"> d{p.artigo} {p.primeiroNome} (abre em nova aba)</span></a>
   </section>
 
   <section class="conteiner secao outros-secao" aria-labelledby="titulo-outros">
@@ -276,6 +289,45 @@ const jsonLd = {
   .secao > :global(.turmas) {
     width: 100%;
     background: var(--cartao);
+  }
+
+  .cursos {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .curso {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px 22px;
+  }
+
+  .curso h3 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .curso h3 a {
+    color: var(--texto);
+    text-decoration: none;
+  }
+
+  .curso h3 a:hover {
+    color: var(--oliva);
+    text-decoration: underline;
+  }
+
+  .idade {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--oliva);
   }
 
   .trabalhos {

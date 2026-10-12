@@ -8,7 +8,7 @@ import '../styles/global.css';
 import { getImage } from 'astro:assets';
 import Cabecalho from '../components/Cabecalho.astro';
 import Rodape from '../components/Rodape.astro';
-import { ENDERECO, INSTAGRAM_URL, WHATSAPP_E164 } from '../config/contato';
+import { CIDADE, ENDERECO, ESTADO, INSTAGRAM_URL, WHATSAPP_E164 } from '../config/contato';
 import imagemPadrao from '../assets/atelier/abertura.jpg';
 import { SITE, type Pagina } from '../config/site';
 
@@ -37,7 +37,13 @@ const organizacao = {
   url: Astro.site?.toString(),
   telephone: `+${WHATSAPP_E164}`,
   sameAs: [INSTAGRAM_URL],
-  ...(ENDERECO && { address: ENDERECO }),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: CIDADE,
+    addressRegion: ESTADO,
+    addressCountry: 'BR',
+    ...(ENDERECO && { streetAddress: ENDERECO }),
+  },
 };
 ---
 
