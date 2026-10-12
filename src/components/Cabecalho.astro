@@ -11,6 +11,7 @@ const { atual } = Astro.props;
 /** Só entram rotas que existem. Item de menu que cai em 404 é pior que item ausente. */
 const menu: { rotulo: string; href: string; chave: Pagina }[] = [
   { rotulo: 'Aulas', href: '/aulas', chave: 'aulas' },
+  { rotulo: 'Online', href: '/online', chave: 'online' },
   { rotulo: 'Professores', href: '/professores', chave: 'professores' },
   { rotulo: 'O atelier', href: '/o-atelier', chave: 'atelier' },
   { rotulo: 'Obras', href: '/obras', chave: 'obras' },

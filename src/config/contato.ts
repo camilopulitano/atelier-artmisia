@@ -56,6 +56,23 @@ export function linkAulaExperimental(curso?: { nome: string }): string {
   return linkWhatsApp(`Olá! Vim pelo site do ${SITE.nome} e gostaria de marcar uma aula experimental${qual}. Quais horários vocês têm?`);
 }
 
+/** Pergunta sobre uma aula online (ou sobre as aulas online em geral). */
+export function linkOnline(curso?: { nome: string; publico?: string; formato: string; emBreve?: boolean }, professor?: { primeiroNome: string; artigo: 'a' | 'o' }): string {
+  if (!curso || !professor) {
+    return linkWhatsApp(`Olá! Vi no site do ${SITE.nome} as aulas online e gostaria de saber horários e valores.`);
+  }
+  if (curso.emBreve) {
+    return linkWhatsApp(
+      `Olá! Vi no site do ${SITE.nome} que o curso de ${curso.nome} com ${professor.artigo} ${professor.primeiroNome} vai ser lançado em breve. Quero ser avisado quando abrir.`,
+    );
+  }
+  return linkWhatsApp(
+    `Olá! Vi no site do ${SITE.nome} ${curso.formato === 'gravado' ? 'o curso gravado' : 'a aula online'} de ${curso.nome}` +
+      `${curso.publico ? ` (${curso.publico.toLowerCase()})` : ''}, com ${professor.artigo} ${professor.primeiroNome}. ` +
+      (curso.formato === 'gravado' ? 'Gostaria de saber como acessar e o valor.' : 'Gostaria de saber os horários e os valores.'),
+  );
+}
+
 /** Pergunta sobre as próximas oficinas. */
 export function linkOficinas(): string {
   return linkWhatsApp(`Olá! Vi no site do ${SITE.nome} que vocês fazem oficinas. Gostaria de saber das próximas datas.`);

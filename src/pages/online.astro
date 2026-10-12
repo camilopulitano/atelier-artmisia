@@ -1,0 +1,236 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Destaque from '../components/Destaque.astro';
+import { cursosOnline, cursosOnlineDe, FORMATOS_ONLINE } from '../content/online';
+import { professores, retratoDe } from '../content/professores';
+import { TEXTOS, semMarcas } from '../content/textos';
+import { linkOnline } from '../config/contato';
+
+// Professores que têm aula online, na ordem de professores.ts.
+const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
+---
+
+<BaseLayout titulo={semMarcas(TEXTOS.online.titulo)} descricao={TEXTOS.online.intro} paginaAtual="online">
+  <section class="conteiner topo" aria-labelledby="titulo-online">
+    <nav class="trilha" aria-label="Você está aqui"><a href="/">Início</a> / <span aria-current="page">Aulas online</span></nav>
+    <h1 id="titulo-online" class="titulo-pagina"><Destaque texto={TEXTOS.online.titulo} /></h1>
+    <p class="intro texto-suave">{TEXTOS.online.intro}</p>
+    <p class="texto-suave resumo">{cursosOnline.length} opções com {comOnline.map((p) => p.nome).join(', ').replace(/, (?=[^,]*$)/, ' e ')}. Aulas presenciais em Medianeira: <a href="/aulas">veja aqui</a>.</p>
+  </section>
+
+  <section class="faixa-secao" aria-label="Aulas online por professor">
+    <div class="conteiner lista">
+      {
+        comOnline.map((p) => (
+          <article class="cartao professor" aria-labelledby={`online-${p.slug}`}>
+            <a class="quem" href={`/professores/${p.slug}`}>
+              <Image
+                src={retratoDe(p)}
+                alt={p.retratoAlt}
+                widths={[120, 240]}
+                sizes="120px"
+                quality={74}
+                format="webp"
+                loading="lazy"
+                style={`object-position: ${p.foco}`}
+              />
+              <span>{p.nome}</span>
+            </a>
+            <div class="dados">
+              <h2 id={`online-${p.slug}`}>Com {p.artigo === 'a' ? 'a' : 'o'} <em>{p.primeiroNome}</em></h2>
+              <ul class="cursos" role="list">
+                {cursosOnlineDe(p.slug).map((c) => (
+                  <li class="curso">
+                    <span class="formato">{FORMATOS_ONLINE[c.formato]}{c.emBreve && <span class="em-breve">Em breve</span>}</span>
+                    <h3>{c.nome}</h3>
+                    {c.publico && <p class="publico">{c.publico}</p>}
+                    <a class="link-seta" href={linkOnline(c, p)} target="_blank" rel="noopener">
+                      {c.emBreve ? 'Quero ser avisado' : 'Consultar pelo WhatsApp'} <span aria-hidden="true">→</span>
+                      <span class="so-leitor"> — {c.nome}{c.publico ? `, ${c.publico}` : ''} (abre em nova aba)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="conteiner chamada" aria-labelledby="titulo-chamada-online">
+    <div class="pilha">
+      <h2 id="titulo-chamada-online" class="titulo-secao"><Destaque texto={TEXTOS.online.chamadaTitulo} /></h2>
+      <p class="texto-suave">{TEXTOS.online.chamadaTexto}</p>
+    </div>
+    <a class="botao" href={linkOnline()} target="_blank" rel="noopener">{TEXTOS.online.botao}<span class="so-leitor"> (abre em nova aba)</span></a>
+  </section>
+</BaseLayout>
+
+<style>
+  .topo {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-block: clamp(32px, 5vw, 64px) 40px;
+  }
+
+  .trilha {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .intro {
+    max-width: 34em;
+    font-size: clamp(17px, 1.6vw, 20px);
+  }
+
+  .resumo {
+    font-size: 16px;
+  }
+
+  .lista {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: clamp(48px, 7vw, 88px);
+  }
+
+  .professor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 36px;
+    padding: clamp(20px, 3vw, 32px);
+  }
+
+  .quem {
+    flex: 0 0 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    color: var(--texto);
+    font-family: var(--serif);
+    font-size: 19px;
+    text-decoration: none;
+  }
+
+  .quem :global(img) {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .quem:hover span {
+    color: var(--oliva);
+  }
+
+  .dados {
+    flex: 999 1 520px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  h2 {
+    font-size: clamp(26px, 2.6vw, 32px);
+    font-weight: 500;
+  }
+
+  .cursos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .curso {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 20px;
+    border-radius: var(--raio);
+    background: var(--fundo);
+  }
+
+  .formato {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .em-breve {
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: var(--raio);
+    background: var(--oliva);
+    color: var(--branco);
+    letter-spacing: 0.08em;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .publico {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--oliva);
+  }
+
+  .curso .link-seta {
+    margin-top: 6px;
+    font-size: 15px;
+  }
+
+  .chamada {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 48px;
+    padding-block: clamp(56px, 8vw, 104px);
+  }
+
+  .pilha {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 420px;
+    min-width: 0;
+  }
+
+  @media (max-width: 700px) {
+    .professor {
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .quem {
+      flex: 1 1 100%;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 12px;
+      text-align: left;
+      font-size: 17px;
+    }
+
+    .quem :global(img) {
+      width: 56px;
+      height: 56px;
+    }
+
+    .chamada .botao {
+      width: 100%;
+    }
+  }
+</style>

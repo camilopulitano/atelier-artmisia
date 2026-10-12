@@ -93,6 +93,14 @@ export const TEXTOS = {
     texto: 'Horários, valores e vagas pelo WhatsApp.',
   },
 
+  online: {
+    titulo: 'Aulas *online*',
+    intro: 'Para quem não está em Medianeira ou prefere aprender de casa: aulas online e cursos gravados com professores do atelier.',
+    botao: 'Consultar aulas online pelo WhatsApp',
+    chamadaTitulo: 'Horários e *valores*',
+    chamadaTexto: 'Horários, valores e vagas das aulas online, e o acesso aos cursos gravados, pelo WhatsApp.',
+  },
+
   introVideos: 'O atelier, as aulas e as obras em movimento, direto do Instagram.',
 };
 
