@@ -3,8 +3,8 @@ import { Image } from 'astro:assets';
 import { idadeRotulo, professorDe, type Curso } from '../content/cursos';
 
 /**
- * Cartão de curso da home: imagem inteira (nunca cortada), nome, idade,
- * professor, uma frase do curso e o link para o curso na página de aulas.
+ * Cartão de curso da home, no modelo pedido pela Ana (referência: Escola Panorama):
+ * capa grande em cima, nome, idade e professor, e um botão "Saiba mais".
  */
 interface Props {
   curso: Curso;
@@ -13,102 +13,77 @@ const { curso } = Astro.props;
 const professor = professorDe(curso);
 ---
 
-<article class="cartao curso">
-  <div class="capa">
+<article class="curso">
+  <a class="capa" href={`/aulas#${curso.slug}`} tabindex="-1" aria-hidden="true">
     <Image
       src={curso.capa}
-      alt={curso.capaAlt}
-      widths={[180, 300, 420]}
-      sizes="150px"
-      quality={74}
+      alt=""
+      widths={[360, 540, 720, 900]}
+      sizes="(max-width: 560px) 92vw, (max-width: 1000px) 46vw, 380px"
+      quality={76}
       format="webp"
       loading="lazy"
       data-fade=""
     />
-  </div>
-  <div class="texto">
-    <h3>{curso.nome}</h3>
-    <p class="idade">{idadeRotulo(curso)}</p>
-    <p class="texto-suave">com {professor.nome}</p>
-    <p class="resumo">{curso.resumo}</p>
-    <a class="link-seta" href={`/aulas#${curso.slug}`}>Ver o curso <span aria-hidden="true">→</span><span class="so-leitor"> {curso.nome}</span></a>
-  </div>
+  </a>
+  <h3>{curso.nome}</h3>
+  <p class="idade">{idadeRotulo(curso)}</p>
+  <p class="texto-suave">com {professor.nome}</p>
+  <a class="botao botao--pequeno" href={`/aulas#${curso.slug}`}>Saiba mais<span class="so-leitor"> sobre {curso.nome}</span></a>
 </article>
 
 <style>
   .curso {
     display: flex;
-    flex-wrap: wrap;
-    gap: 22px;
-    padding: 22px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
   }
 
   .capa {
-    flex: 0 0 150px;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 4px;
-    background: var(--fundo);
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 14px;
+    overflow: hidden;
+    border-radius: var(--raio-cartao);
+    background: var(--cartao);
   }
 
   .capa :global(img) {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms var(--entrada);
   }
 
-  .texto {
-    flex: 1 1 220px;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .capa:hover :global(img) {
+    transform: scale(1.03);
   }
 
   h3 {
-    font-size: 25px;
+    font-size: clamp(22px, 2.2vw, 26px);
     font-weight: 500;
   }
 
-  .texto > p {
-    font-size: 16px;
-  }
-
   .idade {
-    font-size: 15px !important;
+    font-size: 15px;
     font-weight: 600;
     color: var(--oliva);
   }
 
-  .link-seta {
-    margin-top: auto;
+  .texto-suave {
     font-size: 15px;
   }
 
-  @media (max-width: 520px) {
-    .curso {
-      flex-wrap: nowrap;
-      gap: 14px;
-      padding: 12px;
-    }
+  .botao {
+    margin-top: 10px;
+  }
 
-    .capa {
-      flex-basis: 76px;
-      height: 92px;
-      padding: 5px;
-    }
-
-    h3 {
-      font-size: 21px;
-    }
-
-    .resumo {
-      display: none;
+  @media (prefers-reduced-motion: reduce) {
+    .capa :global(img) {
+      transition: none;
     }
   }
 </style>

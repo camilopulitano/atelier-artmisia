@@ -6,7 +6,6 @@ import Preencher from '../components/Preencher.astro';
 import TurmasTabela from '../components/TurmasTabela.astro';
 import Oficinas from '../components/Oficinas.astro';
 import { cursos, idadeRotulo, professorDe, PUBLICOS, SITUACOES_TURMA, turmas, type Publico } from '../content/cursos';
-import { retratoDe } from '../content/professores';
 import { TEXTOS, semMarcas } from '../content/textos';
 import { linkAulaExperimental, linkConsultaTurmas } from '../config/contato';
 
@@ -53,20 +52,19 @@ const temSituacao = turmas.some((t) => t.situacao);
               data-publico={curso.publico.join(' ')}
               aria-labelledby={`titulo-${curso.slug}`}
             >
-              <a class="quem" href={`/professores/${professor.slug}`}>
+              <div class="quem">
                 <Image
-                  src={retratoDe(professor)}
-                  alt={professor.retratoAlt}
-                  widths={[120, 240]}
-                  sizes="120px"
-                  quality={74}
+                  src={curso.capa}
+                  alt={curso.capaAlt}
+                  widths={[240, 360, 480]}
+                  sizes="(max-width: 700px) 92vw, 220px"
+                  quality={76}
                   format="webp"
                   loading="lazy"
                   data-fade=""
-                  style={`object-position: ${professor.foco}`}
                 />
-                <span>{professor.nome}</span>
-              </a>
+                <a href={`/professores/${professor.slug}`}>com {professor.nome}</a>
+              </div>
               <div class="dados">
                 <h2 id={`titulo-${curso.slug}`}>{curso.nome}</h2>
                 <p class="idade">{idadeRotulo(curso)}</p>
@@ -214,7 +212,7 @@ const temSituacao = turmas.some((t) => t.situacao);
   }
 
   .quem {
-    flex: 0 0 170px;
+    flex: 0 0 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -227,14 +225,20 @@ const temSituacao = turmas.some((t) => t.situacao);
   }
 
   .quem :global(img) {
-    width: 120px;
-    height: 120px;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: var(--raio-cartao);
   }
 
-  .quem:hover span {
+  .quem a {
+    color: var(--texto);
+    text-decoration: none;
+  }
+
+  .quem a:hover {
     color: var(--oliva);
+    text-decoration: underline;
   }
 
   .dados {
@@ -326,16 +330,16 @@ const temSituacao = turmas.some((t) => t.situacao);
 
     .quem {
       flex: 1 1 100%;
-      flex-direction: row;
-      justify-content: flex-start;
-      gap: 12px;
+      align-items: stretch;
+      gap: 10px;
       text-align: left;
       font-size: 17px;
     }
 
     .quem :global(img) {
-      width: 56px;
-      height: 56px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
     }
 
     .botoes,

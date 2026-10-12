@@ -1,9 +1,10 @@
 import type { ImageMetadata } from 'astro';
 import { professorPorSlug, professores } from './professores';
-import capaPinturaEmTela from '../assets/obras/hibiscos.jpg';
-import capaDesenhoRealista from '../assets/professores/edison-marsan-1.jpg';
-import capaIniciacao from '../assets/professores/fabiana-de-zorzi-1.jpg';
-import capaPinturaInfantil from '../assets/professores/fabiana-de-zorzi.jpg';
+import capaPinturaEmTela from '../assets/cursos/pintura-em-tela.jpg';
+import capaDesenhoRealista from '../assets/cursos/desenho-realista-e-anime.jpg';
+import capaIniciacao from '../assets/cursos/iniciacao-as-artes.jpg';
+import capaPinturaInfantil from '../assets/cursos/pintura-em-tela-infantil.jpg';
+// TODO(conteudo): capa própria do Desenho Infantil (a Ana mandou capas para os outros quatro).
 import capaDesenhoInfantil from '../assets/professores/camilo-pulitano-2.jpg';
 
 /**
@@ -34,7 +35,7 @@ export interface Curso {
   resumo: string;
   /** Texto completo do curso, um item por parágrafo (página de aulas). */
   descricao: string[];
-  /** Imagem do cartão. Sempre inteira, nunca cortada. */
+  /** Capa do curso (cartão da home e página de aulas). Recortada em quadrado. */
   capa: ImageMetadata;
   capaAlt: string;
 }
@@ -72,7 +73,7 @@ export const cursos: Curso[] = [
       'É um curso de experimentação artística, sem o foco específico na pintura em tela.',
     ],
     capa: capaIniciacao,
-    capaAlt: 'Fabiana de Zorzi ao lado de um retrato de Frida Kahlo em cores vivas, com coroa de flores e fundo azul-turquesa',
+    capaAlt: 'Menina pintando com aquarela um desenho colorido, com lápis de cor e estojo de aquarela sobre a mesa do atelier',
   },
   {
     slug: 'pintura-em-tela-infantil',
@@ -85,7 +86,7 @@ export const cursos: Curso[] = [
       'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição. As propostas são adaptadas à faixa etária, com acompanhamento durante a criação dos trabalhos e espaço para desenvolver a própria criatividade.',
     ],
     capa: capaPinturaInfantil,
-    capaAlt: 'Fabiana de Zorzi sorrindo ao lado do cavalete, com uma pintura de girassóis num vaso',
+    capaAlt: 'Três meninas sorrindo com pincéis na mão, numa mesa com tintas acrílicas no atelier',
   },
   {
     slug: 'pintura-em-tela',
@@ -98,7 +99,7 @@ export const cursos: Curso[] = [
       'Para quem deseja começar a pintar ou desenvolver seus conhecimentos. As aulas abordam as etapas da pintura, desde a preparação do desenho e as misturas de cores até a construção de luz, sombra, volume e detalhes. O acompanhamento respeita o nível e o ritmo de cada aluno.',
     ],
     capa: capaPinturaEmTela,
-    capaAlt: 'Pintura de Ana Quintanas: hibiscos vermelhos sobre folhagem verde',
+    capaAlt: 'Pintura a óleo de uma paisagem: campo dourado, arbustos e mata ao fundo sob luz de fim de tarde',
   },
   {
     slug: 'desenho-infantil',
@@ -123,9 +124,8 @@ export const cursos: Curso[] = [
     descricao: [
       'As aulas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra. Os alunos podem desenvolver trabalhos de desenho realista e anime, com orientação de acordo com seus interesses e nível de experiência.',
     ],
-    // TODO(conteudo): trocar por uma obra autoral do Edison (esta é de um personagem conhecido).
     capa: capaDesenhoRealista,
-    capaAlt: 'Desenho realista em grafite de Edison Marsan, em preto e branco, com lápis ao lado da folha',
+    capaAlt: 'Desenhos de Edison Marsan espalhados sobre a mesa: retratos realistas em grafite e lápis de cor e personagens de anime',
   },
 ];
 
