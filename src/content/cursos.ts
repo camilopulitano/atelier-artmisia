@@ -3,9 +3,8 @@ import { professorPorSlug, professores } from './professores';
 import capaPinturaEmTela from '../assets/cursos/pintura-em-tela.jpg';
 import capaDesenhoRealista from '../assets/cursos/desenho-realista-e-anime.jpg';
 import capaIniciacao from '../assets/cursos/iniciacao-as-artes.jpg';
-import capaPinturaInfantil from '../assets/cursos/pintura-em-tela-infantil.jpg';
-// TODO(conteudo): capa própria do Desenho Infantil (a Ana mandou capas para os outros quatro).
-import capaDesenhoInfantil from '../assets/professores/camilo-pulitano-2.jpg';
+import capaPinturaInfantil from '../assets/professores/fabiana-de-zorzi.jpg';
+import capaDesenhoInfantil from '../assets/cursos/desenho-e-aquarela-para-criancas.jpg';
 
 /**
  * Cursos e turmas. Nomes, idades e textos enviados pela Ana (11/10/2026).
@@ -86,7 +85,7 @@ export const cursos: Curso[] = [
       'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição. As propostas são adaptadas à faixa etária, com acompanhamento durante a criação dos trabalhos e espaço para desenvolver a própria criatividade.',
     ],
     capa: capaPinturaInfantil,
-    capaAlt: 'Menina pintando com aquarela um desenho colorido, com lápis de cor e estojo de aquarela sobre a mesa do atelier',
+    capaAlt: 'Fabiana de Zorzi sorrindo ao lado do cavalete, com uma pintura de girassóis num vaso',
   },
   {
     slug: 'pintura-em-tela',
@@ -102,8 +101,8 @@ export const cursos: Curso[] = [
     capaAlt: 'Pintura a óleo de uma paisagem: campo dourado, arbustos e mata ao fundo sob luz de fim de tarde',
   },
   {
-    slug: 'desenho-infantil',
-    nome: 'Desenho Infantil',
+    slug: 'desenho-e-aquarela-para-criancas',
+    nome: 'Desenho e Aquarela para Crianças',
     professor: 'camilo-pulitano',
     idade: 'de 8 a 11 anos',
     publico: ['criancas'],
@@ -112,7 +111,7 @@ export const cursos: Curso[] = [
       'As aulas desenvolvem a observação, a criatividade e as habilidades de desenho. As crianças exploram linhas, formas, proporções e sombras em atividades adequadas à idade, aprendendo a construir seus desenhos e expressar suas ideias.',
     ],
     capa: capaDesenhoInfantil,
-    capaAlt: 'Camilo Pulitano segurando uma pintura de um casal visto de costas, de frente para o mar',
+    capaAlt: 'Menina pintando com aquarela um desenho colorido, com lápis de cor e estojo de aquarela sobre a mesa do atelier',
   },
   {
     slug: 'desenho-realista-e-anime',

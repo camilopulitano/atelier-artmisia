@@ -136,7 +136,7 @@ export const professores: Professor[] = [
     artigo: 'o',
     papel: 'Professor de desenho para crianças',
     resumo: 'Também dá aulas online, com alunos dos Estados Unidos e da Austrália.',
-    ensina: ['Desenho Infantil'],
+    ensina: ['Desenho e Aquarela para Crianças'],
     tecnicas: ['Desenho', 'Aquarela', 'Óleo', 'Acrílica'],
     retratoAlt: 'Camilo Pulitano segurando uma pintura a óleo com o retrato de três pessoas lado a lado',
     foco: '50% 12%',

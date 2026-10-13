@@ -38,7 +38,7 @@ Procure `TODO(conteudo)` no código. Hoje:
 2. Ano de abertura do atelier.
 3. Fotos do espaço, de aula acontecendo e da exposição Brasilidade.
 4. O que a seção Obras mostra (hoje: 6 obras da Ana).
-5. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; capa do curso Desenho Infantil.
+5. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; capa própria da Pintura em Tela Infantil (hoje é a foto da Fabiana).
 6. Fotos dos quatro professores numa sessão só.
 7. Domínio próprio, se houver (trocar em `src/config/site.ts` e `astro.config.mjs`).
 
