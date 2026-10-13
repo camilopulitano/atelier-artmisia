@@ -221,20 +221,13 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
 
   .grade-cursos {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px 28px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+    gap: 24px;
   }
 
-  @media (max-width: 1000px) {
-    .grade-cursos {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (max-width: 560px) {
-    .grade-cursos {
-      grid-template-columns: 1fr;
-    }
+  /* Número ímpar de cursos: o último ocupa a linha inteira. */
+  .grade-cursos > :global(:last-child:nth-child(odd)) {
+    grid-column: 1 / -1;
   }
 
   .atelier {
@@ -348,7 +341,7 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
     }
 
     .grade-cursos {
-      gap: 36px;
+      gap: 14px;
     }
 
     .grade-professores {

@@ -35,7 +35,7 @@ export interface Curso {
   resumo: string;
   /** Texto completo do curso, um item por parágrafo (página de aulas). */
   descricao: string[];
-  /** Capa do curso (cartão da home e página de aulas). Recortada em quadrado. */
+  /** Capa do curso (cartão da home). Sempre inteira, nunca cortada. */
   capa: ImageMetadata;
   capaAlt: string;
 }
@@ -73,7 +73,7 @@ export const cursos: Curso[] = [
       'É um curso de experimentação artística, sem o foco específico na pintura em tela.',
     ],
     capa: capaIniciacao,
-    capaAlt: 'Menina pintando com aquarela um desenho colorido, com lápis de cor e estojo de aquarela sobre a mesa do atelier',
+    capaAlt: 'Três meninas sorrindo com pincéis na mão, numa mesa com tintas acrílicas no atelier',
   },
   {
     slug: 'pintura-em-tela-infantil',
@@ -86,7 +86,7 @@ export const cursos: Curso[] = [
       'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição. As propostas são adaptadas à faixa etária, com acompanhamento durante a criação dos trabalhos e espaço para desenvolver a própria criatividade.',
     ],
     capa: capaPinturaInfantil,
-    capaAlt: 'Três meninas sorrindo com pincéis na mão, numa mesa com tintas acrílicas no atelier',
+    capaAlt: 'Menina pintando com aquarela um desenho colorido, com lápis de cor e estojo de aquarela sobre a mesa do atelier',
   },
   {
     slug: 'pintura-em-tela',
