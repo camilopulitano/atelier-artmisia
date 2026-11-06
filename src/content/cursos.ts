@@ -78,7 +78,7 @@ export const cursos: Curso[] = [
       'É um curso de experimentação artística, sem o foco específico na pintura em tela.',
     ],
     capa: capaIniciacao,
-    capaAlt: 'Três meninas sorrindo com pincéis na mão, numa mesa com tintas acrílicas no atelier',
+    capaAlt: 'Menina de cabelo cacheado sorrindo na mesa da aula, com lápis de cor e um cavalete com pintura ao fundo',
   },
   {
     slug: 'pintura-em-tela-infantil',
@@ -91,7 +91,7 @@ export const cursos: Curso[] = [
       'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição. As propostas são adaptadas à faixa etária, com acompanhamento durante a criação dos trabalhos e espaço para desenvolver a própria criatividade.',
     ],
     capa: capaPinturaInfantil,
-    capaAlt: 'Fabiana de Zorzi sorrindo ao lado do cavalete, com uma pintura de girassóis num vaso',
+    capaAlt: 'Menino de pé ao lado do cavalete, com a pintura que fez de um caminhão na estrada',
   },
   {
     slug: 'pintura-em-tela',
@@ -104,7 +104,7 @@ export const cursos: Curso[] = [
       'Para quem deseja começar a pintar ou desenvolver seus conhecimentos. As aulas abordam as etapas da pintura, desde a preparação do desenho e as misturas de cores até a construção de luz, sombra, volume e detalhes. O acompanhamento respeita o nível e o ritmo de cada aluno.',
     ],
     capa: capaPinturaEmTela,
-    capaAlt: 'Pintura a óleo de uma paisagem: campo dourado, arbustos e mata ao fundo sob luz de fim de tarde',
+    capaAlt: 'Aluna de cabelo ondulado pintando um veleiro sobre um mar dourado, no cavalete do atelier',
     fotos: [
       'Turma de pintura no atelier: alunos sentados diante dos cavaletes, pintando telas de paisagens e flores',
       'Aluna de cabelo ondulado pintando um veleiro sobre um mar dourado, com pincel fino',
@@ -125,8 +125,9 @@ export const cursos: Curso[] = [
       'As aulas desenvolvem a observação, a criatividade e as habilidades de desenho. As crianças exploram linhas, formas, proporções e sombras em atividades adequadas à idade, aprendendo a construir seus desenhos e expressar suas ideias.',
     ],
     capa: capaDesenhoInfantil,
-    capaAlt: 'Menina pintando com aquarela um desenho colorido, com lápis de cor e estojo de aquarela sobre a mesa do atelier',
+    capaAlt: 'Aluno de camiseta do Atelier Artmisia pintando com aquarela, com a paleta e um copo de água sobre a mesa',
     fotos: [
+      'Camilo Pulitano de pé na cabeceira da mesa, explicando a atividade para a turma de crianças',
       'Dois meninos desenhando lado a lado na mesa do atelier, com pinturas penduradas na parede ao fundo',
       'Menina debruçada sobre a folha, pintando com aquarela, com estojo de lápis de cor ao lado',
       'Detalhe de uma mão pintando em aquarela um pássaro entre folhas verdes e amarelas',
@@ -145,7 +146,7 @@ export const cursos: Curso[] = [
       'As aulas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra. Os alunos podem desenvolver trabalhos de desenho realista e anime, com orientação de acordo com seus interesses e nível de experiência.',
     ],
     capa: capaDesenhoRealista,
-    capaAlt: 'Desenhos de Edison Marsan espalhados sobre a mesa: retratos realistas em grafite e lápis de cor e personagens de anime',
+    capaAlt: 'Desenho colorido de um personagem de anime de cabelo vermelho, com chamas, feito no atelier',
     fotos: [
       'Turma de desenho reunida em volta da mesa do atelier, com o professor Edison orientando os alunos',
       'Edison inclinado sobre a mesa ajudando uma aluna a colorir seu desenho',
@@ -168,7 +169,7 @@ export const cursos: Curso[] = [
       'Um momento de calma, atenção e criação, para quem nunca bordou e para quem quer ir além.',
     ],
     capa: capaBordado,
-    capaAlt: 'Eloisa bordando com linha preta um bastidor preso a um suporte de madeira, na mesa do atelier',
+    capaAlt: 'Eloisa sorrindo enquanto borda um bastidor no atelier, com pinturas na parede ao fundo',
     fotos: [
       'Eloisa sorrindo enquanto borda um bastidor, no atelier, com pinturas na parede ao fundo',
       'Detalhe do bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas',

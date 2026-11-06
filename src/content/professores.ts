@@ -53,8 +53,8 @@ export const professores: Professor[] = [
     tecnicas: ['Óleo', 'Acrílica'],
     desde: 2015,
     fundadora: true,
-    retratoAlt: 'Retrato de Ana Quintanas, de óculos, segurando um pincel',
-    foco: '50% 25%',
+    retratoAlt: 'Ana Quintanas sorrindo no atelier, de avental, segurando uma pequena tela pintada com limões sicilianos',
+    foco: '28% 22%',
     trabalhos: [
       { alt: 'Ana ao lado de um mural pintado na parede, que simula uma janela aberta para um campo com vinhedos e ciprestes' },
       { alt: 'Ana agachada ao lado de um díptico de mar aberto, em azul-turquesa, com espuma branca na superfície' },
@@ -82,8 +82,8 @@ export const professores: Professor[] = [
     tecnicas: ['Grafite', 'Realismo em preto e branco', 'Realismo colorido'],
     desde: 2018,
     noAtelierDesde: 2025,
-    retratoAlt: 'Retrato de Edison Marsan sorrindo, de camiseta azul-marinho, sobre fundo escuro',
-    foco: '50% 30%',
+    retratoAlt: 'Edison Marsan de camiseta preta, inclinado sobre a mesa da aula, acompanhando o desenho de um aluno',
+    foco: '62% 22%',
     trabalhos: [
       { alt: 'Desenho realista em grafite, em preto e branco, de um rosto com maquiagem de palhaço, com lápis ao lado da folha' },
       { alt: 'Desenho colorido a lápis de uma menina de tranças e gola branca, sobre uma mesa de madeira' },
@@ -112,8 +112,8 @@ export const professores: Professor[] = [
     ensina: ['Iniciação às Artes', 'Pintura em Tela Infantil'],
     tecnicas: ['Pintura'],
     desde: 2023,
-    retratoAlt: 'Fabiana de Zorzi sorrindo, sentada ao lado de um cavalete com uma pintura de girassóis num vaso',
-    foco: '74% 30%',
+    retratoAlt: 'Fabiana de Zorzi sorrindo no atelier, de camiseta lilás, com plantas ao fundo',
+    foco: '35% 20%',
     trabalhos: [{ alt: 'Fabiana ao lado de um retrato de Frida Kahlo em cores vivas, com coroa de flores e fundo azul-turquesa' }],
     bio: [
       'Formada em Pedagogia desde 2012, com pós-graduação em Neuropsicopedagogia e formação em Artes Visuais, Fabiana também atuou na Rede Municipal de Ensino, construindo sua trajetória profissional a partir da educação e do desenvolvimento humano.',
@@ -136,8 +136,8 @@ export const professores: Professor[] = [
     resumo: 'Também dá aulas online, com alunos dos Estados Unidos e da Austrália.',
     ensina: ['Desenho e Aquarela para Crianças'],
     tecnicas: ['Desenho', 'Aquarela', 'Óleo', 'Acrílica'],
-    retratoAlt: 'Camilo Pulitano segurando uma pintura a óleo com o retrato de três pessoas lado a lado',
-    foco: '50% 12%',
+    retratoAlt: 'Camilo Pulitano sorrindo no atelier, de camiseta preta, segurando o estudo pintado do rosto de um homem idoso',
+    foco: '50% 18%',
     trabalhos: [
       { alt: 'Estudo a óleo do rosto de um homem idoso de barba branca, com pinceladas largas em tons terrosos e cinza' },
       { alt: 'Camilo segurando uma pintura de um casal visto de costas, de frente para o mar azul-claro' },
