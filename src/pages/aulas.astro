@@ -5,7 +5,7 @@ import Destaque from '../components/Destaque.astro';
 import Preencher from '../components/Preencher.astro';
 import TurmasTabela from '../components/TurmasTabela.astro';
 import Oficinas from '../components/Oficinas.astro';
-import { cursos, idadeRotulo, professorDe, PUBLICOS, SITUACOES_TURMA, turmas, type Publico } from '../content/cursos';
+import { cursos, fotosDe, idadeRotulo, professorDe, PUBLICOS, SITUACOES_TURMA, turmas, type Publico } from '../content/cursos';
 import { retratoDe } from '../content/professores';
 import { TEXTOS, semMarcas } from '../content/textos';
 import { linkAulaExperimental, linkConsultaTurmas } from '../config/contato';
@@ -75,6 +75,24 @@ const temSituacao = turmas.some((t) => t.situacao);
                 </div>
                 <TurmasTabela curso={curso} professor={professor} />
               </div>
+              {fotosDe(curso).length > 0 && (
+                <ul class="fotos" aria-label={`Fotos da aula de ${curso.nome}`}>
+                  {fotosDe(curso).map((f) => (
+                    <li>
+                      <Image
+                        src={f.src}
+                        alt={f.alt}
+                        widths={[280, 420, 640]}
+                        sizes="(max-width: 700px) 70vw, 240px"
+                        quality={74}
+                        format="webp"
+                        loading="lazy"
+                        data-fade=""
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </article>
           );
         })
@@ -264,6 +282,31 @@ const temSituacao = turmas.some((t) => t.situacao);
     max-width: 44em;
   }
 
+  .fotos {
+    flex: 1 1 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(200px, 1fr);
+    gap: 12px;
+    margin: 4px 0 0;
+    padding: 0 0 8px;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .fotos li {
+    scroll-snap-align: start;
+  }
+
+  .fotos :global(img) {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
   .vazio {
     padding: 24px;
     font-family: var(--serif);
@@ -336,6 +379,14 @@ const temSituacao = turmas.some((t) => t.situacao);
     .quem :global(img) {
       width: 56px;
       height: 56px;
+    }
+
+    .fotos {
+      grid-auto-columns: 70%;
+    }
+
+    .fotos :global(img) {
+      height: 220px;
     }
 
     .botoes,
