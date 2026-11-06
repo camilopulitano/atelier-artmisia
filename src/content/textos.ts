@@ -10,10 +10,10 @@
  */
 export const TEXTOS = {
   abertura: {
-    rotulo: 'Atelier de pintura e desenho',
+    rotulo: 'Atelier de pintura, desenho e bordado',
     // TODO(conteudo): se a Ana mandar uma frase dela sobre o atelier, ela pode virar o título.
-    titulo: '*Pintura e desenho* para crianças, adolescentes e adultos',
-    subtitulo: 'Quatro professores, cada um com o seu caminho na arte e o mesmo desejo de ensinar.',
+    titulo: '*Pintura, desenho e bordado* para crianças, adolescentes e adultos',
+    subtitulo: 'Cinco professores, cada um com o seu caminho na arte e o mesmo desejo de ensinar.',
     fotoAlt: 'Mão de Ana Quintanas segurando um pincel diante da tela, com luz lateral no atelier',
   },
 
@@ -60,8 +60,9 @@ export const TEXTOS = {
   youtube: {
     titulo: 'Também no *YouTube*',
     /** slug do professor cujo canal aparece na home. */
-    professor: 'edison-marsan',
-    texto: 'O Edison dedica grande parte dos estudos e da produção ao canal @edisonmarsanart, seu principal projeto autoral.',
+    professor: 'camilo-pulitano',
+    // Do "Sobre" do canal, nas palavras do Camilo, passado para a terceira pessoa.
+    texto: 'No canal @camilopulitano, o Camilo compartilha o caminho para se tornar engenheiro, artista e professor: o dia a dia, os desafios criativos, os estudos e a evolução das obras.',
   },
 
   mostra: {

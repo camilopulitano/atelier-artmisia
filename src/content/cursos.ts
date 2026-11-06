@@ -5,6 +5,7 @@ import capaDesenhoRealista from '../assets/cursos/desenho-realista-e-anime.jpg';
 import capaIniciacao from '../assets/cursos/iniciacao-as-artes.jpg';
 import capaPinturaInfantil from '../assets/professores/fabiana-de-zorzi.jpg';
 import capaDesenhoInfantil from '../assets/cursos/desenho-e-aquarela-para-criancas.jpg';
+import capaBordado from '../assets/cursos/bordado-livre.jpg';
 
 /**
  * Cursos e turmas. Nomes, idades e textos enviados pela Ana (11/10/2026).
@@ -37,6 +38,11 @@ export interface Curso {
   /** Capa do curso (cartão da home). Sempre inteira, nunca cortada. */
   capa: ImageMetadata;
   capaAlt: string;
+  /**
+   * Fotos de aula (ensaio de nov/2026). Arquivos em src/assets/aulas/<slug>-<n>.jpg,
+   * na ordem desta lista; o build falha se faltar algum.
+   */
+  fotos?: string[];
 }
 
 export type SituacaoTurma = 'vagas' | 'espera';
@@ -99,6 +105,14 @@ export const cursos: Curso[] = [
     ],
     capa: capaPinturaEmTela,
     capaAlt: 'Pintura a óleo de uma paisagem: campo dourado, arbustos e mata ao fundo sob luz de fim de tarde',
+    fotos: [
+      'Turma de pintura no atelier: alunos sentados diante dos cavaletes, pintando telas de paisagens e flores',
+      'Aluna de cabelo ondulado pintando um veleiro sobre um mar dourado, com pincel fino',
+      'Aluna de cabelo ruivo pintando um tigre sobre fundo vermelho no cavalete',
+      'Aluno de boné preto pintando uma tela no cavalete, concentrado',
+      'Aluna de blusa listrada lilás pintando flores roxas de cerejeira num cavalete',
+      'Detalhe de uma tela com um tigre em tons de laranja e vermelho, ainda sendo pintada',
+    ],
   },
   {
     slug: 'desenho-e-aquarela-para-criancas',
@@ -112,6 +126,13 @@ export const cursos: Curso[] = [
     ],
     capa: capaDesenhoInfantil,
     capaAlt: 'Menina pintando com aquarela um desenho colorido, com lápis de cor e estojo de aquarela sobre a mesa do atelier',
+    fotos: [
+      'Dois meninos desenhando lado a lado na mesa do atelier, com pinturas penduradas na parede ao fundo',
+      'Menina debruçada sobre a folha, pintando com aquarela, com estojo de lápis de cor ao lado',
+      'Detalhe de uma mão pintando em aquarela um pássaro entre folhas verdes e amarelas',
+      'Detalhe de mãos pintando com pincel e aquarela sobre o papel, com a paleta ao lado',
+      'Crianças desenhando com lápis de cor numa mesa branca do atelier',
+    ],
   },
   {
     slug: 'desenho-realista-e-anime',
@@ -125,6 +146,35 @@ export const cursos: Curso[] = [
     ],
     capa: capaDesenhoRealista,
     capaAlt: 'Desenhos de Edison Marsan espalhados sobre a mesa: retratos realistas em grafite e lápis de cor e personagens de anime',
+    fotos: [
+      'Turma de desenho reunida em volta da mesa do atelier, com o professor Edison orientando os alunos',
+      'Edison inclinado sobre a mesa ajudando uma aluna a colorir seu desenho',
+      'Edison ao lado de um aluno, acompanhando o desenho com lápis de cor',
+      'Aluno colorindo um desenho do Homem-Aranha com lápis de cor',
+      'Detalhe de uma mão desenhando cerejas com lápis de cor',
+      'Estojo aberto com dezenas de lápis de cor sobre a mesa de aula',
+    ],
+  },
+  {
+    slug: 'bordado-livre',
+    nome: 'Bordado Livre',
+    professor: 'eloisa',
+    idade: 'para crianças e adultos',
+    publico: ['criancas', 'adolescentes', 'adultos'],
+    // Texto do Claude, no tom do atelier (Camilo, 05/11/2026). Trocar se a Eloisa mandar o dela.
+    resumo: 'Linha, agulha e um bastidor: é com pouco que o bordado livre começa.',
+    descricao: [
+      'Linha, agulha e um bastidor: é com pouco que o bordado livre começa. Nas aulas, cada aluno aprende os pontos básicos e, aos poucos, descobre como transformar um desenho, um nome ou uma lembrança em uma peça feita à mão.',
+      'Um momento de calma, atenção e criação, para quem nunca bordou e para quem quer ir além.',
+    ],
+    capa: capaBordado,
+    capaAlt: 'Eloisa bordando com linha preta um bastidor preso a um suporte de madeira, na mesa do atelier',
+    fotos: [
+      'Eloisa sorrindo enquanto borda um bastidor, no atelier, com pinturas na parede ao fundo',
+      'Detalhe do bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas',
+      'Eloisa bordando um bastidor preso a um suporte de madeira, perto da janela',
+      'Eloisa sentada no atelier, segurando o bastidor bordado',
+    ],
   },
 ];
 
@@ -164,6 +214,18 @@ export function cursosDe(professorSlug: string): Curso[] {
 export function idadeRotulo(curso: Curso): string {
   return curso.idade.charAt(0).toUpperCase() + curso.idade.slice(1);
 }
+
+const fotosAulas = import.meta.glob<{ default: ImageMetadata }>('../assets/aulas/*.jpg', { eager: true });
+
+/** Fotos de aula do curso, com o texto alternativo. */
+export function fotosDe(curso: Curso): { src: ImageMetadata; alt: string }[] {
+  return (curso.fotos ?? []).map((alt, i) => {
+    const img = fotosAulas[`../assets/aulas/${curso.slug}-${i + 1}.jpg`];
+    if (!img) throw new Error(`[cursos] falta a foto src/assets/aulas/${curso.slug}-${i + 1}.jpg`);
+    return { src: img.default, alt };
+  });
+}
+for (const c of cursos) fotosDe(c);
 
 export function professorDe(curso: Curso) {
   return professorPorSlug(curso.professor);

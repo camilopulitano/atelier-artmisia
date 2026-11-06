@@ -93,14 +93,12 @@ export const professores: Professor[] = [
       'Artista e professor de desenho, Edison iniciou sua trajetória em 2018, quando o desenho surgiu como hobby e também como uma forma de desacelerar em meio à correria do dia a dia.',
       'Seu primeiro contato mais profundo com a arte aconteceu através do realismo em preto e branco, linguagem à qual se dedicou durante vários anos, desenvolvendo trabalhos autorais e também sob encomenda. Em 2024, passou a explorar com mais intensidade o realismo colorido, ampliando seus estudos e sua técnica.',
       'Em 2025, tornou-se professor de desenho no Atelier Artmisia, compartilhando com seus alunos aquilo que construiu ao longo de sua própria trajetória artística.',
-      'Atualmente, também dedica grande parte de seus estudos e produção ao canal @edisonmarsanart, no YouTube, seu principal projeto autoral.',
     ],
     citacoes: [
       'Acredito que a arte é para todos. Mais do que dom, é a dedicação e a vontade de aprender que fazem alguém evoluir.',
     ],
-    // TODO(conteudo): confirmar o endereço exato do canal com o Edison.
     links: [
-      { rotulo: 'Canal no YouTube: @edisonmarsanart', url: 'https://www.youtube.com/@edisonmarsanart' },
+      { rotulo: 'Portfólio do Edison', url: 'https://portfolio-edison-marsan.vercel.app' },
       { rotulo: 'Instagram: @edisonmarsanart', url: 'https://www.instagram.com/edisonmarsanart/' },
     ],
   },
@@ -153,9 +151,32 @@ export const professores: Professor[] = [
     ],
     citacoes: [],
     links: [
+      { rotulo: 'Portfólio do Camilo', url: 'https://portfolio-camilo-pulitano.vercel.app' },
       { rotulo: 'Canal no YouTube: @camilopulitano', url: 'https://www.youtube.com/@camilopulitano' },
       { rotulo: 'Instagram: @camilopulitano', url: 'https://www.instagram.com/camilopulitano/' },
     ],
+  },
+  {
+    // Professora nova (nov/2026). Bio escrita pelo Claude no tom do atelier, a pedido
+    // do Camilo: trocar pelo texto da própria Eloisa quando ela mandar.
+    // TODO(conteudo): sobrenome, Instagram e ano em que começou no atelier.
+    slug: 'eloisa',
+    nome: 'Eloisa',
+    primeiroNome: 'Eloisa',
+    artigo: 'a',
+    papel: 'Professora de bordado livre',
+    resumo: 'Ensina bordado livre para crianças e adultos.',
+    ensina: ['Bordado Livre'],
+    tecnicas: ['Bordado livre'],
+    retratoAlt: 'Eloisa sorrindo enquanto borda um bastidor, sentada no atelier com pinturas na parede ao fundo',
+    foco: '62% 28%',
+    trabalhos: [{ alt: 'Bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas, preso a um suporte de madeira' }],
+    bio: [
+      'Eloisa é professora de bordado livre no Atelier Artmisia. No bordado, encontrou uma forma delicada de criar com as próprias mãos, ponto a ponto, sem pressa.',
+      'Nas aulas, compartilha esse cuidado com crianças e adultos, mostrando que cada peça carrega um pouco de quem a fez.',
+    ],
+    citacoes: [],
+    links: [],
   },
 ];
 
