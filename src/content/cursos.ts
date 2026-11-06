@@ -159,22 +159,22 @@ export const cursos: Curso[] = [
   {
     slug: 'bordado-livre',
     nome: 'Bordado Livre',
-    professor: 'eloisa',
+    professor: 'heloisa',
     idade: 'para crianças e adultos',
     publico: ['criancas', 'adolescentes', 'adultos'],
-    // Texto do Claude, no tom do atelier (Camilo, 05/11/2026). Trocar se a Eloisa mandar o dela.
+    // Texto do Claude, no tom do atelier (Camilo, 05/11/2026). Trocar se a Heloisa mandar o dela.
     resumo: 'Linha, agulha e um bastidor: é com pouco que o bordado livre começa.',
     descricao: [
       'Linha, agulha e um bastidor: é com pouco que o bordado livre começa. Nas aulas, cada aluno aprende os pontos básicos e, aos poucos, descobre como transformar um desenho, um nome ou uma lembrança em uma peça feita à mão.',
       'Um momento de calma, atenção e criação, para quem nunca bordou e para quem quer ir além.',
     ],
     capa: capaBordado,
-    capaAlt: 'Eloisa sorrindo enquanto borda um bastidor no atelier, com pinturas na parede ao fundo',
+    capaAlt: 'Heloisa sorrindo enquanto borda um bastidor no atelier, com pinturas na parede ao fundo',
     fotos: [
-      'Eloisa sorrindo enquanto borda um bastidor, no atelier, com pinturas na parede ao fundo',
+      'Heloisa sorrindo enquanto borda um bastidor, no atelier, com pinturas na parede ao fundo',
       'Detalhe do bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas',
-      'Eloisa bordando um bastidor preso a um suporte de madeira, perto da janela',
-      'Eloisa sentada no atelier, segurando o bastidor bordado',
+      'Heloisa bordando um bastidor preso a um suporte de madeira, perto da janela',
+      'Heloisa sentada no atelier, segurando o bastidor bordado',
     ],
   },
 ];

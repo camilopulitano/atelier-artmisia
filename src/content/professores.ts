@@ -158,21 +158,21 @@ export const professores: Professor[] = [
   },
   {
     // Professora nova (nov/2026). Bio escrita pelo Claude no tom do atelier, a pedido
-    // do Camilo: trocar pelo texto da própria Eloisa quando ela mandar.
+    // do Camilo: trocar pelo texto da própria Heloisa quando ela mandar.
     // TODO(conteudo): sobrenome, Instagram e ano em que começou no atelier.
-    slug: 'eloisa',
-    nome: 'Eloisa',
-    primeiroNome: 'Eloisa',
+    slug: 'heloisa',
+    nome: 'Heloisa',
+    primeiroNome: 'Heloisa',
     artigo: 'a',
     papel: 'Professora de bordado livre',
     resumo: 'Ensina bordado livre para crianças e adultos.',
     ensina: ['Bordado Livre'],
     tecnicas: ['Bordado livre'],
-    retratoAlt: 'Eloisa sorrindo enquanto borda um bastidor, sentada no atelier com pinturas na parede ao fundo',
+    retratoAlt: 'Heloisa sorrindo enquanto borda um bastidor, sentada no atelier com pinturas na parede ao fundo',
     foco: '62% 28%',
     trabalhos: [{ alt: 'Bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas, preso a um suporte de madeira' }],
     bio: [
-      'Eloisa é professora de bordado livre no Atelier Artmisia. No bordado, encontrou uma forma delicada de criar com as próprias mãos, ponto a ponto, sem pressa.',
+      'Heloisa é professora de bordado livre no Atelier Artmisia. No bordado, encontrou uma forma delicada de criar com as próprias mãos, ponto a ponto, sem pressa.',
       'Nas aulas, compartilha esse cuidado com crianças e adultos, mostrando que cada peça carrega um pouco de quem a fez.',
     ],
     citacoes: [],
