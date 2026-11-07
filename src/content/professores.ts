@@ -116,7 +116,7 @@ export const professores: Professor[] = [
     foco: '50% 10%',
     trabalhos: [{ alt: 'Fabiana ao lado de um retrato de Frida Kahlo em cores vivas, com coroa de flores e fundo azul-turquesa' }],
     bio: [
-      'Formada em Pedagogia desde 2012, com pós-graduação em Neuropsicopedagogia e formação em Artes Visuais, Fabiana também atuou na Rede Municipal de Ensino, construindo sua trajetória profissional a partir da educação e do desenvolvimento humano.',
+      'Formada em Pedagogia desde 2012, com pós-graduação em Neuropsicopedagogia e licenciatura em Artes Visuais, Fabiana também atuou na Rede Municipal de Ensino, construindo sua trajetória profissional a partir da educação e do desenvolvimento humano.',
       'Desde a infância, demonstrava curiosidade, sensibilidade e interesse pelas artes e pelas manualidades. No entanto, naquele período, o acesso ao conhecimento e às possibilidades de aprendizagem artística era limitado.',
       'Em 2023, teve seu primeiro contato com a pintura e encontrou na arte um novo caminho de expressão, descoberta e transformação. Desde então, passou a dedicar-se ao aprimoramento de suas habilidades artísticas e, posteriormente, ao ensino da arte.',
       'Aos 37 anos, iniciou sua trajetória nas artes plásticas, unindo sua experiência na educação à paixão pela criação artística. Hoje, dedica-se a aprender, criar e compartilhar conhecimentos, buscando proporcionar aos seus alunos não apenas o aprendizado de técnicas, mas também experiências que estimulem a criatividade, a sensibilidade e a liberdade de expressão.',
