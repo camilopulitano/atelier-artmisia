@@ -112,8 +112,8 @@ export const professores: Professor[] = [
     ensina: ['Iniciação às Artes', 'Pintura em Tela Infantil'],
     tecnicas: ['Pintura'],
     desde: 2023,
-    retratoAlt: 'Fabiana de Zorzi sorrindo no atelier, de camiseta lilás, com plantas ao fundo',
-    foco: '35% 20%',
+    retratoAlt: 'Fabiana de Zorzi sorrindo no atelier, segurando suas pinturas da bailarina e dos livros com rosa',
+    foco: '50% 10%',
     trabalhos: [{ alt: 'Fabiana ao lado de um retrato de Frida Kahlo em cores vivas, com coroa de flores e fundo azul-turquesa' }],
     bio: [
       'Formada em Pedagogia desde 2012, com pós-graduação em Neuropsicopedagogia e formação em Artes Visuais, Fabiana também atuou na Rede Municipal de Ensino, construindo sua trajetória profissional a partir da educação e do desenvolvimento humano.',
