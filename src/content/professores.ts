@@ -80,8 +80,6 @@ export const professores: Professor[] = [
     retratoAlt: 'Edison Marsan sorrindo de leve, de camisa polo preta, diante de uma pintura de paisagem com montanhas e uma casa de telhado vermelho',
     foco: '50% 33%',
     trabalhos: [
-      { alt: 'Desenho realista em grafite, em preto e branco, de um rosto com maquiagem de palhaço, com lápis ao lado da folha' },
-      { alt: 'Desenho colorido a lápis de uma menina de tranças e gola branca, sobre uma mesa de madeira' },
       { alt: 'Vários desenhos coloridos de personagens de mangá espalhados sobre uma mesa' },
     ],
     bio: [
@@ -108,12 +106,7 @@ export const professores: Professor[] = [
     desde: 2023,
     retratoAlt: 'Fabiana de Zorzi sorrindo no atelier, segurando suas pinturas da bailarina e dos livros com rosa',
     foco: '50% 10%',
-    trabalhos: [
-      { alt: 'Pintura a óleo de três livros empilhados com uma rosa cor de pêssego e folhas verdes por cima, em tinta bem texturizada' },
-      { alt: 'Pintura a óleo de um farol de listras vermelhas e brancas à beira-mar, com dois barcos na areia e céu de nuvens' },
-      { alt: 'Pintura a óleo de uma arara-vermelha de asas azuis em um galho, sobre fundo de folhagem verde e amarela' },
-      { alt: 'Pintura a óleo de uma bailarina de costas, de tutu branco e sapatilhas de ponta, sobre fundo de nuvens cinza e azul' },
-    ],
+    trabalhos: [],
     bio: [
       'Formada em Pedagogia desde 2012, com pós-graduação em Neuropsicopedagogia e licenciatura em Artes Visuais, Fabiana também atuou na Rede Municipal de Ensino, construindo sua trajetória profissional a partir da educação e do desenvolvimento humano.',
       'Desde a infância, demonstrava curiosidade, sensibilidade e interesse pelas artes e pelas manualidades. No entanto, naquele período, o acesso ao conhecimento e às possibilidades de aprendizagem artística era limitado.',
@@ -139,7 +132,6 @@ export const professores: Professor[] = [
     // Recorte mais fechado no rosto, a pedido do Camilo (10/11/2026).
     foco: '44% 30%',
     trabalhos: [
-      { alt: 'Estudo a óleo do rosto de um homem idoso de barba branca, com pinceladas largas em tons terrosos e cinza' },
       { alt: 'Camilo segurando uma pintura de um casal visto de costas, de frente para o mar azul-claro' },
     ],
     bio: [

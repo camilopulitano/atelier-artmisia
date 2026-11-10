@@ -2,7 +2,7 @@
 import type { Situacao } from '../content/obras';
 
 interface Props {
-  situacao: Situacao;
+  situacao?: Situacao;
   destaque?: boolean;
 }
 const { situacao, destaque = false } = Astro.props;
@@ -15,7 +15,7 @@ const { situacao, destaque = false } = Astro.props;
 const rotulo = situacao === 'disponivel' ? 'Disponível' : 'Vendida';
 ---
 
-<span class:list={['selo', situacao, { destaque }]}><span class="ponto" aria-hidden="true"></span>{rotulo}</span>
+{situacao && <span class:list={['selo', situacao, { destaque }]}><span class="ponto" aria-hidden="true"></span>{rotulo}</span>}
 
 <style>
   .selo {

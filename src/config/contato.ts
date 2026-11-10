@@ -110,11 +110,11 @@ export function linkProfessor(professor: { primeiroNome: string; artigo: 'a' | '
 }
 
 /** Pergunta sobre uma obra: título, autor e o link da ficha. */
-export function linkObra(obra: { slug: string; titulo: string; situacao: 'disponivel' | 'vendida' }, autor: string): string {
+export function linkObra(obra: { slug: string; titulo: string; situacao?: 'disponivel' | 'vendida' }, autor: string): string {
   const ficha = new URL(`/obras/${obra.slug}`, import.meta.env.SITE).toString();
   const pedido =
-    obra.situacao === 'disponivel'
-      ? `Vi a obra "${obra.titulo}", de ${autor}, no site do ${SITE.nome} e gostaria de saber o valor e mais informações.`
+    obra.situacao !== 'vendida'
+      ? `Vi a obra "${obra.titulo}", de ${autor}, no site do ${SITE.nome} e gostaria de saber se está disponível, o valor e mais informações.`
       : `Vi a obra "${obra.titulo}", de ${autor}, no site do ${SITE.nome}. Sei que já foi vendida, mas gostaria de saber sobre outras obras.`;
   return linkWhatsApp(`Olá! ${pedido}\n${ficha}`);
 }

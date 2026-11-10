@@ -27,7 +27,7 @@ interface Props {
 const { obra, anterior, proxima } = Astro.props;
 const imagem = imagemDe(obra);
 const autor = autorDe(obra);
-const disponivel = obra.situacao === 'disponivel';
+const vendida = obra.situacao === 'vendida';
 const whatsapp = linkObra(obra, autor.nome);
 const fotos = fotosDe(obra);
 
@@ -54,16 +54,18 @@ const jsonLd = {
   ...(obra.tecnica && { artMedium: obra.tecnica }),
   ...(obra.ano && { dateCreated: String(obra.ano) }),
   // Sem preço: só a disponibilidade.
-  offers: {
-    '@type': 'Offer',
-    availability: disponivel ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
-  },
+  ...(obra.situacao && {
+    offers: {
+      '@type': 'Offer',
+      availability: vendida ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
+    },
+  }),
 };
 ---
 
 <BaseLayout
   titulo={obra.titulo}
-  descricao={`${obra.titulo}, obra de ${autor.nome}. ${disponivel ? 'Obra disponível.' : 'Obra vendida.'} ${obra.sobre ?? obra.alt + '.'}`}
+  descricao={`${obra.titulo}, obra de ${autor.nome}. ${vendida ? 'Obra vendida.' : obra.situacao ? 'Obra disponível.' : ''} ${obra.sobre ?? obra.alt + '.'}`}
   imagem={imagem}
   jsonLd={jsonLd}
   paginaAtual="obras"
@@ -112,7 +114,7 @@ const jsonLd = {
           <a class="autor" href={`/professores/${autor.slug}`}>{autor.nome}</a>
         </header>
 
-        <Selo situacao={obra.situacao} destaque />
+        {obra.situacao && <Selo situacao={obra.situacao} destaque />}
 
         <section class="sobre-obra" aria-labelledby="titulo-sobre-obra">
           <h2 id="titulo-sobre-obra" class="sobrancelha">Sobre a obra</h2>
@@ -141,9 +143,9 @@ const jsonLd = {
         </section>
 
         <div class="acoes">
-          {!disponivel && <p class="nota">Esta obra já foi vendida, mas dá para conversar sobre ela e sobre outras obras.</p>}
+          {vendida && <p class="nota">Esta obra já foi vendida, mas dá para conversar sobre ela e sobre outras obras.</p>}
           <a class="botao" href={whatsapp} target="_blank" rel="noopener">Consultar valor pelo WhatsApp</a>
-          {!disponivel && <a class="botao botao--contorno" href="/obras?situacao=disponivel">Ver obras disponíveis</a>}
+          {vendida && <a class="botao botao--contorno" href="/obras?situacao=disponivel">Ver obras disponíveis</a>}
         </div>
 
         {

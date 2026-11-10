@@ -21,7 +21,8 @@ export interface Obra {
   titulo: string;
   /** slug do professor em professores.ts */
   autor: string;
-  situacao: Situacao;
+  /** Sem valor = ainda não informado: a obra aparece sem selo. */
+  situacao?: Situacao;
   tema: Tema;
   /** Descrição da imagem para quem usa leitor de tela. */
   alt: string;
@@ -56,6 +57,14 @@ export const obras: Obra[] = [
   { slug: 'araras-azuis', titulo: 'Araras-azuis', autor: 'ana-quintanas', situacao: 'vendida', tema: 'natureza', certificado: true, tecnica: 'Óleo sobre tela', dimensoes: '90 × 70 cm', alt: 'Pintura de duas araras-azuis de perfil, lado a lado' },
   { slug: 'morro-colorido', titulo: 'Morro colorido', autor: 'ana-quintanas', situacao: 'vendida', tema: 'paisagem', certificado: true, alt: 'Pintura de casas coloridas subindo um morro, com o céu azul ao fundo' },
   { slug: 'ipe-amarelo', titulo: 'Ipê-amarelo', autor: 'ana-quintanas', situacao: 'vendida', tema: 'paisagem', certificado: true, alt: 'Pintura de um ipê-amarelo florido diante de uma casa branca de janelas verdes' },
+  // Obras dos outros professores (Camilo, 10/11/2026). Títulos descritivos e sem selo: falta confirmar com cada professor o nome da obra e se está à venda.
+  { slug: 'livros-e-rosa', titulo: 'Livros e rosa', autor: 'fabiana-de-zorzi', tema: 'outros', tecnica: 'Óleo sobre tela', alt: 'Pintura a óleo de três livros empilhados com uma rosa cor de pêssego e folhas verdes por cima, em tinta bem texturizada' },
+  { slug: 'farol-e-barcos', titulo: 'Farol e barcos', autor: 'fabiana-de-zorzi', tema: 'paisagem', tecnica: 'Óleo sobre tela', alt: 'Pintura a óleo de um farol de listras vermelhas e brancas à beira-mar, com dois barcos na areia e céu de nuvens' },
+  { slug: 'arara-vermelha', titulo: 'Arara-vermelha', autor: 'fabiana-de-zorzi', tema: 'natureza', tecnica: 'Óleo sobre tela', alt: 'Pintura a óleo de uma arara-vermelha de asas azuis em um galho, sobre fundo de folhagem verde e amarela' },
+  { slug: 'bailarina', titulo: 'Bailarina', autor: 'fabiana-de-zorzi', tema: 'retrato', tecnica: 'Óleo sobre tela', alt: 'Pintura a óleo de uma bailarina de costas, de tutu branco e sapatilhas de ponta, sobre fundo de nuvens cinza e azul' },
+  { slug: 'estudo-de-homem-idoso', titulo: 'Estudo de homem idoso', autor: 'camilo-pulitano', tema: 'retrato', tecnica: 'Óleo', alt: 'Estudo a óleo do rosto de um homem idoso de barba branca, com pinceladas largas em tons terrosos e cinza' },
+  { slug: 'palhaco', titulo: 'Palhaço', autor: 'edison-marsan', tema: 'retrato', tecnica: 'Grafite', alt: 'Desenho realista em grafite, em preto e branco, de um rosto com maquiagem de palhaço, com lápis ao lado da folha' },
+  { slug: 'menina-de-trancas', titulo: 'Menina de tranças', autor: 'edison-marsan', tema: 'retrato', tecnica: 'Lápis de cor', alt: 'Desenho colorido a lápis de uma menina de tranças e gola branca, sobre uma mesa de madeira' },
 ];
 
 const imagens = import.meta.glob<{ default: ImageMetadata }>('../assets/obras/*.jpg', { eager: true });
