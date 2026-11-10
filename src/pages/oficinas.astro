@@ -1,9 +1,21 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Destaque from '../components/Destaque.astro';
 import Preencher from '../components/Preencher.astro';
 import Oficinas from '../components/Oficinas.astro';
 import { TEXTOS, semMarcas } from '../content/textos';
+import vinho1 from '../assets/oficinas/pintura-e-vinho-1.jpg';
+import vinho2 from '../assets/oficinas/pintura-e-vinho-2.jpg';
+
+// Fotos já recebidas por oficina (Camilo, 10/11/2026). As outras seguem com [PREENCHER].
+const fotos: Record<string, { src: ImageMetadata; alt: string }[]> = {
+  'Pintura e vinho': [
+    { src: vinho1, alt: 'Quatro participantes e o professor sorrindo, cada um mostrando sua tela: limões, cacto, vaso de flores e gatos' },
+    { src: vinho2, alt: 'Participante de lenço azul tomando vinho diante de telas em cavaletes, com tinta amarela na paleta' },
+  ],
+};
 
 /**
  * Página das oficinas: o que o atelier já fez e o formulário de interesse.
@@ -34,7 +46,17 @@ const { tipos } = TEXTOS.oficinas;
         {
           tipos.map((t) => (
             <li class="cartao oficina">
-              <div class="midia"><Preencher o="fotos e vídeo desta oficina" /></div>
+              <div class="midia">
+                {fotos[t] ? (
+                  <div class="fotos">
+                    {fotos[t].map((f) => (
+                      <Image src={f.src} alt={f.alt} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 360px" quality={76} format="webp" loading="lazy" />
+                    ))}
+                  </div>
+                ) : (
+                  <Preencher o="fotos e vídeo desta oficina" />
+                )}
+              </div>
               <h3>{t}</h3>
             </li>
           ))
@@ -102,5 +124,16 @@ const { tipos } = TEXTOS.oficinas;
   .oficina h3 {
     font-size: 22px;
     font-weight: 500;
+  }
+
+  .fotos {
+    display: grid;
+    gap: 8px;
+  }
+
+  .fotos :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
   }
 </style>
