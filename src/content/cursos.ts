@@ -111,7 +111,9 @@ export const cursos: Curso[] = [
     resumo: 'Para quem deseja começar a pintar ou desenvolver seus conhecimentos.',
     descricao: [
       'Para quem deseja começar a pintar ou desenvolver seus conhecimentos. As aulas abordam as etapas da pintura, desde a preparação do desenho e as misturas de cores até a construção de luz, sombra, volume e detalhes. O acompanhamento respeita o nível e o ritmo de cada aluno.',
+      'Nessa turma os alunos têm a chance de aprender desde o nível básico até o avançado, com técnicas de pintura a óleo ou acrílica.',
     ],
+    ritmo: 'Aula de 3 horas',
     capa: capaPinturaEmTela,
     capaAlt: 'Aluna de cabelo ondulado pintando um veleiro sobre um mar dourado, no cavalete do atelier',
     fotos: [
@@ -150,10 +152,11 @@ export const cursos: Curso[] = [
     professor: 'edison-marsan',
     idade: 'a partir de 12 anos e adultos',
     publico: ['adolescentes', 'adultos'],
-    resumo: 'As aulas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra.',
+    resumo: 'Aulas voltadas para técnicas de desenho realista ou de construção de anime.',
     descricao: [
-      'As aulas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra. Os alunos podem desenvolver trabalhos de desenho realista e anime, com orientação de acordo com seus interesses e nível de experiência.',
+      'Aulas voltadas para técnicas de desenho realista ou de construção de anime. Elas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra, com orientação de acordo com os interesses e o nível de experiência de cada aluno.',
     ],
+    ritmo: 'Aula de 2 horas',
     capa: capaDesenhoRealista,
     capaAlt: 'Desenho colorido de um personagem de anime de cabelo vermelho, com chamas, feito no atelier',
     fotos: [
@@ -201,6 +204,15 @@ export const turmas: Turma[] = [
   { curso: 'pintura-em-tela-infantil', dia: 'Quarta à tarde', horario: '13h30 às 16h30' },
   { curso: 'pintura-em-tela-infantil', dia: 'Quinta de manhã', horario: '8h às 11h' },
   { curso: 'pintura-em-tela-infantil', dia: 'Quinta à tarde', horario: '13h30 às 16h30' },
+  { curso: 'pintura-em-tela', dia: 'Terça à noite', horario: '18h30 às 21h30' },
+  { curso: 'pintura-em-tela', dia: 'Quarta de manhã', horario: '8h às 11h' },
+  { curso: 'pintura-em-tela', dia: 'Quarta à tarde', horario: '13h30 às 16h30' },
+  { curso: 'pintura-em-tela', dia: 'Quinta à noite', horario: '18h30 às 21h30' },
+  { curso: 'pintura-em-tela', dia: 'Sexta à tarde', horario: '13h30 às 16h30' },
+  { curso: 'desenho-realista-e-anime', dia: 'Segunda à noite', horario: '18h30 às 20h30' },
+  { curso: 'desenho-realista-e-anime', dia: 'Quarta à noite', horario: '18h30 às 20h30' },
+  { curso: 'desenho-realista-e-anime', dia: 'Sábado de manhã', horario: '7h30 às 9h30' },
+  { curso: 'desenho-realista-e-anime', dia: 'Sábado de manhã', horario: '9h30 às 11h30' },
 ];
 
 /** Falha no build se um curso apontar para professor que não existe, ou uma turma para curso que não existe. */
