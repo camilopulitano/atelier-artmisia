@@ -45,6 +45,14 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                     <span class="formato">{FORMATOS_ONLINE[c.formato]}{c.emBreve && <span class="em-breve">Em breve</span>}</span>
                     <h3>{c.nome}</h3>
                     {c.publico && <p class="publico">{c.publico}</p>}
+                    {c.nivel && <p class="nivel">{c.nivel}</p>}
+                    {(c.dia || c.ritmo || c.valor) && (
+                      <dl class="detalhes">
+                        {c.dia && (<div><dt>Horário</dt><dd>{c.dia}{c.horario ? `, ${c.horario}` : ''}</dd></div>)}
+                        {c.ritmo && (<div><dt>Aulas</dt><dd>{c.ritmo}</dd></div>)}
+                        {c.valor && (<div><dt>Valor</dt><dd>{c.valor}</dd></div>)}
+                      </dl>
+                    )}
                     <a class="link-seta" href={c.link ?? linkOnline(c, p)} target="_blank" rel="noopener">
                       {c.link ? 'Ver o curso' : c.emBreve ? 'Quero ser avisado' : 'Consultar pelo WhatsApp'} <span aria-hidden="true">→</span>
                       <span class="so-leitor"> — {c.nome}{c.publico ? `, ${c.publico}` : ''} (abre em nova aba)</span>
@@ -185,6 +193,32 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     font-size: 16px;
     font-weight: 600;
     color: var(--oliva);
+  }
+
+  .nivel {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 6px 0 0;
+  }
+
+  .detalhes dt {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .detalhes dd {
+    margin: 2px 0 0;
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .curso .link-seta {

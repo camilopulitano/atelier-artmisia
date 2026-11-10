@@ -10,17 +10,23 @@ import { SITE } from './site';
 // WhatsApp do atelier, (45) 99859-3078 (confirmado em 12/10/2026).
 const WHATSAPP_BRUTO = '5545998593078'; // 55 + DDD + 9 + número, só dígitos
 
-// Instagram do atelier (confirmado em 12/10/2026).
-export const INSTAGRAM_USUARIO = 'artmisia.atelier'; // sem o @
+// Instagram do atelier. Corrigido em 10/11/2026: estava invertido ("artmisia.atelier"),
+// e esse perfil não existe. O certo é @atelier.artmisia (47 mil seguidores).
+export const INSTAGRAM_USUARIO = 'atelier.artmisia'; // sem o @
 
 /** Cidade do atelier (texto da Ana, 11/10/2026). */
 export const CIDADE = 'Medianeira';
 export const ESTADO = 'PR';
 
-/** TODO(conteudo): rua e número do atelier. Enquanto vazio, o site mostra a cidade e [PREENCHER]. */
-export const ENDERECO: string | undefined = undefined;
+/** Endereço do perfil do atelier no Google (conferido em 10/11/2026). */
+export const ENDERECO: string | undefined = 'R. Argentina, 1267 — Centro, Medianeira (PR), 85884-000';
 
-/** TODO(conteudo): dias e horário em que o atelier fica aberto. */
+/**
+ * TODO(conteudo): dias e horário em que o atelier fica aberto.
+ * O Google informa terça 8h–16h30, quarta 13h30–21h, quinta 8h–21h, sexta 13h30–21h,
+ * sábado 8h–11h e segunda fechado — mas há turmas de segunda em cursos.ts.
+ * Confirmar com a Ana antes de publicar.
+ */
 export const HORARIO: string | undefined = undefined;
 
 function validarE164(numero: string): string {
@@ -54,6 +60,15 @@ export function linkConsultaTurmas(): string {
 export function linkAulaExperimental(curso?: { nome: string }): string {
   const qual = curso ? ` de ${curso.nome}` : '';
   return linkWhatsApp(`Olá! Vim pelo site do ${SITE.nome} e gostaria de marcar uma aula experimental${qual}. Quais horários vocês têm?`);
+}
+
+/** Marcar aula experimental num horário específico (botão de cada turma). */
+export function linkAulaExperimentalTurma(curso: { nome: string }, turma: { dia?: string; horario?: string }): string {
+  const quando = [turma.dia, turma.horario].filter(Boolean).join(', ');
+  return linkWhatsApp(
+    `Olá! Vim pelo site do ${SITE.nome} e gostaria de marcar uma aula experimental de ${curso.nome}` +
+      `${quando ? ` na turma de ${quando}` : ''}. Essa turma tem vaga?`,
+  );
 }
 
 /** Pergunta sobre uma aula online (ou sobre as aulas online em geral). */

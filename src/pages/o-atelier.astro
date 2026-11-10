@@ -24,7 +24,7 @@ const fundadora = professores.find((p) => p.fundadora)!;
       <p class="sobrancelha">O atelier</p>
       <h1 id="titulo-atelier" class="titulo-pagina"><Destaque texto={TEXTOS.atelier.titulo} /></h1>
       <p class="texto-leitura">{TEXTOS.atelier.sobre ?? <Preencher o="um parágrafo da Ana sobre o atelier: quando abriu e como são as aulas" />}</p>
-      <p class="texto-suave">Aberto em {TEXTOS.atelier.fundacao ?? <Preencher o="ano" />}.</p>
+      {TEXTOS.atelier.fundacao && <p class="texto-suave">Aberto em {TEXTOS.atelier.fundacao}.</p>}
     </div>
     <Image
       src={fotoFundadora}
@@ -49,10 +49,7 @@ const fundadora = professores.find((p) => p.fundadora)!;
     </div>
   </section>
 
-  <section class="conteiner secao" aria-labelledby="titulo-espaco">
-    <h2 id="titulo-espaco" class="titulo-secao">O <em>espaço</em></h2>
-    <div class="espaco-fotos"><Preencher o="fotos do espaço e de aula acontecendo" /></div>
-  </section>
+  {/* TODO(conteudo): seção "O espaço" volta quando houver fotos do atelier (Camilo, 10/11/2026). */}
 
   <section class="faixa-secao" aria-labelledby="titulo-equipe">
     <div class="conteiner secao">

@@ -3,7 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TurmasTabela from '../../components/TurmasTabela.astro';
 import { professores, retratoDe, rotuloNoAtelier, trabalhosDe, type Professor } from '../../content/professores';
-import { cursosDe, idadeRotulo, turmasDe } from '../../content/cursos';
+import { cursosDe, idadeRotulo } from '../../content/cursos';
 import { imagemDe, obras } from '../../content/obras';
 import { TEXTOS } from '../../content/textos';
 import { cursosOnlineDe, FORMATOS_ONLINE } from '../../content/online';
@@ -27,6 +27,20 @@ const trabalhos = [
 const cursos = cursosDe(p.slug);
 const online = cursosOnlineDe(p.slug);
 const outros = professores.filter((o) => o.slug !== p.slug);
+
+// Título da lista de online: só cita os formatos que o professor realmente tem.
+const rotulosOnline: Record<string, string> = {
+  turma: 'Aulas online',
+  particular: 'Aulas particulares',
+  gravado: 'Cursos gravados',
+};
+const formatos = [...new Set(online.map((c) => c.formato))];
+const rotuloOnline = formatos
+  .map((f) => rotulosOnline[f])
+  .join(' e ')
+  .replace(/^Aulas online e Aulas particulares$/, 'Aulas online e aulas particulares')
+  .replace(/ e Cursos gravados$/, ' e cursos gravados')
+  .replace(/ e Aulas particulares$/, ' e aulas particulares');
 
 // "Edison Marsan" → "Edison" + "Marsan" (o sobrenome sai em itálico verde).
 const partesNome = p.nome.split(' ');
@@ -138,13 +152,14 @@ const jsonLd = {
 
   <section id="turmas" class="conteiner secao" aria-labelledby="titulo-turmas">
     <h2 id="titulo-turmas" class="titulo-secao">{cursos.length > 1 ? 'Cursos' : 'Curso'} d{p.artigo} <em>{p.primeiroNome}</em></h2>
-    <ul class="cursos" role="list">
+    <ul class="cursos cursos--largos" role="list">
       {
         cursos.map((curso) => (
           <li class="cartao curso">
             <h3><a href={`/aulas#${curso.slug}`}>{curso.nome}</a></h3>
             <p class="idade">{idadeRotulo(curso)}</p>
             <p class="texto-suave">{curso.resumo}</p>
+            <TurmasTabela curso={curso} professor={p} comCurso />
           </li>
         ))
       }
@@ -152,20 +167,24 @@ const jsonLd = {
     {
       online.length > 0 && (
         <>
-          <h3 class="titulo-online">Online e gravados</h3>
+          <h3 class="titulo-online">{rotuloOnline}</h3>
           <ul class="cursos" role="list">
             {online.map((c) => (
               <li class="cartao curso">
                 <h3>{c.link ? <a href={c.link} target="_blank" rel="noopener">{c.nome}</a> : <a href="/online">{c.nome}</a>}</h3>
                 {c.publico && <p class="idade">{c.publico}</p>}
                 <p class="texto-suave">{FORMATOS_ONLINE[c.formato]}{c.emBreve ? ' · em breve' : ''}</p>
+                {(c.dia || c.valor) && (
+                  <p class="texto-suave">
+                    {[c.dia && `${c.dia}${c.horario ? `, ${c.horario}` : ''}`, c.valor].filter(Boolean).join(' · ')}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
         </>
       )
     }
-    {cursos.map((curso) => turmasDe(curso).length > 0 && <TurmasTabela curso={curso} professor={p} comCurso />)}
     <p class="texto-suave">{TEXTOS.aulas.horarios}</p>
     <a class="botao" href={linkProfessor(p)} target="_blank" rel="noopener">{TEXTOS.botaoTurmas}<span class="so-leitor"> d{p.artigo} {p.primeiroNome} (abre em nova aba)</span></a>
   </section>
@@ -322,6 +341,11 @@ const jsonLd = {
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  /* Cursos presenciais: cada cartão traz horários e valor, então ocupa a linha toda. */
+  .cursos--largos {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .curso {

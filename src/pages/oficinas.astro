@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Destaque from '../components/Destaque.astro';
+import Preencher from '../components/Preencher.astro';
+import Oficinas from '../components/Oficinas.astro';
+import { TEXTOS, semMarcas } from '../content/textos';
+
+/**
+ * Página das oficinas: o que o atelier já fez e o formulário de interesse.
+ *
+ * TODO(conteudo): fotos e vídeos de cada oficina (o Camilo vai mandar).
+ * Enquanto não vierem, cada oficina mostra [PREENCHER] no lugar da foto.
+ */
+const { tipos } = TEXTOS.oficinas;
+---
+
+<BaseLayout
+  titulo={semMarcas(TEXTOS.oficinas.titulo)}
+  descricao={TEXTOS.oficinas.intro}
+  paginaAtual="oficinas"
+>
+  <section class="conteiner topo" aria-labelledby="titulo-oficinas-pagina">
+    <nav class="trilha" aria-label="Você está aqui"><a href="/">Início</a> / <span aria-current="page">Oficinas</span></nav>
+    <p class="sobrancelha">{TEXTOS.oficinas.rotulo}</p>
+    <h1 id="titulo-oficinas-pagina" class="titulo-pagina"><Destaque texto={TEXTOS.oficinas.titulo} /></h1>
+    <p class="intro texto-suave">{TEXTOS.oficinas.intro}</p>
+    <p class="texto-suave">Prefere uma turma fixa, toda semana? <a href="/aulas">Veja os cursos</a>.</p>
+  </section>
+
+  <section class="faixa-secao" aria-labelledby="titulo-ja-feitas">
+    <div class="conteiner secao">
+      <h2 id="titulo-ja-feitas" class="titulo-secao"><Destaque texto={TEXTOS.oficinas.jaFeitas} /></h2>
+      <ul class="grade" role="list">
+        {
+          tipos.map((t) => (
+            <li class="cartao oficina">
+              <div class="midia"><Preencher o="fotos e vídeo desta oficina" /></div>
+              <h3>{t}</h3>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <Oficinas />
+</BaseLayout>
+
+<style>
+  .topo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-block: clamp(32px, 5vw, 64px) 32px;
+  }
+
+  .trilha {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .intro {
+    max-width: 36em;
+    font-size: clamp(17px, 1.6vw, 20px);
+  }
+
+  .secao {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: clamp(48px, 7vw, 88px);
+  }
+
+  .grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .oficina {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .midia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    padding: 16px;
+    border: 1.5px dashed var(--linha-forte);
+    border-radius: var(--raio);
+    background: var(--secao);
+    text-align: center;
+  }
+
+  .oficina h3 {
+    font-size: 22px;
+    font-weight: 500;
+  }
+</style>

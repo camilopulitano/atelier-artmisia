@@ -12,7 +12,7 @@
  */
 
 /** Páginas do menu (marca a página atual no cabeçalho). */
-export type Pagina = 'inicio' | 'aulas' | 'online' | 'professores' | 'atelier' | 'obras' | 'videos';
+export type Pagina = 'inicio' | 'aulas' | 'oficinas' | 'online' | 'professores' | 'atelier' | 'obras' | 'videos';
 
 export const SITE = {
   /** Grafia oficial, sem acento. */

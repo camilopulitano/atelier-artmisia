@@ -35,8 +35,12 @@ export const TEXTOS = {
     titulo: '*Oficinas*',
     texto:
       'Além dos cursos, o atelier realiza oficinas em datas específicas. Cada oficina tem sua própria programação, público e condições de participação, divulgados conforme a abertura das inscrições.',
-    /** Tipos de oficina (Ana, 12/10/2026). */
-    tipos: ['Aquarela', 'Pintura ao vivo', 'Cerâmica', 'Colagem'],
+    /** Oficinas já realizadas (Camilo, 10/11/2026). A lista também alimenta o formulário de interesse. */
+    tipos: ['Cartões de Natal', 'Pintura e vinho', 'Cerâmica', 'Bordado', 'Pintura em taças'],
+    /** Página própria. */
+    intro: 'As oficinas são encontros de um dia, para quem quer experimentar sem entrar numa turma fixa. Abaixo, as que o atelier já realizou; para saber da próxima, deixe seu contato.',
+    jaFeitas: 'O que já *aconteceu*',
+    // TODO(conteudo): fotos e vídeos de cada oficina (o Camilo vai mandar).
   },
 
   atelier: {
@@ -69,7 +73,7 @@ export const TEXTOS = {
     rotulo: 'Exposição dos alunos',
     titulo: '*Brasilidade*',
     texto: 'Em 22 de agosto, obras dos alunos do Atelier Artmisia foram expostas no Passeio Vivaz, com entrada gratuita.',
-    detalhe: '22 de agosto · sábado · a partir das 14h · Passeio Vivaz',
+    detalhe: '22 de agosto · sábado · Passeio Vivaz',
   },
 
   obras: {
@@ -85,7 +89,8 @@ export const TEXTOS = {
     horarios: 'Para consultar os horários, valores e a disponibilidade de vagas, entre em contato com o ateliê pelo WhatsApp.',
     /** Ana, 12/10/2026. */
     aulaExperimental: 'Tem: é só marcar o horário pelo WhatsApp' as string | undefined,
-    material: 'Não incluso' as string | undefined,
+    /** Aparece logo abaixo do valor de cada curso (Camilo, 10/11/2026). */
+    material: 'Material não incluso' as string | undefined,
     inscricoesTitulo: 'Horários e *inscrições*',
   },
 

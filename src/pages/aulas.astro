@@ -33,14 +33,6 @@ const temSituacao = turmas.some((t) => t.situacao);
     <p class="so-leitor" id="resumo" aria-live="polite"></p>
   </section>
 
-  <section class="conteiner" aria-label="Antes de começar">
-    <dl class="infos">
-      <div class="cartao"><dt>Horários, valores e vagas</dt><dd>{TEXTOS.aulas.consulta}</dd></div>
-      <div class="cartao"><dt>Aula experimental</dt><dd>{TEXTOS.aulas.aulaExperimental ?? <Preencher />}</dd></div>
-      <div class="cartao"><dt>Material</dt><dd>{TEXTOS.aulas.material ?? <Preencher o="incluso ou o aluno traz" />}</dd></div>
-    </dl>
-  </section>
-
   <section class="faixa-secao" aria-label="Cursos e turmas">
     <div class="conteiner lista">
       {
@@ -110,7 +102,7 @@ const temSituacao = turmas.some((t) => t.situacao);
     </div>
   </section>
 
-  <Oficinas />
+  <Oficinas comFormulario={false} />
 
   <section class="faixa-secao" aria-labelledby="titulo-chamada">
   <div class="conteiner chamada">

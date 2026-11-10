@@ -1,5 +1,5 @@
 ---
-import { linkAulaExperimental, linkTurma } from '../config/contato';
+import { linkAulaExperimental, linkAulaExperimentalTurma, linkTurma } from '../config/contato';
 import { SITUACOES_TURMA, turmasDe, type Curso } from '../content/cursos';
 import type { Professor } from '../content/professores';
 import { TEXTOS } from '../content/textos';
@@ -30,19 +30,25 @@ const whatsapp = linkTurma(curso, professor);
             <div><dt>Aulas</dt><dd>{curso.ritmo}</dd></div>
           )}
           {curso.valor && (
-            <div><dt>Valor</dt><dd>{curso.valor}</dd></div>
+            <div>
+              <dt>Valor</dt>
+              <dd>{curso.valor}{TEXTOS.aulas.material && <span class="material">{TEXTOS.aulas.material}</span>}</dd>
+            </div>
           )}
         </dl>
       )}
       {turmas.length > 0 && (
         <div>
-          <p class="rotulo" id={`horarios-${curso.slug}`}>Horários</p>
+          <p class="rotulo" id={`horarios-${curso.slug}`}>Horários · clique para marcar uma aula experimental</p>
           <ul class="horarios" aria-labelledby={`horarios-${curso.slug}`}>
             {turmas.map((t) => (
               <li>
-                <span class="dia">{t.dia}</span>
-                <span class="hora">{t.horario}</span>
-                {t.situacao && <span class:list={['situacao', t.situacao]}>{SITUACOES_TURMA[t.situacao]}</span>}
+                <a href={linkAulaExperimentalTurma(curso, t)} target="_blank" rel="noopener">
+                  <span class="dia">{t.dia}</span>
+                  <span class="hora">{t.horario}</span>
+                  {t.situacao && <span class:list={['situacao', t.situacao]}>{SITUACOES_TURMA[t.situacao]}</span>}
+                  <span class="so-leitor"> — marcar aula experimental de {curso.nome} no WhatsApp (abre em nova aba)</span>
+                </a>
               </li>
             ))}
           </ul>
@@ -98,6 +104,14 @@ const whatsapp = linkTurma(curso, professor);
     font-weight: 600;
   }
 
+  .material {
+    display: block;
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--texto-suave);
+  }
+
   dt,
   .rotulo {
     font-size: 13px;
@@ -118,11 +132,31 @@ const whatsapp = linkTurma(curso, professor);
 
   .horarios li {
     display: flex;
+  }
+
+  .horarios a {
+    flex: 1;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 2px;
+    min-height: 44px;
     padding: 10px 14px;
     border: 1px solid var(--linha);
     border-radius: var(--raio);
+    background: var(--cartao);
+    color: var(--texto);
+    text-decoration: none;
+  }
+
+  .horarios a:hover,
+  .horarios a:focus-visible {
+    border-color: var(--oliva);
+  }
+
+  .horarios a:hover .hora,
+  .horarios a:focus-visible .hora {
+    color: var(--oliva);
   }
 
   .dia {

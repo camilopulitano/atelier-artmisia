@@ -12,8 +12,10 @@ import { TEXTOS } from '../content/textos';
 interface Props {
   /** Nível do título: h2 na página, mesmo estilo. */
   fundo?: 'padrao' | 'secao';
+  /** false: mostra só o resumo e um link para /oficinas (home e página de aulas). */
+  comFormulario?: boolean;
 }
-const { fundo = 'padrao' } = Astro.props;
+const { fundo = 'padrao', comFormulario = true } = Astro.props;
 const { tipos } = TEXTOS.oficinas;
 ---
 
@@ -26,8 +28,10 @@ const { tipos } = TEXTOS.oficinas;
       <ul class="tipos" role="list">
         {tipos.map((t) => <li>{t}</li>)}
       </ul>
+      {!comFormulario && <a class="botao botao--contorno" href="/oficinas">Ver as oficinas</a>}
     </div>
 
+    {comFormulario && (
     <form class="cartao form-oficina" data-whatsapp={WHATSAPP_E164} data-site={SITE.nome} aria-labelledby="titulo-form-oficina">
       <h3 id="titulo-form-oficina">Quero saber da próxima oficina</h3>
       <p class="texto-suave">Deixe seu contato e o atelier avisa quando abrirem as inscrições.</p>
@@ -64,6 +68,7 @@ const { tipos } = TEXTOS.oficinas;
         <noscript>Sem JavaScript? <a href={linkOficinas()}>Fale com o atelier pelo WhatsApp</a>.</noscript>
       </p>
     </form>
+    )}
   </div>
 </section>
 
