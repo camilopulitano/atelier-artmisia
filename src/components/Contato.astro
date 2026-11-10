@@ -1,7 +1,7 @@
 ---
 import Destaque from './Destaque.astro';
 import Preencher from './Preencher.astro';
-import { CIDADE, ENDERECO, ESTADO, HORARIO, INSTAGRAM_URL, INSTAGRAM_USUARIO, linkAulaExperimental, linkConsultaTurmas, linkWhatsApp, WHATSAPP_LEGIVEL } from '../config/contato';
+import { CIDADE, ENDERECO, ESTADO, INSTAGRAM_URL, INSTAGRAM_USUARIO, linkAulaExperimental, linkConsultaTurmas, linkWhatsApp, WHATSAPP_LEGIVEL } from '../config/contato';
 import { TEXTOS } from '../content/textos';
 
 /** Seção de contato (home e página do atelier). */
@@ -24,7 +24,6 @@ const { fundo = 'padrao' } = Astro.props;
     </div>
     <dl class="cartao dados">
       <div><dt>Endereço</dt><dd>{ENDERECO ?? <>{CIDADE}, {ESTADO} <Preencher o="rua e número" /></>}</dd></div>
-      <div><dt>Horário</dt><dd>{HORARIO ?? <Preencher />}</dd></div>
       <div><dt>WhatsApp</dt><dd><a href={linkWhatsApp()} target="_blank" rel="noopener">{WHATSAPP_LEGIVEL}</a></dd></div>
       <div><dt>Instagram</dt><dd><a href={INSTAGRAM_URL} target="_blank" rel="noopener">@{INSTAGRAM_USUARIO}</a></dd></div>
     </dl>
