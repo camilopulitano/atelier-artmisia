@@ -50,8 +50,6 @@ export interface Curso {
   ritmo?: string;
   /** Valor, como o atelier informa. Ex.: "R$ 180". */
   valor?: string;
-  /** Limite máximo de alunos por turma. */
-  maxAlunos?: number;
 }
 
 export type SituacaoTurma = 'vagas' | 'espera';
@@ -88,7 +86,6 @@ export const cursos: Curso[] = [
     ],
     ritmo: '1 vez por semana, aula de 2 horas',
     valor: 'R$ 180 por mês',
-    maxAlunos: 12,
     capa: capaIniciacao,
     capaAlt: 'Menina de cabelo cacheado sorrindo na mesa da aula, com lápis de cor e um cavalete com pintura ao fundo',
   },
@@ -105,7 +102,6 @@ export const cursos: Curso[] = [
     ],
     ritmo: 'Aula de 3 horas',
     valor: 'R$ 250 por mês',
-    maxAlunos: 10,
     capa: capaPinturaInfantil,
     capaAlt: 'Menino de pé ao lado do cavalete, com a pintura que fez de um caminhão na estrada',
   },
@@ -147,7 +143,6 @@ export const cursos: Curso[] = [
     capaAlt: 'Aluno de camiseta do Atelier Artmisia pintando com aquarela, com a paleta e um copo de água sobre a mesa',
     ritmo: 'Aula de 2 horas',
     valor: 'R$ 250 por mês',
-    maxAlunos: 8,
     fotos: [
       'Camilo Pulitano de pé na cabeceira da mesa, explicando a atividade para a turma de crianças',
       'Dois meninos desenhando lado a lado na mesa do atelier, com pinturas penduradas na parede ao fundo',
@@ -169,7 +164,6 @@ export const cursos: Curso[] = [
     ],
     ritmo: 'Aula de 2 horas',
     valor: 'R$ 250 por mês',
-    maxAlunos: 6,
     capa: capaDesenhoRealista,
     capaAlt: 'Desenho colorido de um personagem de anime de cabelo vermelho, com chamas, feito no atelier',
     // Ordem pedida pelo Camilo (10/11/2026). O arquivo -1 (turma em volta da mesa) saiu do carrossel;
@@ -206,7 +200,6 @@ export const cursos: Curso[] = [
     capaAlt: 'Heloisa sorrindo enquanto borda um bastidor no atelier, com pinturas na parede ao fundo',
     ritmo: 'Aula de 2 horas',
     valor: 'R$ 220 por mês',
-    maxAlunos: 8,
     fotos: [
       'Heloisa sorrindo enquanto borda um bastidor, no atelier, com pinturas na parede ao fundo',
       'Detalhe do bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas',
