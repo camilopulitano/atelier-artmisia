@@ -1,5 +1,4 @@
 ---
-import Preencher from './Preencher.astro';
 import { linkAulaExperimental, linkTurma } from '../config/contato';
 import { SITUACOES_TURMA, turmasDe, type Curso } from '../content/cursos';
 import type { Professor } from '../content/professores';
@@ -7,70 +6,61 @@ import { TEXTOS } from '../content/textos';
 
 /**
  * Turmas de um curso.
- * - Sem turma cadastrada (hoje): só o botão "Consultar turmas pelo WhatsApp",
- *   já com o nome do curso e do professor na mensagem.
- * - Com turmas em cursos.ts: tabela no computador, cartões no celular (mesmo HTML).
- * Sem preço: o valor vai pelo WhatsApp.
+ * - Duração/frequência e valor (`ritmo`, `valor` em cursos.ts), quando o curso tem.
+ * - Horários (`turmas` em cursos.ts), quando o curso tem: lista de dia + horário.
+ * - Sempre os botões do WhatsApp, com o nome do curso e do professor na mensagem.
  */
 interface Props {
   curso: Curso;
   professor: Professor;
-  /** Mostra a coluna "Curso" (página do professor, que lista vários cursos). */
+  /** Mantido por compatibilidade com a página do professor. */
   comCurso?: boolean;
 }
-const { curso, professor, comCurso = false } = Astro.props;
+const { curso, professor } = Astro.props;
 const turmas = turmasDe(curso);
 const whatsapp = linkTurma(curso, professor);
 ---
 
 {
-  turmas.length === 0 ? (
-    <div class="consulta">
-      <a class="botao" href={whatsapp} target="_blank" rel="noopener">
-        {TEXTOS.botaoTurmas}
-        <span class="so-leitor"> — {curso.nome} (abre em nova aba)</span>
-      </a>
-      <a class="botao botao--contorno" href={linkAulaExperimental(curso)} target="_blank" rel="noopener">
-        {TEXTOS.botaoExperimental}
-        <span class="so-leitor"> — {curso.nome} (abre em nova aba)</span>
-      </a>
-    </div>
-  ) : (
+  (curso.ritmo || curso.valor || turmas.length > 0) && (
     <div class="turmas">
-      <table>
-        <caption class="so-leitor">Turmas de {curso.nome}</caption>
-        <thead>
-          <tr>
-            {comCurso && <th scope="col">Curso</th>}
-            <th scope="col">Dia</th>
-            <th scope="col">Horário</th>
-            <th scope="col">Idade</th>
-            <th scope="col">Vagas</th>
-            <th scope="col"><span class="so-leitor">Perguntar</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          {turmas.map((t) => (
-            <tr>
-              {comCurso && <td data-rotulo="Curso" class="curso">{curso.nome}</td>}
-              <td data-rotulo="Dia">{t.dia ?? <Preencher />}</td>
-              <td data-rotulo="Horário">{t.horario ?? <Preencher />}</td>
-              <td data-rotulo="Idade">{t.idade ?? curso.idade}</td>
-              <td data-rotulo="Vagas">
-                {t.situacao ? <span class:list={['situacao', t.situacao]}>{SITUACOES_TURMA[t.situacao]}</span> : <Preencher />}
-              </td>
-              <td class="acao">
-                <a class="botao botao--pequeno" href={whatsapp} target="_blank" rel="noopener">
-                  Perguntar sobre a turma<span class="so-leitor"> de {curso.nome} no WhatsApp (abre em nova aba)</span>
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {(curso.ritmo || curso.valor) && (
+        <dl class="info">
+          {curso.ritmo && (
+            <div><dt>Aulas</dt><dd>{curso.ritmo}</dd></div>
+          )}
+          {curso.valor && (
+            <div><dt>Valor</dt><dd>{curso.valor}</dd></div>
+          )}
+        </dl>
+      )}
+      {turmas.length > 0 && (
+        <div>
+          <p class="rotulo" id={`horarios-${curso.slug}`}>Horários</p>
+          <ul class="horarios" aria-labelledby={`horarios-${curso.slug}`}>
+            {turmas.map((t) => (
+              <li>
+                <span class="dia">{t.dia}</span>
+                <span class="hora">{t.horario}</span>
+                {t.situacao && <span class:list={['situacao', t.situacao]}>{SITUACOES_TURMA[t.situacao]}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
+<div class="consulta">
+  <a class="botao" href={whatsapp} target="_blank" rel="noopener">
+    {turmas.length > 0 ? 'Perguntar sobre a turma' : TEXTOS.botaoTurmas}
+    <span class="so-leitor"> — {curso.nome} no WhatsApp (abre em nova aba)</span>
+  </a>
+  <a class="botao botao--contorno" href={linkAulaExperimental(curso)} target="_blank" rel="noopener">
+    {TEXTOS.botaoExperimental}
+    <span class="so-leitor"> — {curso.nome} (abre em nova aba)</span>
+  </a>
+</div>
 
 <style>
   .consulta {
@@ -86,49 +76,68 @@ const whatsapp = linkTurma(curso, professor);
     }
   }
 
-  /* A tabela vira cartões pela largura DELA (container query), não da tela:
-     o mesmo componente aparece em colunas de larguras diferentes. */
   .turmas {
-    container-type: inline-size;
-    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 18px;
     border-radius: var(--raio);
     background: var(--fundo);
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
+  .info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 32px;
+    margin: 0;
   }
 
-  th {
-    padding: 12px 16px;
-    text-align: left;
+  .info dd {
+    margin: 2px 0 0;
+    font-size: 17px;
     font-weight: 600;
+  }
+
+  dt,
+  .rotulo {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--texto-suave);
   }
 
-  td {
-    padding: 12px 16px;
-    border-top: 1px solid var(--linha);
-    vertical-align: middle;
+  .horarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+    gap: 8px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .curso {
+  .horarios li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 14px;
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+  }
+
+  .dia {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .hora {
+    font-size: 17px;
     font-weight: 600;
   }
 
-  .acao {
-    text-align: right;
-    padding-block: 8px;
-  }
-
-  .acao .botao {
-    white-space: nowrap;
-  }
-
   .situacao {
-    display: inline-block;
+    align-self: flex-start;
+    margin-top: 4px;
     padding: 2px 10px;
     border-radius: var(--raio);
     font-size: 14px;
@@ -143,60 +152,5 @@ const whatsapp = linkTurma(curso, professor);
   .situacao.espera {
     border: 1.5px solid var(--texto-suave);
     color: var(--texto);
-  }
-
-  /* Espaço estreito: cada turma vira um cartão com rótulos. */
-  @container (max-width: 860px) {
-    table,
-    tbody {
-      display: block;
-    }
-
-    thead {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-    }
-
-    tr {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px 12px;
-      padding: 14px;
-    }
-
-    tr + tr {
-      border-top: 1px solid var(--linha);
-    }
-
-    td {
-      padding: 0;
-      border: 0;
-      font-size: 15px;
-    }
-
-    td[data-rotulo]::before {
-      content: attr(data-rotulo);
-      display: block;
-      font-size: 13px;
-      color: var(--texto-suave);
-    }
-
-    .curso {
-      grid-column: 1 / -1;
-    }
-
-    .acao {
-      grid-column: 1 / -1;
-      text-align: left;
-      padding: 4px 0 0;
-    }
-
-    .acao .botao {
-      width: 100%;
-      white-space: normal;
-    }
   }
 </style>
