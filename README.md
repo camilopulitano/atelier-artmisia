@@ -40,7 +40,6 @@ Procure `TODO(conteudo)` no código. Hoje:
 4. O que a seção Obras mostra (hoje: 6 obras da Ana).
 5. Link exato do canal do Edison; ano em que o Camilo começou a pintar a óleo; capa própria da Pintura em Tela Infantil (hoje é a foto da Fabiana).
 6. Fotos dos quatro professores numa sessão só.
-7. Domínio próprio, se houver (trocar em `src/config/site.ts` e `astro.config.mjs`).
 
 Já vieram da Ana: cursos, idades e textos, oficinas (aquarela, pintura ao vivo, cerâmica, colagem), parágrafo sobre o atelier, aula experimental (marcar pelo WhatsApp), material não incluso, WhatsApp e Instagram confirmados.
 
@@ -48,6 +47,6 @@ Lista completa e a mensagem para a Ana: `claude/conteudo-atelier.md` no Project.
 
 ## Publicar
 
-No ar em **https://atelier-artmisia.vercel.app** (Vercel, projeto `atelier-artmisia`), a partir do repositório privado `camilopulitano/atelier-artmisia` no GitHub.
+No ar em **https://atelierartmisia.com.br** (domínio no registro.br; o endereço antigo atelier-artmisia.vercel.app continua funcionando) (Vercel, projeto `atelier-artmisia`), a partir do repositório privado `camilopulitano/atelier-artmisia` no GitHub.
 
 Cada alteração enviada para a `main` vai ao ar sozinha em cerca de um minuto.

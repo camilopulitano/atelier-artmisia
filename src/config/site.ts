@@ -22,6 +22,6 @@ export const SITE = {
   /** Descrição padrão para Google e WhatsApp. */
   descricao:
     'Atelier de pintura e desenho em Medianeira (PR), com cursos para crianças, adolescentes e adultos. Conheça os cursos e os professores e consulte as turmas pelo WhatsApp.',
-  /** TODO(conteudo): domínio final. Precisa bater com `site` em astro.config.mjs. */
-  url: 'https://atelier-artmisia.vercel.app',
+  /** Domínio próprio (registro.br). Precisa bater com `site` em astro.config.mjs. */
+  url: 'https://atelierartmisia.com.br',
 };
