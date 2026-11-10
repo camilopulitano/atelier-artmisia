@@ -22,18 +22,15 @@ const whatsapp = linkTurma(curso, professor);
 ---
 
 {
-  (curso.ritmo || curso.valor || curso.maxAlunos || turmas.length > 0) && (
+  (curso.ritmo || curso.valor || turmas.length > 0) && (
     <div class="turmas">
-      {(curso.ritmo || curso.valor || curso.maxAlunos) && (
+      {(curso.ritmo || curso.valor) && (
         <dl class="info">
           {curso.ritmo && (
             <div><dt>Aulas</dt><dd>{curso.ritmo}</dd></div>
           )}
           {curso.valor && (
             <div><dt>Valor</dt><dd>{curso.valor}</dd></div>
-          )}
-          {curso.maxAlunos && (
-            <div><dt>Turma</dt><dd>Máximo de {curso.maxAlunos} alunos</dd></div>
           )}
         </dl>
       )}
@@ -56,7 +53,7 @@ const whatsapp = linkTurma(curso, professor);
 }
 <div class="consulta">
   <a class="botao" href={whatsapp} target="_blank" rel="noopener">
-    {turmas.length > 0 ? 'Perguntar sobre a turma' : TEXTOS.botaoTurmas}
+    {turmas.length > 0 ? 'Consultar vagas disponíveis' : TEXTOS.botaoTurmas}
     <span class="so-leitor"> — {curso.nome} no WhatsApp (abre em nova aba)</span>
   </a>
   <a class="botao botao--contorno" href={linkAulaExperimental(curso)} target="_blank" rel="noopener">
