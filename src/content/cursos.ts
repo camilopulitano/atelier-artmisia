@@ -197,6 +197,7 @@ export const cursos: Curso[] = [
     ],
     capa: capaBordado,
     capaAlt: 'Heloisa sorrindo enquanto borda um bastidor no atelier, com pinturas na parede ao fundo',
+    ritmo: 'Aula de 2 horas',
     fotos: [
       'Heloisa sorrindo enquanto borda um bastidor, no atelier, com pinturas na parede ao fundo',
       'Detalhe do bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas',
@@ -221,6 +222,9 @@ export const turmas: Turma[] = [
   { curso: 'pintura-em-tela-infantil', dia: 'Quinta à tarde', horario: '13h30 às 16h30' },
   { curso: 'desenho-e-aquarela-para-criancas', dia: 'Segunda à noite', horario: '18h30 às 20h30' },
   { curso: 'desenho-e-aquarela-para-criancas', dia: 'Quinta à noite', horario: '18h30 às 20h30' },
+  { curso: 'bordado-livre', dia: 'Terça à noite', horario: '18h30 às 20h30' },
+  { curso: 'bordado-livre', dia: 'Quarta à noite', horario: '18h30 às 20h30' },
+  { curso: 'bordado-livre', dia: 'Sábado de manhã', horario: '9h às 11h' },
   { curso: 'pintura-em-tela', dia: 'Terça à noite', horario: '18h30 às 21h30' },
   { curso: 'pintura-em-tela', dia: 'Quarta de manhã', horario: '8h às 11h' },
   { curso: 'pintura-em-tela', dia: 'Quarta à tarde', horario: '13h30 às 16h30' },
