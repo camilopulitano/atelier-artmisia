@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Destaque from '../components/Destaque.astro';
-import Preencher from '../components/Preencher.astro';
 import Oficinas from '../components/Oficinas.astro';
 import { TEXTOS, semMarcas } from '../content/textos';
 import vinho1 from '../assets/oficinas/pintura-e-vinho-1.jpg';
@@ -44,18 +43,15 @@ const { tipos } = TEXTOS.oficinas;
       <h2 id="titulo-ja-feitas" class="titulo-secao"><Destaque texto={TEXTOS.oficinas.jaFeitas} /></h2>
       <ul class="grade" role="list">
         {
-          tipos.map((t) => (
+          // Só aparecem as oficinas que já têm foto; as outras entram quando as fotos chegarem.
+          tipos.filter((t) => fotos[t]).map((t) => (
             <li class="cartao oficina">
               <div class="midia">
-                {fotos[t] ? (
-                  <div class="fotos">
-                    {fotos[t].map((f) => (
-                      <Image src={f.src} alt={f.alt} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 360px" quality={76} format="webp" loading="lazy" />
-                    ))}
-                  </div>
-                ) : (
-                  <Preencher o="fotos e vídeo desta oficina" />
-                )}
+                <div class="fotos">
+                  {fotos[t].map((f) => (
+                    <Image src={f.src} alt={f.alt} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 360px" quality={76} format="webp" loading="lazy" />
+                  ))}
+                </div>
               </div>
               <h3>{t}</h3>
             </li>
