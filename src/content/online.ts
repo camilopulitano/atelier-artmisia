@@ -1,4 +1,6 @@
+import type { ImageMetadata } from 'astro';
 import { professores } from './professores';
+import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
  * Aulas online e cursos gravados (Camilo, 12/10/2026).
@@ -25,6 +27,9 @@ export interface CursoOnline {
   emBreve?: boolean;
   /** Página própria do curso (o botão leva para lá em vez do WhatsApp). */
   link?: string;
+  /** Capa do curso (aparece no cartão da página de aulas online). */
+  capa?: ImageMetadata;
+  capaAlt?: string;
   /** Dia da semana da turma. Ex.: "Segunda-feira". */
   dia?: string;
   /** Ex.: "19h às 21h". */
@@ -57,6 +62,9 @@ export const cursosOnline: CursoOnline[] = [
     professor: 'ana-quintanas',
     formato: 'gravado',
     link: 'https://anaquintanas.netlify.app/',
+    // Capa enviada pelo Camilo (10/11/2026).
+    capa: capaOleoGravado,
+    capaAlt: 'Ana Quintanas, de óculos e avental, abrindo com as mãos a janela de um mural pintado na parede, com colinas, ciprestes e montanhas ao fundo',
   },
   { slug: 'anime-gravado-edison', nome: 'Anime', professor: 'edison-marsan', formato: 'gravado', emBreve: true },
   { slug: 'acrilica-criancas-camilo', nome: 'Pintura em acrílica', professor: 'camilo-pulitano', publico: 'Crianças de 7 a 12 anos', formato: 'turma' },
