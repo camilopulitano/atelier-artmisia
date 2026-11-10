@@ -107,7 +107,7 @@ export const professores: Professor[] = [
     artigo: 'a',
     papel: 'Pedagoga e professora de arte para crianças',
     resumo: 'Formada em Pedagogia em 2012; na pintura desde 2023.',
-    ensina: ['Iniciação às Artes', 'Pintura em Tela Infantil'],
+    ensina: ['Iniciação Artística', 'Pintura em Tela Infantil'],
     tecnicas: ['Pintura'],
     desde: 2023,
     retratoAlt: 'Fabiana de Zorzi sorrindo no atelier, segurando suas pinturas da bailarina e dos livros com rosa',

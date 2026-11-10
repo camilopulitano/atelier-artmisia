@@ -9,7 +9,8 @@ import capaBordado from '../assets/cursos/bordado-livre.jpg';
 
 /**
  * Cursos e turmas. Nomes, idades e textos enviados pela Ana (11/10/2026).
- * Sem preço: horários, valores e vagas são passados pelo WhatsApp.
+ * Horários, duração e valor publicados a pedido do Camilo (10/11/2026) nos cursos
+ * que já têm; os outros seguem pelo WhatsApp.
  *
  * A ordem da lista é a ordem da página de aulas e da home.
  */
@@ -43,6 +44,10 @@ export interface Curso {
    * na ordem desta lista; o build falha se faltar algum.
    */
   fotos?: string[];
+  /** Frequência e duração da aula. Ex.: "1 vez por semana, aula de 2 horas". */
+  ritmo?: string;
+  /** Valor, como o atelier informa. Ex.: "R$ 180". */
+  valor?: string;
 }
 
 export type SituacaoTurma = 'vagas' | 'espera';
@@ -67,16 +72,18 @@ export interface Turma {
 export const cursos: Curso[] = [
   {
     slug: 'iniciacao-as-artes',
-    nome: 'Iniciação às Artes',
+    nome: 'Iniciação Artística',
     professor: 'fabiana-de-zorzi',
     idade: 'de 4 a 7 anos',
     publico: ['criancas'],
     resumo:
-      'Um primeiro contato com a arte por meio de atividades como desenho, pintura, colagem e exploração de cores, formas e materiais.',
+      'Uma iniciação a todo tipo de arte: desenho, pintura, colagem, argila e exploração de cores, formas e materiais.',
     descricao: [
-      'Um primeiro contato com a arte por meio de atividades como desenho, pintura, colagem e exploração de cores, formas e materiais. A proposta é desenvolver a coordenação motora, a criatividade e a expressão das crianças de maneira lúdica, respeitando sua idade.',
+      'Uma iniciação a todo tipo de arte: desenho, pintura, colagem, atividades com argila e exploração de cores, formas e materiais. A proposta é desenvolver a coordenação motora, a criatividade e a expressão das crianças de maneira lúdica, respeitando sua idade.',
       'É um curso de experimentação artística, sem o foco específico na pintura em tela.',
     ],
+    ritmo: '1 vez por semana, aula de 2 horas',
+    valor: 'R$ 180',
     capa: capaIniciacao,
     capaAlt: 'Menina de cabelo cacheado sorrindo na mesa da aula, com lápis de cor e um cavalete com pintura ao fundo',
   },
@@ -89,7 +96,9 @@ export const cursos: Curso[] = [
     resumo: 'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição.',
     descricao: [
       'As crianças aprendem os primeiros passos da pintura em tela, explorando cores, misturas, pincéis e composição. As propostas são adaptadas à faixa etária, com acompanhamento durante a criação dos trabalhos e espaço para desenvolver a própria criatividade.',
+      'A aula tem 3 horas e é focada na pintura em tela, com atividades extras e estudo da história da arte durante a aula.',
     ],
+    ritmo: 'Aula de 3 horas',
     capa: capaPinturaInfantil,
     capaAlt: 'Menino de pé ao lado do cavalete, com a pintura que fez de um caminhão na estrada',
   },
@@ -180,12 +189,19 @@ export const cursos: Curso[] = [
 ];
 
 /**
- * Turmas com dia e horário. Hoje vazia: o atelier passa horários, valores e
- * vagas pelo WhatsApp, e cada curso mostra o botão "Consultar turmas pelo WhatsApp".
- * Se um dia quiserem publicar os horários, é só preencher aqui (um curso pode
- * ter várias turmas: repita a linha com o mesmo `curso`) e a tabela aparece sozinha.
+ * Turmas com dia e horário (Camilo, 10/11/2026). Um curso pode ter várias turmas:
+ * repita a linha com o mesmo `curso`. Curso sem turma aqui mostra só o botão
+ * "Consultar turmas pelo WhatsApp".
  */
-export const turmas: Turma[] = [];
+export const turmas: Turma[] = [
+  { curso: 'iniciacao-as-artes', dia: 'Terça de manhã', horario: '9h às 11h' },
+  { curso: 'iniciacao-as-artes', dia: 'Terça à tarde', horario: '13h30 às 15h30' },
+  { curso: 'iniciacao-as-artes', dia: 'Sexta de manhã', horario: '9h às 11h' },
+  { curso: 'pintura-em-tela-infantil', dia: 'Segunda de manhã', horario: '8h às 11h' },
+  { curso: 'pintura-em-tela-infantil', dia: 'Quarta à tarde', horario: '13h30 às 16h30' },
+  { curso: 'pintura-em-tela-infantil', dia: 'Quinta de manhã', horario: '8h às 11h' },
+  { curso: 'pintura-em-tela-infantil', dia: 'Quinta à tarde', horario: '13h30 às 16h30' },
+];
 
 /** Falha no build se um curso apontar para professor que não existe, ou uma turma para curso que não existe. */
 function validar(): void {

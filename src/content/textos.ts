@@ -80,7 +80,7 @@ export const TEXTOS = {
   aulas: {
     titulo: '*Aulas*',
     intro: 'Pintura e desenho para crianças, adolescentes e adultos, com aulas que respeitam o ritmo de cada aluno.',
-    consulta: 'Pelo WhatsApp',
+    consulta: 'Nos cursos abaixo; o que faltar, pelo WhatsApp',
     /** Texto da Ana: horários e inscrições. */
     horarios: 'Para consultar os horários, valores e a disponibilidade de vagas, entre em contato com o ateliê pelo WhatsApp.',
     /** Ana, 12/10/2026. */
