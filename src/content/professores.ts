@@ -56,14 +56,7 @@ export const professores: Professor[] = [
     retratoAlt: 'Ana Quintanas sorrindo, de óculos e avental do Atelier Artmisia, segurando um pincel e uma paleta de tintas',
     foco: '50% 25%',
     trabalhos: [
-      { alt: 'Pessoa de camiseta escura pintando no cavalete, com uma tela de árvore amarela, céu azul e campo ao fundo' },
-      { alt: 'Aluno de cabelo cacheado segurando uma tela grande com leões ao redor de uma figura de túnica azul, diante de uma parede de pedra' },
-      { alt: 'Mulher de blusa preta e calça jeans segurando uma tela com um papagaio vermelho, azul e verde num galho' },
       { alt: 'Jovem de óculos segurando uma tela com uma casinha de telhado marrom, cerca de madeira e flores coloridas' },
-      { alt: 'Senhora de cabelo grisalho segurando uma pintura de estrada lilás, com um ipê rosa e uma casa vermelha ao fundo' },
-      { alt: 'Menina de avental segurando uma natureza-morta com garrafa de vinho, uvas, pêssegos e uma taça' },
-      { alt: 'Ana segurando uma tela horizontal com uma igreja branca cercada de coqueiros, à beira-mar, com barcos na água' },
-      { alt: 'Aluna de cabelo cacheado pintando com pincel fino uma árvore de flores roxas sobre um céu azul' },
     ],
     bio: [
       'Artista plástica, professora de pintura e fundadora do Atelier Artmisia, Ana iniciou sua trajetória na pintura em 2015. Desde então, buscou formação com diferentes artistas e técnicas, construindo uma trajetória marcada pelo estudo constante e pelo desejo de ensinar.',
@@ -86,8 +79,8 @@ export const professores: Professor[] = [
     tecnicas: ['Grafite', 'Realismo em preto e branco', 'Realismo colorido'],
     desde: 2018,
     noAtelierDesde: 2025,
-    retratoAlt: 'Edison Marsan de camiseta preta, inclinado sobre a mesa da aula, acompanhando o desenho de um aluno',
-    foco: '62% 22%',
+    retratoAlt: 'Edison Marsan sorrindo de leve, de camisa polo preta, diante de uma pintura de paisagem com montanhas e uma casa de telhado vermelho',
+    foco: '50% 33%',
     trabalhos: [
       { alt: 'Desenho realista em grafite, em preto e branco, de um rosto com maquiagem de palhaço, com lápis ao lado da folha' },
       { alt: 'Desenho colorido a lápis de uma menina de tranças e gola branca, sobre uma mesa de madeira' },
@@ -139,8 +132,8 @@ export const professores: Professor[] = [
     resumo: 'Também dá aulas online, com alunos dos Estados Unidos e da Austrália.',
     ensina: ['Desenho e Aquarela para Crianças'],
     tecnicas: ['Desenho', 'Aquarela', 'Óleo', 'Acrílica'],
-    retratoAlt: 'Camilo Pulitano sorrindo no atelier, de camiseta preta, segurando o estudo pintado do rosto de um homem idoso',
-    foco: '50% 18%',
+    retratoAlt: 'Camilo Pulitano sorrindo no atelier, de barba e camiseta preta, segurando uma paleta de aquarela e o retrato em aquarela de uma mulher de cabelo cacheado',
+    foco: '50% 25%',
     trabalhos: [
       { alt: 'Estudo a óleo do rosto de um homem idoso de barba branca, com pinceladas largas em tons terrosos e cinza' },
       { alt: 'Camilo segurando uma pintura de um casal visto de costas, de frente para o mar azul-claro' },

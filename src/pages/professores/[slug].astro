@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import TurmasTabela from '../../components/TurmasTabela.astro';
 import { professores, retratoDe, rotuloNoAtelier, trabalhosDe, type Professor } from '../../content/professores';
 import { cursosDe, idadeRotulo, turmasDe } from '../../content/cursos';
+import { imagemDe, obras } from '../../content/obras';
 import { TEXTOS } from '../../content/textos';
 import { cursosOnlineDe, FORMATOS_ONLINE } from '../../content/online';
 import { linkProfessor } from '../../config/contato';
@@ -18,7 +19,11 @@ interface Props {
 }
 const { professor: p } = Astro.props;
 const retrato = retratoDe(p);
-const trabalhos = trabalhosDe(p);
+// Carrossel: fotos do professor, seguidas das obras dele (as mesmas da página Obras).
+const trabalhos = [
+  ...trabalhosDe(p),
+  ...obras.filter((o) => o.autor === p.slug).map((o) => ({ src: imagemDe(o), alt: o.alt })),
+];
 const cursos = cursosDe(p.slug);
 const online = cursosOnlineDe(p.slug);
 const outros = professores.filter((o) => o.slug !== p.slug);
