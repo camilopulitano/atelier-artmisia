@@ -85,7 +85,7 @@ export const cursos: Curso[] = [
       'É um curso de experimentação artística, sem o foco específico na pintura em tela.',
     ],
     ritmo: '1 vez por semana, aula de 2 horas',
-    valor: 'R$ 180',
+    valor: 'R$ 180 por mês',
     capa: capaIniciacao,
     capaAlt: 'Menina de cabelo cacheado sorrindo na mesa da aula, com lápis de cor e um cavalete com pintura ao fundo',
   },
@@ -101,6 +101,7 @@ export const cursos: Curso[] = [
       'A aula tem 3 horas e é focada na pintura em tela, com atividades extras e estudo da história da arte durante a aula.',
     ],
     ritmo: 'Aula de 3 horas',
+    valor: 'R$ 250 por mês',
     capa: capaPinturaInfantil,
     capaAlt: 'Menino de pé ao lado do cavalete, com a pintura que fez de um caminhão na estrada',
   },
@@ -116,6 +117,7 @@ export const cursos: Curso[] = [
       'Nessa turma os alunos têm a chance de aprender desde o nível básico até o avançado, com técnicas de pintura a óleo ou acrílica.',
     ],
     ritmo: 'Aula de 3 horas',
+    valor: 'R$ 250 por mês',
     capa: capaPinturaEmTela,
     capaAlt: 'Aluna de cabelo ondulado pintando um veleiro sobre um mar dourado, no cavalete do atelier',
     fotos: [
@@ -159,6 +161,7 @@ export const cursos: Curso[] = [
       'Aulas voltadas para técnicas de desenho realista ou de construção de anime. Elas trabalham os fundamentos do desenho, como traço, proporção, perspectiva, luz e sombra, com orientação de acordo com os interesses e o nível de experiência de cada aluno.',
     ],
     ritmo: 'Aula de 2 horas',
+    valor: 'R$ 250 por mês',
     capa: capaDesenhoRealista,
     capaAlt: 'Desenho colorido de um personagem de anime de cabelo vermelho, com chamas, feito no atelier',
     // Ordem pedida pelo Camilo (10/11/2026). O arquivo -1 (turma em volta da mesa) saiu do carrossel;
