@@ -163,7 +163,7 @@ export const cursos: Curso[] = [
     capaAlt: 'Desenho colorido de um personagem de anime de cabelo vermelho, com chamas, feito no atelier',
     // Ordem pedida pelo Camilo (10/11/2026). O arquivo -1 (turma em volta da mesa) saiu do carrossel;
     // o -2 agora é a foto nova do Edison com o aluno; o -10 é a foto nova do aluno desenhando.
-    fotosOrdem: [2, 10, 3, 4, 5, 6, 7, 8, 9],
+    fotosOrdem: [2, 10, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13],
     fotos: [
       'Edison inclinado sobre a mesa, ajudando um aluno que olha para ele, com o estojo aberto de lápis de cor à frente',
       'Aluno de camiseta azul e rosa concentrado, com a cabeça baixa sobre a folha, desenhando',
@@ -174,6 +174,9 @@ export const cursos: Curso[] = [
       'Retrato realista de uma mulher sorrindo, feito com lápis de cor, ao lado da foto de referência quadriculada',
       'Aluna sorrindo no atelier, segurando o desenho realista de uma boca feito a grafite, com a foto de referência quadriculada embaixo',
       'Aluno sorrindo no atelier, segurando o desenho realista de um olho verde feito com lápis de cor, abaixo da foto de referência quadriculada',
+      'Desenho realista de um olho feito a grafite, abaixo da foto de referência quadriculada em preto e branco',
+      'Mãos de um aluno desenhando um nariz com lápis de cor, ao lado da foto de referência quadriculada e de uma caixa de lápis de cor',
+      'Vários desenhos espalhados sobre a mesa, entre retratos realistas a grafite e personagens de anime coloridos',
     ],
   },
   {
