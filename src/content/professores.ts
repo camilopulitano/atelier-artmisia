@@ -67,7 +67,6 @@ export const professores: Professor[] = [
     ],
     citacoes: [],
     links: [
-      { rotulo: 'Portfólio da Ana', url: 'https://site-anamorais.vercel.app' },
       { rotulo: 'Instagram: @ana.quintanas', url: 'https://www.instagram.com/ana.quintanas/' },
     ],
   },
@@ -98,7 +97,6 @@ export const professores: Professor[] = [
       'Acredito que a arte é para todos. Mais do que dom, é a dedicação e a vontade de aprender que fazem alguém evoluir.',
     ],
     links: [
-      { rotulo: 'Portfólio do Edison', url: 'https://portfolio-edison-marsan.vercel.app' },
       { rotulo: 'Instagram: @edisonmarsanart', url: 'https://www.instagram.com/edisonmarsanart/' },
     ],
   },
@@ -151,7 +149,6 @@ export const professores: Professor[] = [
     ],
     citacoes: [],
     links: [
-      { rotulo: 'Portfólio do Camilo', url: 'https://portfolio-camilo-pulitano.vercel.app' },
       { rotulo: 'Canal no YouTube: @camilopulitano', url: 'https://www.youtube.com/@camilopulitano' },
       { rotulo: 'Instagram: @camilopulitano', url: 'https://www.instagram.com/camilopulitano/' },
     ],
