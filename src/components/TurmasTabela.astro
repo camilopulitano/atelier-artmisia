@@ -22,15 +22,18 @@ const whatsapp = linkTurma(curso, professor);
 ---
 
 {
-  (curso.ritmo || curso.valor || turmas.length > 0) && (
+  (curso.ritmo || curso.valor || curso.maxAlunos || turmas.length > 0) && (
     <div class="turmas">
-      {(curso.ritmo || curso.valor) && (
+      {(curso.ritmo || curso.valor || curso.maxAlunos) && (
         <dl class="info">
           {curso.ritmo && (
             <div><dt>Aulas</dt><dd>{curso.ritmo}</dd></div>
           )}
           {curso.valor && (
             <div><dt>Valor</dt><dd>{curso.valor}</dd></div>
+          )}
+          {curso.maxAlunos && (
+            <div><dt>Turma</dt><dd>Máximo de {curso.maxAlunos} alunos</dd></div>
           )}
         </dl>
       )}
