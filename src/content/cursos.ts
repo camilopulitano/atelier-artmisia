@@ -166,6 +166,8 @@ export const cursos: Curso[] = [
       'Aluno colorindo um desenho do Homem-Aranha com lápis de cor',
       'Detalhe de uma mão desenhando cerejas com lápis de cor',
       'Estojo aberto com dezenas de lápis de cor sobre a mesa de aula',
+      'Retrato realista de uma mulher sorrindo, feito com lápis de cor, ao lado da foto de referência quadriculada',
+      'Aluna sorrindo no atelier, segurando o desenho realista de uma boca feito a grafite, com a foto de referência quadriculada embaixo',
     ],
   },
   {
