@@ -55,9 +55,7 @@ export const professores: Professor[] = [
     fundadora: true,
     retratoAlt: 'Ana Quintanas sorrindo, de óculos e avental do Atelier Artmisia, segurando um pincel e uma paleta de tintas',
     foco: '50% 25%',
-    trabalhos: [
-      { alt: 'Jovem de óculos segurando uma tela com uma casinha de telhado marrom, cerca de madeira e flores coloridas' },
-    ],
+    trabalhos: [],
     bio: [
       'Artista plástica, professora de pintura e fundadora do Atelier Artmisia, Ana iniciou sua trajetória na pintura em 2015. Desde então, buscou formação com diferentes artistas e técnicas, construindo uma trajetória marcada pelo estudo constante e pelo desejo de ensinar.',
       'Sua pintura tem forte ligação com o naturalismo, mas sua curiosidade pela arte a levou a explorar diferentes linguagens e estilos, ampliando também sua forma de ensinar.',
@@ -110,7 +108,12 @@ export const professores: Professor[] = [
     desde: 2023,
     retratoAlt: 'Fabiana de Zorzi sorrindo no atelier, segurando suas pinturas da bailarina e dos livros com rosa',
     foco: '50% 10%',
-    trabalhos: [{ alt: 'Fabiana ao lado de um retrato de Frida Kahlo em cores vivas, com coroa de flores e fundo azul-turquesa' }],
+    trabalhos: [
+      { alt: 'Pintura a óleo de três livros empilhados com uma rosa cor de pêssego e folhas verdes por cima, em tinta bem texturizada' },
+      { alt: 'Pintura a óleo de um farol de listras vermelhas e brancas à beira-mar, com dois barcos na areia e céu de nuvens' },
+      { alt: 'Pintura a óleo de uma arara-vermelha de asas azuis em um galho, sobre fundo de folhagem verde e amarela' },
+      { alt: 'Pintura a óleo de uma bailarina de costas, de tutu branco e sapatilhas de ponta, sobre fundo de nuvens cinza e azul' },
+    ],
     bio: [
       'Formada em Pedagogia desde 2012, com pós-graduação em Neuropsicopedagogia e licenciatura em Artes Visuais, Fabiana também atuou na Rede Municipal de Ensino, construindo sua trajetória profissional a partir da educação e do desenvolvimento humano.',
       'Desde a infância, demonstrava curiosidade, sensibilidade e interesse pelas artes e pelas manualidades. No entanto, naquele período, o acesso ao conhecimento e às possibilidades de aprendizagem artística era limitado.',
