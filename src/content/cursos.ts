@@ -141,6 +141,7 @@ export const cursos: Curso[] = [
     ],
     capa: capaDesenhoInfantil,
     capaAlt: 'Aluno de camiseta do Atelier Artmisia pintando com aquarela, com a paleta e um copo de água sobre a mesa',
+    ritmo: 'Aula de 2 horas',
     fotos: [
       'Camilo Pulitano de pé na cabeceira da mesa, explicando a atividade para a turma de crianças',
       'Dois meninos desenhando lado a lado na mesa do atelier, com pinturas penduradas na parede ao fundo',
@@ -218,6 +219,8 @@ export const turmas: Turma[] = [
   { curso: 'pintura-em-tela-infantil', dia: 'Quarta à tarde', horario: '13h30 às 16h30' },
   { curso: 'pintura-em-tela-infantil', dia: 'Quinta de manhã', horario: '8h às 11h' },
   { curso: 'pintura-em-tela-infantil', dia: 'Quinta à tarde', horario: '13h30 às 16h30' },
+  { curso: 'desenho-e-aquarela-para-criancas', dia: 'Segunda à noite', horario: '18h30 às 20h30' },
+  { curso: 'desenho-e-aquarela-para-criancas', dia: 'Quinta à noite', horario: '18h30 às 20h30' },
   { curso: 'pintura-em-tela', dia: 'Terça à noite', horario: '18h30 às 21h30' },
   { curso: 'pintura-em-tela', dia: 'Quarta de manhã', horario: '8h às 11h' },
   { curso: 'pintura-em-tela', dia: 'Quarta à tarde', horario: '13h30 às 16h30' },
