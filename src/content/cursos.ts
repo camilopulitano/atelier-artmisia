@@ -142,6 +142,7 @@ export const cursos: Curso[] = [
     capa: capaDesenhoInfantil,
     capaAlt: 'Aluno de camiseta do Atelier Artmisia pintando com aquarela, com a paleta e um copo de água sobre a mesa',
     ritmo: 'Aula de 2 horas',
+    valor: 'R$ 250 por mês',
     fotos: [
       'Camilo Pulitano de pé na cabeceira da mesa, explicando a atividade para a turma de crianças',
       'Dois meninos desenhando lado a lado na mesa do atelier, com pinturas penduradas na parede ao fundo',
@@ -198,6 +199,7 @@ export const cursos: Curso[] = [
     capa: capaBordado,
     capaAlt: 'Heloisa sorrindo enquanto borda um bastidor no atelier, com pinturas na parede ao fundo',
     ritmo: 'Aula de 2 horas',
+    valor: 'R$ 220 por mês',
     fotos: [
       'Heloisa sorrindo enquanto borda um bastidor, no atelier, com pinturas na parede ao fundo',
       'Detalhe do bastidor bordado com dois gatinhos, um ramo de flores e os nomes Ana e Lucas',
