@@ -44,8 +44,8 @@ export interface Curso {
    * na ordem desta lista; o build falha se faltar algum.
    */
   fotos?: string[];
-  /** Número do arquivo da primeira foto (padrão 1). Serve para tirar fotos do começo sem renomear arquivos. */
-  fotosDesde?: number;
+  /** Números dos arquivos na ordem em que aparecem (padrão 1, 2, 3...). Serve para tirar ou reordenar fotos sem renomear arquivos. */
+  fotosOrdem?: number[];
   /** Frequência e duração da aula. Ex.: "1 vez por semana, aula de 2 horas". */
   ritmo?: string;
   /** Valor, como o atelier informa. Ex.: "R$ 180". */
@@ -161,9 +161,12 @@ export const cursos: Curso[] = [
     ritmo: 'Aula de 2 horas',
     capa: capaDesenhoRealista,
     capaAlt: 'Desenho colorido de um personagem de anime de cabelo vermelho, com chamas, feito no atelier',
-    // Fotos 1 e 2 (turma em volta da mesa; Edison ajudando uma aluna) saíram do carrossel a pedido do Camilo (10/11/2026).
-    fotosDesde: 3,
+    // Ordem pedida pelo Camilo (10/11/2026). O arquivo -1 (turma em volta da mesa) saiu do carrossel;
+    // o -2 agora é a foto nova do Edison com o aluno; o -10 é a foto nova do aluno desenhando.
+    fotosOrdem: [2, 10, 3, 4, 5, 6, 7, 8, 9],
     fotos: [
+      'Edison inclinado sobre a mesa, ajudando um aluno que olha para ele, com o estojo aberto de lápis de cor à frente',
+      'Aluno de camiseta azul e rosa concentrado, com a cabeça baixa sobre a folha, desenhando',
       'Edison ao lado de um aluno, acompanhando o desenho com lápis de cor',
       'Aluno colorindo um desenho do Homem-Aranha com lápis de cor',
       'Detalhe de uma mão desenhando cerejas com lápis de cor',
@@ -254,7 +257,7 @@ const fotosAulas = import.meta.glob<{ default: ImageMetadata }>('../assets/aulas
 /** Fotos de aula do curso, com o texto alternativo. */
 export function fotosDe(curso: Curso): { src: ImageMetadata; alt: string }[] {
   return (curso.fotos ?? []).map((alt, i) => {
-    const n = (curso.fotosDesde ?? 1) + i;
+    const n = curso.fotosOrdem?.[i] ?? i + 1;
     const img = fotosAulas[`../assets/aulas/${curso.slug}-${n}.jpg`];
     if (!img) throw new Error(`[cursos] falta a foto src/assets/aulas/${curso.slug}-${n}.jpg`);
     return { src: img.default, alt };
