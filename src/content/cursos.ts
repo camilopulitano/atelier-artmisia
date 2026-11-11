@@ -119,7 +119,7 @@ export const cursos: Curso[] = [
     ritmo: '1 vez por semana, 3 horas de aula',
     valor: 'R$ 250 por mês',
     capa: capaPinturaEmTela,
-    capaAlt: 'Aluna de cabelo ondulado pintando um veleiro sobre um mar dourado, no cavalete do atelier',
+    capaAlt: 'Artista de óculos ajeitando na parede uma pintura de janela aberta para uma paisagem da Toscana, com ciprestes e um caminho entre os campos',
     // Fotos enviadas pelo Camilo (10/11/2026): das antigas ficou só o aluno de boné.
     fotos: [
       'Aluno de boné preto pintando uma tela no cavalete, concentrado',
