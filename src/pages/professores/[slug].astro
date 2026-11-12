@@ -35,7 +35,7 @@ const rotulosOnline: Record<string, string> = {
   gravado: 'Cursos gravados',
 };
 const formatos = [...new Set(online.map((c) => c.formato))];
-const rotuloOnline = formatos
+const rotuloOnline = online.length === 1 && online[0].rotulo ? online[0].rotulo : formatos
   .map((f) => rotulosOnline[f])
   .join(' e ')
   .replace(/^Aulas online e Aulas particulares$/, 'Aulas online e aulas particulares')
@@ -173,7 +173,7 @@ const jsonLd = {
               <li class="cartao curso">
                 <h3>{c.link ? <a href={c.link} target="_blank" rel="noopener">{c.nome}</a> : <a href="/online">{c.nome}</a>}</h3>
                 {c.publico && <p class="idade">{c.publico}</p>}
-                <p class="texto-suave">{FORMATOS_ONLINE[c.formato]}{c.emBreve ? ' · em breve' : ''}</p>
+                <p class="texto-suave">{c.rotulo ?? FORMATOS_ONLINE[c.formato]}{c.emBreve ? ' · em breve' : ''}</p>
                 {(c.dia || c.valor) && (
                   <p class="texto-suave">
                     {[c.dia && `${c.dia}${c.horario ? `, ${c.horario}` : ''}`, c.valor].filter(Boolean).join(' · ')}

@@ -52,6 +52,12 @@ export interface CursoOnline {
   valor?: string;
   /** Uma linha extra sobre o nível. Ex.: "Turma para iniciantes". */
   nivel?: string;
+  /** Substitui o nome do formato no rótulo do cartão. */
+  rotulo?: string;
+  /** Duas (ou mais) ofertas distintas dentro do mesmo cartão. Ex.: crianças e adultos. */
+  ofertas?: { titulo: string; texto: string }[];
+  /** Modalidades ensinadas. */
+  modalidades?: string[];
   /** Explicação do curso, em uma ou duas frases. */
   descricao?: string;
   /** Aviso de material. */
@@ -182,10 +188,23 @@ export const cursosOnline: CursoOnline[] = [
     botao: 'Quero me inscrever nas aulas ao vivo',
     link: linkWhatsApp('Olá! Vi no site do Atelier Artmisia as aulas online ao vivo de pintura com a Ana e gostaria de me inscrever. Tem vaga?'),
   },
-  { slug: 'acrilica-criancas-camilo', nome: 'Pintura em acrílica', professor: 'camilo-pulitano', publico: 'Crianças de 7 a 12 anos', formato: 'turma' },
-  { slug: 'desenho-camilo', nome: 'Desenho', professor: 'camilo-pulitano', publico: 'Crianças e adultos', formato: 'turma' },
-  { slug: 'aquarela-camilo', nome: 'Aquarela', professor: 'camilo-pulitano', publico: 'Crianças e adultos', formato: 'turma' },
-  { slug: 'oleo-particular-camilo', nome: 'Pintura a óleo', professor: 'camilo-pulitano', formato: 'particular' },
+  // Texto do Camilo (12/11/2026): um cartão só, com as duas ofertas dele bem separadas das da Ana.
+  {
+    slug: 'aulas-online-camilo',
+    nome: 'Aulas online de arte com o professor Camilo',
+    professor: 'camilo-pulitano',
+    formato: 'particular',
+    rotulo: 'Aulas online e aulas particulares',
+    ofertas: [
+      { titulo: 'Crianças', texto: 'Aulas on-line' },
+      { titulo: 'Adultos', texto: 'Aulas particulares' },
+    ],
+    modalidades: ['Desenho', 'Pintura em tela', 'Aquarela'],
+    descricao:
+      'O professor Camilo oferece aulas on-line para crianças e aulas particulares para adultos, incentivando a criatividade e a expressão artística em todas as idades.\n\nAs aulas particulares têm acompanhamento personalizado, de acordo com os interesses, o nível e o ritmo de aprendizado de cada aluno.',
+    botao: 'Falar com o Camilo sobre horários e valores',
+    link: linkWhatsApp('Olá! Vi no site do Atelier Artmisia as aulas online de arte com o professor Camilo e gostaria de saber horários, valores e como me inscrever.'),
+  },
 ];
 
 function validar(): void {

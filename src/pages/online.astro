@@ -51,7 +51,7 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
               <h2 id={`online-${p.slug}`}>Com {p.artigo === 'a' ? 'a' : 'o'} <em>{p.primeiroNome}</em></h2>
               <ul class="cursos" role="list">
                 {cursosOnlineDe(p.slug).map((c) => (
-                  <li class:list={['curso', relatosDoCurso[c.slug] && 'curso--largo']}>
+                  <li class:list={['curso', (relatosDoCurso[c.slug] || c.ofertas) && 'curso--largo']}>
                     {c.capa && (
                       <Image
                         src={c.capa}
@@ -65,11 +65,19 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                         class="capa"
                       />
                     )}
-                    <span class="formato">{FORMATOS_ONLINE[c.formato]}{c.emBreve && <span class="em-breve">Em breve</span>}</span>
+                    <span class="formato">{c.rotulo ?? FORMATOS_ONLINE[c.formato]}{c.emBreve && <span class="em-breve">Em breve</span>}</span>
                     <h3>{c.nome}</h3>
                     {c.publico && <p class="publico">{c.publico}</p>}
                     {c.nivel && <p class="nivel">{c.nivel}</p>}
-                    {c.descricao && <p class="descricao">{c.descricao}</p>}
+                    {c.ofertas && (
+                      <ul class="ofertas" role="list">
+                        {c.ofertas.map((o) => (
+                          <li><span>{o.titulo}</span><strong>{o.texto}</strong></li>
+                        ))}
+                      </ul>
+                    )}
+                    {c.modalidades && <p class="nivel">Modalidades: {c.modalidades.join(', ')}.</p>}
+                    {c.descricao && c.descricao.split('\n\n').map((par) => <p class="descricao">{par}</p>)}
                     {(c.dia || c.ritmo || c.valor) && (
                       <dl class="detalhes">
                         {c.dia && (<div><dt>Horário</dt><dd>{c.dia}{c.horario ? `, ${c.horario}` : ''}</dd></div>)}
@@ -256,6 +264,32 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     object-fit: contain;
     border-radius: 4px;
     background: var(--secao);
+  }
+
+  .ofertas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 6px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ofertas li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 16px;
+    border-radius: var(--raio);
+    background: var(--secao);
+  }
+
+  .ofertas span {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
   }
 
   .descricao {
