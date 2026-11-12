@@ -12,6 +12,16 @@ import fotoDepoimento8 from '../assets/online/depoimento-aluna-8.jpg';
 import fotoDepoimento9 from '../assets/online/depoimento-aluna-9.jpg';
 import fotoDepoimento10 from '../assets/online/depoimento-aluna-10.jpg';
 import fotoDepoimento11 from '../assets/online/depoimento-aluna-11.jpg';
+import fotoCamilo1 from '../assets/online/camilo-1.jpg';
+import fotoCamilo2 from '../assets/online/camilo-2.jpg';
+import fotoCamilo3 from '../assets/online/camilo-3.jpg';
+import fotoCamilo4 from '../assets/online/camilo-4.jpg';
+import fotoCamilo5 from '../assets/online/camilo-5.jpg';
+import fotoCamilo6 from '../assets/online/camilo-6.jpg';
+import fotoCamilo7 from '../assets/online/camilo-7.jpg';
+import fotoCamilo8 from '../assets/online/camilo-8.jpg';
+import fotoCamilo9 from '../assets/online/camilo-9.jpg';
+import fotoCamilo10 from '../assets/online/camilo-10.jpg';
 import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
@@ -56,6 +66,8 @@ export interface CursoOnline {
   rotulo?: string;
   /** Duas (ou mais) ofertas distintas dentro do mesmo cartão. Ex.: crianças e adultos. */
   ofertas?: { titulo: string; texto: string }[];
+  /** Trabalhos de alunos, mostrados em carrossel no cartão. */
+  fotos?: { src: ImageMetadata; alt: string }[];
   /** Modalidades ensinadas. */
   modalidades?: string[];
   /** Explicação do curso, em uma ou duas frases. */
@@ -200,6 +212,18 @@ export const cursosOnline: CursoOnline[] = [
       { titulo: 'Adultos', texto: 'Aulas particulares' },
     ],
     modalidades: ['Desenho', 'Pintura em tela', 'Aquarela'],
+    fotos: [
+      { src: fotoCamilo1, alt: 'Aluno e professora de óculos segurando trabalhos: um Luffy em acrílica, uma capivara com uma tangerina na cabeça e uma aquarela de ramos de limão em vaso listrado' },
+      { src: fotoCamilo2, alt: 'Aluna de óculos sentada, segurando uma pintura de uma personagem de cabelo castanho e blusa azul, com outras telas apoiadas na mesa ao fundo' },
+      { src: fotoCamilo3, alt: 'Pintura de duas orcas saindo da água diante de um sol laranja e amarelo, em um mar azul com reflexos rosados' },
+      { src: fotoCamilo4, alt: 'Aquarela de ramos de limão em um vaso azul listrado, sobre uma mesa de listras azuis' },
+      { src: fotoCamilo5, alt: 'Aquarela de ramos de folhas em azul-esverdeado, com folhas mais claras ao fundo' },
+      { src: fotoCamilo6, alt: 'Aluna de óculos segurando uma aquarela de uma praia com onda, mar verde e montanhas azuis sob nuvens' },
+      { src: fotoCamilo7, alt: 'Aluna sorrindo e mostrando cinco pinturas pequenas: Mickey, Bob Esponja, Minnie e outros personagens' },
+      { src: fotoCamilo8, alt: 'Menino sorrindo e segurando uma tela de um ovo frito sorridente sobre fundo vermelho e amarelo' },
+      { src: fotoCamilo9, alt: 'Aluna ao lado de uma pintura de uma personagem de cabelo vinho e blusa azul sobre fundo verde' },
+      { src: fotoCamilo10, alt: 'Pintura de um pinguim sorridente de cachecol azul e branco, sob neve, sobre fundo azul' },
+    ],
     descricao:
       'O professor Camilo oferece aulas on-line para crianças e aulas particulares para adultos, incentivando a criatividade e a expressão artística em todas as idades.\n\nAs aulas particulares têm acompanhamento personalizado, de acordo com os interesses, o nível e o ritmo de aprendizado de cada aluno.',
     botao: 'Falar com o Camilo sobre horários e valores',

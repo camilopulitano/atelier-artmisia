@@ -4,6 +4,7 @@ import grupoZoom from '../assets/online/grupo-zoom.jpg';
 import grupoLaranja from '../assets/online/grupo-laranja.jpg';
 import grupoVaca from '../assets/online/grupo-vaca.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FotosCurso from '../components/FotosCurso.astro';
 import Depoimentos from '../components/Depoimentos.astro';
 import Destaque from '../components/Destaque.astro';
 import { cursosOnline, cursosOnlineDe, depoimentosDe, FORMATOS_ONLINE } from '../content/online';
@@ -77,6 +78,7 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                       </ul>
                     )}
                     {c.modalidades && <p class="nivel">Modalidades: {c.modalidades.join(', ')}.</p>}
+                    {c.fotos && <FotosCurso titulo={`Trabalhos dos alunos de ${p.primeiroNome}`} fotos={c.fotos} />}
                     {c.descricao && c.descricao.split('\n\n').map((par) => <p class="descricao">{par}</p>)}
                     {(c.dia || c.ritmo || c.valor) && (
                       <dl class="detalhes">

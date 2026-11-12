@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  titulo: string;
+  fotos: { src: ImageMetadata; alt: string }[];
+}
+const { titulo, fotos } = Astro.props;
+---
+
+<div class="galeria" role="region" aria-roledescription="carrossel" aria-label={titulo}>
+  <p class="titulo-galeria">{titulo}</p>
+  <ul class="slides" role="list">
+    {
+      fotos.map((f, i) => (
+        <li class="slide" hidden={i > 0}>
+          <Image src={f.src} alt={f.alt} widths={[480, 720, 960]} sizes="(max-width: 700px) 90vw, 480px" quality={78} format="webp" loading="lazy" />
+        </li>
+      ))
+    }
+  </ul>
+  {
+    fotos.length > 1 && (
+      <div class="controles">
+        <button type="button" class="seta" data-anterior aria-label="Foto anterior">←</button>
+        <span class="contador" aria-live="polite"><span data-atual>1</span> / {fotos.length}</span>
+        <button type="button" class="seta" data-proximo aria-label="Próxima foto">→</button>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.galeria').forEach((g) => {
+    const slides = Array.from(g.querySelectorAll<HTMLElement>('.slide'));
+    const atualEl = g.querySelector<HTMLElement>('[data-atual]');
+    let atual = 0;
+    const mostrar = (i: number) => {
+      atual = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => (s.hidden = n !== atual));
+      if (atualEl) atualEl.textContent = String(atual + 1);
+    };
+    g.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('[data-anterior], [data-proximo]');
+      if (b) mostrar(atual + (b.hasAttribute('data-proximo') ? 1 : -1));
+    });
+  });
+</script>
+
+<style>
+  .galeria {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 8px 0;
+    padding: clamp(14px, 2vw, 20px);
+    border-radius: var(--raio);
+    background: var(--secao);
+  }
+
+  .titulo-galeria {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .slides {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .slide[hidden] {
+    display: none;
+  }
+
+  .slide :global(img) {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    max-height: 520px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .controles {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .contador {
+    font-size: 15px;
+    color: var(--texto-suave);
+  }
+
+  .seta {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--texto-suave);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--texto);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .seta:hover {
+    background: var(--fundo);
+  }
+</style>
