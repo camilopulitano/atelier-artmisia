@@ -11,6 +11,7 @@ import fotoDepoimento7 from '../assets/online/depoimento-aluna-7.jpg';
 import fotoDepoimento8 from '../assets/online/depoimento-aluna-8.jpg';
 import fotoDepoimento9 from '../assets/online/depoimento-aluna-9.jpg';
 import fotoDepoimento10 from '../assets/online/depoimento-aluna-10.jpg';
+import fotoDepoimento11 from '../assets/online/depoimento-aluna-11.jpg';
 import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
@@ -63,6 +64,8 @@ export interface CursoOnline {
 export interface Depoimento {
   /** Nome como a aluna quer aparecer. Vazio = "Aluna do curso online". */
   nome?: string;
+  /** Qual curso a pessoa fez. Aparece depois do nome. */
+  curso?: string;
   texto: string;
   foto?: ImageMetadata;
   fotoAlt?: string;
@@ -123,6 +126,16 @@ export const depoimentos: Depoimento[] = [
     foto2Alt: 'Yasmin ao ar livre, segurando duas telas: uma paisagem de campo amarelo com cerca e céu alaranjado, ao lado da imagem usada como referência',
     foto3: fotoDepoimento10,
     foto3Alt: 'Yasmin deitada na grama de uma praça, à noite, entre duas telas que pintou de um chapim azul e amarelo em um galho',
+  },
+  {
+    // Relato recebido por mensagem no Instagram (print enviado pelo Camilo, 11/11/2026).
+    // TODO(conteudo): confirmar com a Paula que ela autoriza o uso do relato e da foto no site.
+    nome: 'Paula Ribeiro',
+    curso: 'curso gravado',
+    texto:
+      'Eu fiz o seu curso do quadrinho do limão! Amei demais. Estava desde 2004 sem pintar, era criança quando fiz aulas. Voltei com essa aula pra ver como eu me saía e simplesmente amei.',
+    foto: fotoDepoimento11,
+    fotoAlt: 'Paula Ribeiro segurando a tela que pintou no curso gravado: dois limões amarelos com folhas verdes sobre listras laranja e brancas',
   },
 ];
 

@@ -100,7 +100,7 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
               )}
               <figure>
                 <blockquote>{d.texto.split('\n\n').map((par) => <p>{par}</p>)}</blockquote>
-                <figcaption>{d.nome ?? 'Aluna do curso online da Ana'}</figcaption>
+                <figcaption>{d.nome ? `${d.nome}${d.curso ? ` · ${d.curso}` : ''}` : 'Aluna do curso online da Ana'}</figcaption>
               </figure>
             </li>
           ))}
