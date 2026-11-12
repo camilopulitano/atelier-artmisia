@@ -92,7 +92,7 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
             <li class="depoimento">
               {d.foto && <Image src={d.foto} alt={d.fotoAlt ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 320px" quality={76} format="webp" loading="lazy" />}
               <figure>
-                <blockquote><p>{d.texto}</p></blockquote>
+                <blockquote>{d.texto.split('\n\n').map((par) => <p>{par}</p>)}</blockquote>
                 <figcaption>{d.nome ?? 'Aluna do curso online da Ana'}</figcaption>
               </figure>
             </li>
@@ -367,6 +367,10 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     font-family: var(--serif);
     font-size: clamp(18px, 1.8vw, 21px);
     line-height: 1.6;
+  }
+
+  .depoimento blockquote p + p {
+    margin-top: 0.8em;
   }
 
   .depoimento figcaption {

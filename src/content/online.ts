@@ -3,6 +3,7 @@ import { linkWhatsApp } from '../config/contato';
 import { professores } from './professores';
 import fotoDepoimento1 from '../assets/online/depoimento-aluna-1.jpg';
 import fotoDepoimento2 from '../assets/online/depoimento-aluna-2.jpg';
+import fotoDepoimento3 from '../assets/online/depoimento-aluna-3.jpg';
 import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
@@ -74,6 +75,13 @@ export const depoimentos: Depoimento[] = [
       'Estou gostando muito do curso de pintura online. As aulas com a Ana são claras, tranquilas e me sinto mais confiante a cada quadro. O processo tem sido muito prazeroso e o resultado está ficando além do que eu esperava. Obrigada por compartilhar seu conhecimento com tanto carinho!',
     foto: fotoDepoimento2,
     fotoAlt: 'Fabíola Mayeda sorrindo e segurando a tela que pintou: dois limões amarelos com folhas verdes sobre listras laranja e brancas',
+  },
+  {
+    nome: 'Anna Carolina',
+    texto:
+      'Sou a Anna Carolina, de Minas Gerais, sempre gostei de coisas criativas e de poder colocar um pouco de mim naquilo que faço. Comecei o curso de pintura com um objetivo simples, mas muito especial: ter um quadro pintado por mim para colocar no apartamento para onde vou me mudar. Além disso, queria encontrar um hobby que me trouxesse distração, leveza e, quem sabe, futuramente, algo que eu também possa ensinar a outras pessoas, assim como estou aprendendo com a Ana.\n\nAlguns dias têm sido um verdadeiro desafio para mim, mas em outros tudo fica mais fácil. Nem sempre gosto das minhas pinturas de primeira, mas a Ana nos ensinou que muitas vezes precisamos descansar nosso "olhar" e olhar novamente depois de um tempo, e realmente funciona!\n\nEstou amando cada quadro, cada aula e todo esse processo. Ana é uma pessoa incrível e gosto muito da forma leve que ela conduz as aulas, tira nossas dúvidas e, ao mesmo tempo, permite que exista uma troca de ideias, experiências e descobertas entre todas nós. E, quando percebo, a aula já passou. Estou muito feliz por ter começado e por estar descobrindo, aos poucos, o quanto a pintura pode ser prazerosa e especial para mim.',
+    foto: fotoDepoimento3,
+    fotoAlt: 'Anna Carolina, de blusa vermelha, sorrindo e segurando duas telas que pintou: um pássaro azul e amarelo em um galho e um veleiro no mar ao pôr do sol',
   },
 ];
 
