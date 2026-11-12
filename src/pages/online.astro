@@ -89,6 +89,19 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                         itens={depoimentosDe(relatosDoCurso[c.slug])}
                       />
                     )}
+                    {c.slug === 'oleo-adultos-ana' && (
+                      <section class="grupo" aria-labelledby="titulo-grupo">
+                        <div class="pilha">
+                          <h2 id="titulo-grupo" class="titulo-secao"><Destaque texto={TEXTOS.online.grupoTitulo} /></h2>
+                          <p class="texto-suave">{TEXTOS.online.grupoTexto}</p>
+                        </div>
+                        <div class="fotos-grupo">
+                          <Image class="zoom" src={grupoZoom} alt="Aula ao vivo pelo Zoom: três alunas e um aluno sorrindo, cada um mostrando o quadro de um tucano que pintou, e no canto a mesa da professora com a referência, o quadro em andamento e a paleta" widths={[480, 640, 960]} sizes="(max-width: 700px) 90vw, 560px" quality={76} format="webp" loading="lazy" />
+                          <Image class="laranja" src={grupoLaranja} alt="Duas fotos de quadros em andamento compartilhadas no grupo: uma laranja e metade de laranja pintadas sobre fundo azul, a tinta cobrindo só parte da tela" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 420px" quality={76} format="webp" loading="lazy" />
+                          <Image class="vaca" src={grupoVaca} alt="Foto compartilhada no grupo de um quadro pronto: uma vaca branca e marrom de lenço azul sobre fundo xadrez azul e branco" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 260px" quality={76} format="webp" loading="lazy" />
+                        </div>
+                      </section>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -96,18 +109,6 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
           </article>
         ))
       }
-    </div>
-  </section>
-
-  <section class="conteiner grupo" aria-labelledby="titulo-grupo">
-    <div class="pilha">
-      <h2 id="titulo-grupo" class="titulo-secao"><Destaque texto={TEXTOS.online.grupoTitulo} /></h2>
-      <p class="texto-suave">{TEXTOS.online.grupoTexto}</p>
-    </div>
-    <div class="fotos-grupo">
-      <Image class="zoom" src={grupoZoom} alt="Aula ao vivo pelo Zoom: três alunas e um aluno sorrindo, cada um mostrando o quadro de um tucano que pintou, e no canto a mesa da professora com a referência, o quadro em andamento e a paleta" widths={[480, 640, 960]} sizes="(max-width: 700px) 90vw, 560px" quality={76} format="webp" loading="lazy" />
-      <Image class="laranja" src={grupoLaranja} alt="Duas fotos de quadros em andamento compartilhadas no grupo: uma laranja e metade de laranja pintadas sobre fundo azul, a tinta cobrindo só parte da tela" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 420px" quality={76} format="webp" loading="lazy" />
-      <Image class="vaca" src={grupoVaca} alt="Foto compartilhada no grupo de um quadro pronto: uma vaca branca e marrom de lenço azul sobre fundo xadrez azul e branco" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 260px" quality={76} format="webp" loading="lazy" />
     </div>
   </section>
 
@@ -297,7 +298,9 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 24px 48px;
-    padding-top: clamp(48px, 7vw, 88px);
+    margin-top: 20px;
+    padding-top: 24px;
+    border-top: 1px solid var(--secao);
   }
 
   .fotos-grupo {
