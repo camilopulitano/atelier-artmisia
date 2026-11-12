@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Destaque from '../components/Destaque.astro';
-import { cursosOnline, cursosOnlineDe, FORMATOS_ONLINE } from '../content/online';
+import { cursosOnline, cursosOnlineDe, depoimentos, FORMATOS_ONLINE } from '../content/online';
 import { professores, retratoDe } from '../content/professores';
 import { TEXTOS, semMarcas } from '../content/textos';
 import { linkOnline } from '../config/contato';
@@ -82,6 +82,33 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     </div>
   </section>
 
+  {
+    depoimentos.length > 0 && (
+      <section class="conteiner depoimentos" aria-labelledby="titulo-depoimentos">
+        <h2 id="titulo-depoimentos" class="titulo-secao">Quem fez o <em>curso</em></h2>
+        <div class="carrossel" role="region" aria-roledescription="carrossel" aria-label="Depoimentos de alunas">
+        <ul class="lista-depoimentos" role="list" data-carrossel-depoimentos>
+          {depoimentos.map((d) => (
+            <li class="depoimento">
+              {d.foto && <Image src={d.foto} alt={d.fotoAlt ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 320px" quality={76} format="webp" loading="lazy" />}
+              <figure>
+                <blockquote><p>{d.texto}</p></blockquote>
+                <figcaption>{d.nome ?? 'Aluna do curso online da Ana'}</figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+        {depoimentos.length > 1 && (
+          <div class="controles">
+            <button type="button" class="seta" data-anterior aria-label="Depoimento anterior">←</button>
+            <button type="button" class="seta" data-proximo aria-label="Próximo depoimento">→</button>
+          </div>
+        )}
+        </div>
+      </section>
+    )
+  }
+
   <section class="conteiner chamada" aria-labelledby="titulo-chamada-online">
     <div class="pilha">
       <h2 id="titulo-chamada-online" class="titulo-secao"><Destaque texto={TEXTOS.online.chamadaTitulo} /></h2>
@@ -90,6 +117,15 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     <a class="botao" href={linkOnline()} target="_blank" rel="noopener">{TEXTOS.online.botao}<span class="so-leitor"> (abre em nova aba)</span></a>
   </section>
 </BaseLayout>
+
+<script>
+  const lista = document.querySelector<HTMLElement>('[data-carrossel-depoimentos]');
+  if (lista) {
+    const passo = (d: number) => lista.scrollBy({ left: d * lista.clientWidth, behavior: 'smooth' });
+    document.querySelector('[data-anterior]')?.addEventListener('click', () => passo(-1));
+    document.querySelector('[data-proximo]')?.addEventListener('click', () => passo(1));
+  }
+</script>
 
 <style>
   .topo {
@@ -258,6 +294,86 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
   .curso .link-seta {
     margin-top: 6px;
     font-size: 15px;
+  }
+
+  .depoimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: clamp(48px, 7vw, 88px);
+  }
+
+  .lista-depoimentos {
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lista-depoimentos::-webkit-scrollbar {
+    display: none;
+  }
+
+  .controles {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .seta {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--texto-suave);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--texto);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .seta:hover {
+    background: var(--secao);
+  }
+
+  .depoimento {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px 32px;
+  }
+
+  .depoimento :global(img) {
+    flex: 0 1 300px;
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--raio);
+  }
+
+  .depoimento figure {
+    flex: 1 1 320px;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .depoimento blockquote {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.8vw, 21px);
+    line-height: 1.6;
+  }
+
+  .depoimento figcaption {
+    margin-top: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--oliva);
   }
 
   .chamada {

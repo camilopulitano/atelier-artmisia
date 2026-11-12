@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import { linkWhatsApp } from '../config/contato';
 import { professores } from './professores';
+import fotoDepoimento1 from '../assets/online/depoimento-aluna-1.jpg';
 import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
@@ -48,6 +49,25 @@ export interface CursoOnline {
   /** Texto do botão (padrão: depende do formato). */
   botao?: string;
 }
+
+/** Relatos de quem fez os cursos online da Ana, enviados pelo Camilo (11/11/2026). */
+export interface Depoimento {
+  /** Nome como a aluna quer aparecer. Vazio = "Aluna do curso online". */
+  nome?: string;
+  texto: string;
+  foto?: ImageMetadata;
+  fotoAlt?: string;
+}
+
+export const depoimentos: Depoimento[] = [
+  {
+    // TODO(conteudo): nome da aluna e se ela autoriza aparecer com a foto.
+    texto:
+      'A arte é uma das formas mais lindas de libertação, é um crescimento para a vida. Pintar foi desde o começo onde eu pude me expressar e transformar em físico algo tão intangível quanto os sentimentos. Fazer esse curso com a Ana me trouxe e me traz cada vez mais segurança técnica para poder me expressar. Com técnicas novas, colorimetria, trocas e vivências pude ir vendo que o mundo da pintura pode ser muito mais explorado do que eu pensava. Ao olhar cada quadro que fiz no curso posso enxergar a evolução em cada pincelada, mas ainda mais especial que isso, é o prazer de pintar e alimentar a alma.',
+    foto: fotoDepoimento1,
+    fotoAlt: 'Aluna de óculos e blusa rosa sorrindo ao lado da tela que pintou: uma flor rosa grande com folhas verdes, sobre fundo cinza-claro',
+  },
+];
 
 export const cursosOnline: CursoOnline[] = [
   // Horário e valor da turma online (Camilo, 10/11/2026).
