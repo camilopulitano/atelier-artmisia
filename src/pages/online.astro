@@ -90,7 +90,12 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
         <ul class="lista-depoimentos" role="list" data-carrossel-depoimentos>
           {depoimentos.map((d) => (
             <li class="depoimento">
-              {d.foto && <Image src={d.foto} alt={d.fotoAlt ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 320px" quality={76} format="webp" loading="lazy" />}
+              {d.foto && (
+                <div class="fotos-dep">
+                  <Image src={d.foto} alt={d.fotoAlt ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" />
+                  {d.foto2 && <Image src={d.foto2} alt={d.foto2Alt ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" />}
+                </div>
+              )}
               <figure>
                 <blockquote>{d.texto.split('\n\n').map((par) => <p>{par}</p>)}</blockquote>
                 <figcaption>{d.nome ?? 'Aluna do curso online da Ana'}</figcaption>
@@ -348,8 +353,15 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     gap: 20px 32px;
   }
 
-  .depoimento :global(img) {
+  .fotos-dep {
     flex: 0 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .depoimento :global(img) {
     width: 300px;
     max-width: 100%;
     height: auto;

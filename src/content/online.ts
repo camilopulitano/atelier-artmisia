@@ -4,6 +4,8 @@ import { professores } from './professores';
 import fotoDepoimento1 from '../assets/online/depoimento-aluna-1.jpg';
 import fotoDepoimento2 from '../assets/online/depoimento-aluna-2.jpg';
 import fotoDepoimento3 from '../assets/online/depoimento-aluna-3.jpg';
+import fotoDepoimento4 from '../assets/online/depoimento-aluna-4.jpg';
+import fotoDepoimento5 from '../assets/online/depoimento-aluna-5.jpg';
 import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
@@ -59,6 +61,9 @@ export interface Depoimento {
   texto: string;
   foto?: ImageMetadata;
   fotoAlt?: string;
+  /** Segunda foto, quando a aluna mandou mais de uma. */
+  foto2?: ImageMetadata;
+  foto2Alt?: string;
 }
 
 export const depoimentos: Depoimento[] = [
@@ -82,6 +87,15 @@ export const depoimentos: Depoimento[] = [
       'Sou a Anna Carolina, de Minas Gerais, sempre gostei de coisas criativas e de poder colocar um pouco de mim naquilo que faço. Comecei o curso de pintura com um objetivo simples, mas muito especial: ter um quadro pintado por mim para colocar no apartamento para onde vou me mudar. Além disso, queria encontrar um hobby que me trouxesse distração, leveza e, quem sabe, futuramente, algo que eu também possa ensinar a outras pessoas, assim como estou aprendendo com a Ana.\n\nAlguns dias têm sido um verdadeiro desafio para mim, mas em outros tudo fica mais fácil. Nem sempre gosto das minhas pinturas de primeira, mas a Ana nos ensinou que muitas vezes precisamos descansar nosso "olhar" e olhar novamente depois de um tempo, e realmente funciona!\n\nEstou amando cada quadro, cada aula e todo esse processo. Ana é uma pessoa incrível e gosto muito da forma leve que ela conduz as aulas, tira nossas dúvidas e, ao mesmo tempo, permite que exista uma troca de ideias, experiências e descobertas entre todas nós. E, quando percebo, a aula já passou. Estou muito feliz por ter começado e por estar descobrindo, aos poucos, o quanto a pintura pode ser prazerosa e especial para mim.',
     foto: fotoDepoimento3,
     fotoAlt: 'Anna Carolina, de blusa vermelha, sorrindo e segurando duas telas que pintou: um pássaro azul e amarelo em um galho e um veleiro no mar ao pôr do sol',
+  },
+  {
+    nome: 'Carime Arcanjo',
+    texto:
+      'Meu nome é Carime Arcanjo, sou de Dourados, Mato Grosso do Sul, e sempre tive dentro de mim uma grande vontade de desenhar e pintar quadros. Durante muito tempo, achei que esse sonho talvez nunca pudesse se realizar, porque acreditava que não conseguiria aprender a pintar como sempre imaginei.\n\nMas, pesquisando na minha cidade e também pela internet, encontrei a Ana, através do Instagram, e me apaixonei pelas obras dela. Fiquei encantada com seu trabalho e decidi entrar em contato. Foi assim que comecei a fazer o curso on-line.\n\nHoje, já estou há três meses estudando e posso dizer que estou simplesmente amando essa experiência! Cada aprendizado tem sido muito especial para mim e está me mostrando que nunca é tarde para correr atrás de um sonho.\n\nEspero continuar aprendendo, evoluindo e, quem sabe no futuro, me tornar uma grande artista, assim como a ela. Estou muito feliz por ter acreditado em mim mesma e por finalmente estar realizando um sonho que por muito tempo achei que não seria possível.',
+    foto: fotoDepoimento4,
+    fotoAlt: 'Carime Arcanjo, de camiseta clara, sorrindo e segurando a tela que pintou: uma flor rosa grande com folhas verdes, sobre fundo verde-claro',
+    foto2: fotoDepoimento5,
+    foto2Alt: 'Carime Arcanjo sorrindo e segurando outra tela que pintou: uma praia com duas palmeiras, mar azul, um veleiro ao fundo e a sombra das palmeiras na areia',
   },
 ];
 
