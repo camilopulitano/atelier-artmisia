@@ -182,7 +182,6 @@ export const cursosOnline: CursoOnline[] = [
     botao: 'Quero me inscrever nas aulas ao vivo',
     link: linkWhatsApp('Olá! Vi no site do Atelier Artmisia as aulas online ao vivo de pintura com a Ana e gostaria de me inscrever. Tem vaga?'),
   },
-  { slug: 'anime-gravado-edison', nome: 'Anime', professor: 'edison-marsan', formato: 'gravado', emBreve: true },
   { slug: 'acrilica-criancas-camilo', nome: 'Pintura em acrílica', professor: 'camilo-pulitano', publico: 'Crianças de 7 a 12 anos', formato: 'turma' },
   { slug: 'desenho-camilo', nome: 'Desenho', professor: 'camilo-pulitano', publico: 'Crianças e adultos', formato: 'turma' },
   { slug: 'aquarela-camilo', nome: 'Aquarela', professor: 'camilo-pulitano', publico: 'Crianças e adultos', formato: 'turma' },
