@@ -26,7 +26,11 @@ const { titulo, itens, id } = Astro.props;
                     {[[d.foto, d.fotoAlt], [d.foto2, d.foto2Alt], [d.foto3, d.foto3Alt]].map(([src, alt]) =>
                       src ? <Image src={src as ImageMetadata} alt={(alt as string) ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" /> : null,
                     )}
-                    <p class="legenda">{nome}</p>
+                    <div class="legenda-linha">
+                      {itens.length > 1 && <button type="button" class="seta" data-anterior aria-label="Depoimento anterior">←</button>}
+                      <p class="legenda">{nome}</p>
+                      {itens.length > 1 && <button type="button" class="seta" data-proximo aria-label="Próximo depoimento">→</button>}
+                    </div>
                   </div>
                 )}
                 <figure>
@@ -37,24 +41,17 @@ const { titulo, itens, id } = Astro.props;
             );
           })}
         </ul>
-        {itens.length > 1 && (
-          <div class="controles">
-            <button type="button" class="seta" data-anterior aria-label="Depoimento anterior">←</button>
-            <button type="button" class="seta" data-proximo aria-label="Próximo depoimento">→</button>
-          </div>
-        )}
       </div>
     </section>
   )
 }
 
 <script>
-  document.querySelectorAll<HTMLElement>('.carrossel').forEach((c) => {
-    const lista = c.querySelector<HTMLElement>('.lista-depoimentos');
-    if (!lista) return;
-    const passo = (d: number) => lista.scrollBy({ left: d * lista.clientWidth, behavior: 'smooth' });
-    c.querySelector('[data-anterior]')?.addEventListener('click', () => passo(-1));
-    c.querySelector('[data-proximo]')?.addEventListener('click', () => passo(1));
+  document.addEventListener('click', (e) => {
+    const botao = (e.target as HTMLElement).closest<HTMLElement>('[data-anterior], [data-proximo]');
+    const lista = botao?.closest('.carrossel')?.querySelector<HTMLElement>('.lista-depoimentos');
+    if (!botao || !lista) return;
+    lista.scrollBy({ left: (botao.hasAttribute('data-proximo') ? 1 : -1) * lista.clientWidth, behavior: 'smooth' });
   });
 </script>
 
@@ -81,15 +78,17 @@ const { titulo, itens, id } = Astro.props;
     display: none;
   }
 
-  .controles {
+  .legenda-linha {
     display: flex;
+    align-items: center;
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 2px;
   }
 
   .seta {
-    width: 44px;
-    height: 44px;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
     border: 1px solid var(--texto-suave);
     border-radius: 50%;
     background: transparent;
@@ -144,7 +143,9 @@ const { titulo, itens, id } = Astro.props;
   }
 
   .legenda {
-    margin: 4px 0 0;
+    margin: 0;
+    flex: 1 1 auto;
+    text-align: center;
     font-size: 15px;
     font-weight: 600;
     color: var(--oliva);
