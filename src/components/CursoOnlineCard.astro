@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Cartão de aula online da home, no mesmo formato do cartão de curso presencial.
+ */
+interface Props {
+  nome: string;
+  rotulo: string;
+  professor: string;
+  resumo: string;
+  capa: ImageMetadata;
+  capaAlt: string;
+  href: string;
+}
+const { nome, rotulo, professor, resumo, capa, capaAlt, href } = Astro.props;
+---
+
+<article class="cartao curso">
+  <div class="capa">
+    <Image src={capa} alt={capaAlt} widths={[180, 300, 420]} sizes="150px" quality={74} format="webp" loading="lazy" data-fade="" />
+  </div>
+  <div class="texto">
+    <h3>{nome}</h3>
+    <p class="idade">{rotulo}</p>
+    <p class="texto-suave">com {professor}</p>
+    <p class="resumo">{resumo}</p>
+    <a class="link-seta" href={href}>Ver as aulas <span aria-hidden="true">→</span><span class="so-leitor"> {nome}</span></a>
+  </div>
+</article>
+
+<style>
+  .curso {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 22px;
+  }
+
+  .capa {
+    flex: 0 0 150px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 4px;
+    background: var(--fundo);
+  }
+
+  .capa :global(img) {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .texto {
+    flex: 1 1 220px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  h3 {
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .texto > p {
+    font-size: 16px;
+  }
+
+  .idade {
+    font-size: 15px !important;
+    font-weight: 600;
+    color: var(--oliva);
+  }
+
+  .link-seta {
+    margin-top: auto;
+    font-size: 15px;
+  }
+
+  @media (max-width: 520px) {
+    .curso {
+      flex-wrap: nowrap;
+      gap: 14px;
+      padding: 12px;
+    }
+
+    .capa {
+      flex-basis: 76px;
+      height: 92px;
+      padding: 5px;
+    }
+
+    h3 {
+      font-size: 21px;
+    }
+
+    .resumo {
+      display: none;
+    }
+  }
+</style>

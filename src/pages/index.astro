@@ -4,6 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Destaque from '../components/Destaque.astro';
 import Preencher from '../components/Preencher.astro';
 import CursoCard from '../components/CursoCard.astro';
+import CursoOnlineCard from '../components/CursoOnlineCard.astro';
+import capaOnlineAna from '../assets/online/oleo-gravado-ana.jpg';
+import capaOnlineCamilo from '../assets/online/camilo-1.jpg';
 import ProfessorCirculo from '../components/ProfessorCirculo.astro';
 import FaixaObras from '../components/FaixaObras.astro';
 import Contato from '../components/Contato.astro';
@@ -62,6 +65,24 @@ const publicos = Object.entries(PUBLICOS) as [Publico, string][];
       </div>
       <div class="grade-cursos">
         {cursos.map((curso) => <CursoCard curso={curso} />)}
+        <CursoOnlineCard
+          nome="Aulas online de pintura"
+          rotulo="Online · iniciantes, a partir de 12 anos"
+          professor="Ana Quintanas"
+          resumo="Curso gravado Limão Siciliano e aulas ao vivo pelo Zoom, para quem nunca pegou em um pincel ou quer aprender mais técnica."
+          capa={capaOnlineAna}
+          capaAlt="Ana Quintanas, de óculos e avental, abrindo com as mãos a janela de um mural pintado na parede, com colinas, ciprestes e montanhas ao fundo"
+          href="/online#oleo-gravado-ana"
+        />
+        <CursoOnlineCard
+          nome="Aulas online de arte"
+          rotulo="Online · crianças e adultos"
+          professor="Camilo Pulitano"
+          resumo="Aulas on-line para crianças e aulas particulares para adultos, em desenho, pintura em tela e aquarela."
+          capa={capaOnlineCamilo}
+          capaAlt="Aluno e professora de óculos segurando trabalhos: um Luffy em acrílica, uma capivara com uma tangerina na cabeça e uma aquarela de ramos de limão em vaso listrado"
+          href="/online#aulas-online-camilo"
+        />
       </div>
     </div>
   </section>
