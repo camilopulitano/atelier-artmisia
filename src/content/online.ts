@@ -64,8 +64,8 @@ export interface CursoOnline {
 export interface Depoimento {
   /** Nome como a aluna quer aparecer. Vazio = "Aluna do curso online". */
   nome?: string;
-  /** Qual curso a pessoa fez. Aparece depois do nome. */
-  curso?: string;
+  /** Qual curso a pessoa fez: define onde o relato aparece na página. */
+  curso: 'gravado' | 'ao-vivo';
   texto: string;
   foto?: ImageMetadata;
   fotoAlt?: string;
@@ -79,6 +79,7 @@ export interface Depoimento {
 export const depoimentos: Depoimento[] = [
   {
     nome: 'Nathalia Hasckel',
+    curso: 'ao-vivo',
     texto:
       'A arte é uma das formas mais lindas de libertação, é um crescimento para a vida. Pintar foi desde o começo onde eu pude me expressar e transformar em físico algo tão intangível quanto os sentimentos. Fazer esse curso com a Ana me trouxe e me traz cada vez mais segurança técnica para poder me expressar. Com técnicas novas, colorimetria, trocas e vivências pude ir vendo que o mundo da pintura pode ser muito mais explorado do que eu pensava. Ao olhar cada quadro que fiz no curso posso enxergar a evolução em cada pincelada, mas ainda mais especial que isso, é o prazer de pintar e alimentar a alma.',
     foto: fotoDepoimento1,
@@ -86,6 +87,7 @@ export const depoimentos: Depoimento[] = [
   },
   {
     nome: 'Fabíola Mayeda',
+    curso: 'ao-vivo',
     texto:
       'Estou gostando muito do curso de pintura online. As aulas com a Ana são claras, tranquilas e me sinto mais confiante a cada quadro. O processo tem sido muito prazeroso e o resultado está ficando além do que eu esperava. Obrigada por compartilhar seu conhecimento com tanto carinho!',
     foto: fotoDepoimento2,
@@ -93,6 +95,7 @@ export const depoimentos: Depoimento[] = [
   },
   {
     nome: 'Anna Carolina',
+    curso: 'ao-vivo',
     texto:
       'Sou a Anna Carolina, de Minas Gerais, sempre gostei de coisas criativas e de poder colocar um pouco de mim naquilo que faço. Comecei o curso de pintura com um objetivo simples, mas muito especial: ter um quadro pintado por mim para colocar no apartamento para onde vou me mudar. Além disso, queria encontrar um hobby que me trouxesse distração, leveza e, quem sabe, futuramente, algo que eu também possa ensinar a outras pessoas, assim como estou aprendendo com a Ana.\n\nAlguns dias têm sido um verdadeiro desafio para mim, mas em outros tudo fica mais fácil. Nem sempre gosto das minhas pinturas de primeira, mas a Ana nos ensinou que muitas vezes precisamos descansar nosso "olhar" e olhar novamente depois de um tempo, e realmente funciona!\n\nEstou amando cada quadro, cada aula e todo esse processo. Ana é uma pessoa incrível e gosto muito da forma leve que ela conduz as aulas, tira nossas dúvidas e, ao mesmo tempo, permite que exista uma troca de ideias, experiências e descobertas entre todas nós. E, quando percebo, a aula já passou. Estou muito feliz por ter começado e por estar descobrindo, aos poucos, o quanto a pintura pode ser prazerosa e especial para mim.',
     foto: fotoDepoimento3,
@@ -100,6 +103,7 @@ export const depoimentos: Depoimento[] = [
   },
   {
     nome: 'Carime Arcanjo',
+    curso: 'ao-vivo',
     texto:
       'Meu nome é Carime Arcanjo, sou de Dourados, Mato Grosso do Sul, e sempre tive dentro de mim uma grande vontade de desenhar e pintar quadros. Durante muito tempo, achei que esse sonho talvez nunca pudesse se realizar, porque acreditava que não conseguiria aprender a pintar como sempre imaginei.\n\nMas, pesquisando na minha cidade e também pela internet, encontrei a Ana, através do Instagram, e me apaixonei pelas obras dela. Fiquei encantada com seu trabalho e decidi entrar em contato. Foi assim que comecei a fazer o curso on-line.\n\nHoje, já estou há três meses estudando e posso dizer que estou simplesmente amando essa experiência! Cada aprendizado tem sido muito especial para mim e está me mostrando que nunca é tarde para correr atrás de um sonho.\n\nEspero continuar aprendendo, evoluindo e, quem sabe no futuro, me tornar uma grande artista, assim como a ela. Estou muito feliz por ter acreditado em mim mesma e por finalmente estar realizando um sonho que por muito tempo achei que não seria possível.',
     foto: fotoDepoimento4,
@@ -109,6 +113,7 @@ export const depoimentos: Depoimento[] = [
   },
   {
     nome: 'Sabrina Morais',
+    curso: 'ao-vivo',
     texto:
       'Sempre tive dentro de mim uma pequena criança que ama arte e bagunça com tintas. Que tem vontade de criar, de aprender, de encantar e colocar um pouco de mim em tudo que eu me proponho a fazer.\n\nMas foi só após 28 anos que senti coragem de transformar isso em aprendizado de verdade.\n\nEm cinco meses sendo aluna do ateliê Artmisia, pude me jogar de verdade nessa paixão e aprender de forma leve e humana a observar, a pegar no pincel, a misturar cores. O que parece simples e infantil, na verdade foi algo transformador pra mim. Desenvolvi segurança, ousadia, capricho ao mesmo tempo que me divirto.\n\nNo primeiro olhar, aulas onlines pra mim pareciam distantes demais e eu tinha medo de não aprender ou não gostar, mas a Ana faz a gente se sentir "em casa" (literalmente?! Hahaha), nos passa confiança, ajuda cada aluno sem distinção, em cada problema que se pode ter ao longo do processo, é como se ela pegasse nas nossas mãos e nos orientasse a direção da pincelada.\n\nCada aula molda meu olhar, minha confiança e a artista que vive dentro de mim.\n\nSinto uma gratidão enorme pela Ana, me identifico com ela em muitas coisas e me inspiro muito nela. Ainda tenho tanto a aprender, mas já amo profundamente o lugar onde esse aprendizado começou.\n\nComo é bom dar voz e cor à menina dentro de mim que sempre soube o que queria.',
     foto: fotoDepoimento6,
@@ -118,6 +123,7 @@ export const depoimentos: Depoimento[] = [
   },
   {
     nome: 'Yasmin Fernanda da Silva',
+    curso: 'ao-vivo',
     texto:
       'Me chamo Yasmin, sou de Porto Ferreira e sempre fui apaixonada por qualquer tipo de arte. No ano passado, na cidade de São Pedro, no dia das crianças, tive a oportunidade de fazer maquiagem artística em MUITAS crianças... Eu nunca tinha tido uma experiência desse tamanho, eu só desenhava meus conhecidos nas épocas de carnavais ou algo do tipo, mas nunca tinha feito isso de forma "profissional". E ver o rostinho daquelas crianças felizes e encantadas com o desenho fez eu querer aprender cada vez mais sobre pintura.\n\nEntão pesquisei e encontrei a Ana. Estou com ela desde fevereiro e, mesmo não conseguindo estar presente em todas as aulas ao vivo, sempre que tenho dúvidas com as aulas gravadas ela sempre está lá para ajudar. Ela me ensinou a confiar no processo e que a perspectiva de cada pessoa é diferente em relação ao quadro.\n\nUma vez ela falou em aula que o quadro que estamos pintando tem vários sentimentos nossos... Um dia podemos estar pintando ele cansado, outro dia feliz, no outro triste... E achei isso muito bonito, porque mostra que, assim como nossos dias são instáveis, o quadro em questão de segundos também pode mudar completamente. Isso mostra que a arte nos completa mais do que imaginamos.',
     foto: fotoDepoimento8,
@@ -131,13 +137,15 @@ export const depoimentos: Depoimento[] = [
     // Relato recebido por mensagem no Instagram (print enviado pelo Camilo, 11/11/2026).
     // TODO(conteudo): confirmar com a Paula que ela autoriza o uso do relato e da foto no site.
     nome: 'Paula Ribeiro',
-    curso: 'curso gravado',
+    curso: 'gravado',
     texto:
       'Eu fiz o seu curso do quadrinho do limão! Amei demais. Estava desde 2004 sem pintar, era criança quando fiz aulas. Voltei com essa aula pra ver como eu me saía e simplesmente amei.',
     foto: fotoDepoimento11,
     fotoAlt: 'Paula Ribeiro segurando a tela que pintou no curso gravado: dois limões amarelos com folhas verdes sobre listras laranja e brancas',
   },
 ];
+
+export const depoimentosDe = (curso: Depoimento['curso']): Depoimento[] => depoimentos.filter((d) => d.curso === curso);
 
 export const cursosOnline: CursoOnline[] = [
   // Horário e valor da turma online (Camilo, 10/11/2026).

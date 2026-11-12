@@ -1,0 +1,158 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Depoimento } from '../content/online';
+
+interface Props {
+  titulo: string;
+  itens: Depoimento[];
+  id: string;
+}
+const { titulo, itens, id } = Astro.props;
+---
+
+{
+  itens.length > 0 && (
+    <section class="depoimentos" aria-labelledby={id}>
+      <h3 id={id}>{titulo}</h3>
+      <div class="carrossel" role="region" aria-roledescription="carrossel" aria-label={titulo}>
+        <ul class="lista-depoimentos" role="list">
+          {itens.map((d) => {
+            const nome = d.nome ?? 'Aluna do curso online da Ana';
+            return (
+              <li class="depoimento">
+                {d.foto && (
+                  <div class="fotos-dep">
+                    {[[d.foto, d.fotoAlt], [d.foto2, d.foto2Alt], [d.foto3, d.foto3Alt]].map(([src, alt]) =>
+                      src ? <Image src={src as ImageMetadata} alt={(alt as string) ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" /> : null,
+                    )}
+                    <p class="legenda">{nome}</p>
+                  </div>
+                )}
+                <figure>
+                  <blockquote>{d.texto.split('\n\n').map((par) => <p>{par}</p>)}</blockquote>
+                  {!d.foto && <figcaption class="legenda">{nome}</figcaption>}
+                </figure>
+              </li>
+            );
+          })}
+        </ul>
+        {itens.length > 1 && (
+          <div class="controles">
+            <button type="button" class="seta" data-anterior aria-label="Depoimento anterior">←</button>
+            <button type="button" class="seta" data-proximo aria-label="Próximo depoimento">→</button>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<script>
+  document.querySelectorAll<HTMLElement>('.carrossel').forEach((c) => {
+    const lista = c.querySelector<HTMLElement>('.lista-depoimentos');
+    if (!lista) return;
+    const passo = (d: number) => lista.scrollBy({ left: d * lista.clientWidth, behavior: 'smooth' });
+    c.querySelector('[data-anterior]')?.addEventListener('click', () => passo(-1));
+    c.querySelector('[data-proximo]')?.addEventListener('click', () => passo(1));
+  });
+</script>
+
+<style>
+  .depoimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: 8px;
+  }
+
+  .lista-depoimentos {
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lista-depoimentos::-webkit-scrollbar {
+    display: none;
+  }
+
+  .controles {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .seta {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--texto-suave);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--texto);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .seta:hover {
+    background: var(--secao);
+  }
+
+  .depoimento {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px 32px;
+  }
+
+  .fotos-dep {
+    flex: 0 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .depoimento :global(img) {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--raio);
+  }
+
+  .depoimento figure {
+    flex: 1 1 320px;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .depoimento blockquote {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.8vw, 21px);
+    line-height: 1.6;
+  }
+
+  .depoimento blockquote p + p {
+    margin-top: 0.8em;
+  }
+
+  .legenda {
+    margin: 4px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--oliva);
+  }
+
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+</style>

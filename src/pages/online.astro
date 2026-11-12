@@ -3,15 +3,21 @@ import { Image } from 'astro:assets';
 import grupoZoom from '../assets/online/grupo-zoom.jpg';
 import grupoLaranja from '../assets/online/grupo-laranja.jpg';
 import grupoVaca from '../assets/online/grupo-vaca.jpg';
-import type { ImageMetadata } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Depoimentos from '../components/Depoimentos.astro';
 import Destaque from '../components/Destaque.astro';
-import { cursosOnline, cursosOnlineDe, depoimentos, FORMATOS_ONLINE } from '../content/online';
+import { cursosOnline, cursosOnlineDe, depoimentosDe, FORMATOS_ONLINE } from '../content/online';
 import { professores, retratoDe } from '../content/professores';
 import { TEXTOS, semMarcas } from '../content/textos';
 import { linkOnline } from '../config/contato';
 
 // Professores que têm aula online, na ordem de professores.ts.
+// Relatos de alunas que aparecem logo abaixo do curso correspondente.
+const relatosDoCurso: Record<string, 'gravado' | 'ao-vivo'> = {
+  'oleo-gravado-ana': 'gravado',
+  'oleo-adultos-ana': 'ao-vivo',
+};
+
 const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
 ---
 
@@ -45,7 +51,7 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
               <h2 id={`online-${p.slug}`}>Com {p.artigo === 'a' ? 'a' : 'o'} <em>{p.primeiroNome}</em></h2>
               <ul class="cursos" role="list">
                 {cursosOnlineDe(p.slug).map((c) => (
-                  <li class="curso">
+                  <li class:list={['curso', relatosDoCurso[c.slug] && 'curso--largo']}>
                     {c.capa && (
                       <Image
                         src={c.capa}
@@ -76,6 +82,13 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                       {c.botao ?? (c.link ? 'Ver o curso' : c.emBreve ? 'Quero ser avisado' : 'Consultar pelo WhatsApp')} <span aria-hidden="true">→</span>
                       <span class="so-leitor"> — {c.nome}{c.publico ? `, ${c.publico}` : ''} (abre em nova aba)</span>
                     </a>
+                    {relatosDoCurso[c.slug] && (
+                      <Depoimentos
+                        id={`dep-${c.slug}`}
+                        titulo={relatosDoCurso[c.slug] === 'gravado' ? 'Quem fez o curso' : 'Quem faz as aulas ao vivo'}
+                        itens={depoimentosDe(relatosDoCurso[c.slug])}
+                      />
+                    )}
                   </li>
                 ))}
               </ul>
@@ -98,39 +111,6 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     </div>
   </section>
 
-  {
-    depoimentos.length > 0 && (
-      <section class="conteiner depoimentos" aria-labelledby="titulo-depoimentos">
-        <h2 id="titulo-depoimentos" class="titulo-secao">Quem fez o <em>curso</em></h2>
-        <div class="carrossel" role="region" aria-roledescription="carrossel" aria-label="Depoimentos de alunas">
-        <ul class="lista-depoimentos" role="list" data-carrossel-depoimentos>
-          {depoimentos.map((d) => (
-            <li class="depoimento">
-              {d.foto && (
-                <div class="fotos-dep">
-                  {[[d.foto, d.fotoAlt], [d.foto2, d.foto2Alt], [d.foto3, d.foto3Alt]].map(([src, alt]) =>
-                    src ? <Image src={src as ImageMetadata} alt={(alt as string) ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" /> : null,
-                  )}
-                </div>
-              )}
-              <figure>
-                <blockquote>{d.texto.split('\n\n').map((par) => <p>{par}</p>)}</blockquote>
-                <figcaption>{d.nome ? `${d.nome}${d.curso ? ` · ${d.curso}` : ''}` : 'Aluna do curso online da Ana'}</figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
-        {depoimentos.length > 1 && (
-          <div class="controles">
-            <button type="button" class="seta" data-anterior aria-label="Depoimento anterior">←</button>
-            <button type="button" class="seta" data-proximo aria-label="Próximo depoimento">→</button>
-          </div>
-        )}
-        </div>
-      </section>
-    )
-  }
-
   <section class="conteiner chamada" aria-labelledby="titulo-chamada-online">
     <div class="pilha">
       <h2 id="titulo-chamada-online" class="titulo-secao"><Destaque texto={TEXTOS.online.chamadaTitulo} /></h2>
@@ -139,16 +119,6 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     <a class="botao" href={linkOnline()} target="_blank" rel="noopener">{TEXTOS.online.botao}<span class="so-leitor"> (abre em nova aba)</span></a>
   </section>
 </BaseLayout>
-
-<script>
-  const lista = document.querySelector<HTMLElement>('[data-carrossel-depoimentos]');
-  if (lista) {
-    const passo = (d: number) => lista.scrollBy({ left: d * lista.clientWidth, behavior: 'smooth' });
-    document.querySelector('[data-anterior]')?.addEventListener('click', () => passo(-1));
-    document.querySelector('[data-proximo]')?.addEventListener('click', () => passo(1));
-  }
-</script>
-
 <style>
   .topo {
     display: flex;
@@ -238,6 +208,10 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     padding: 18px 20px;
     border-radius: var(--raio);
     background: var(--fundo);
+  }
+
+  .curso--largo {
+    grid-column: 1 / -1;
   }
 
   .formato {
@@ -449,43 +423,4 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
 
   .chamada {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px 48px;
-    padding-block: clamp(56px, 8vw, 104px);
-  }
-
-  .pilha {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1 1 420px;
-    min-width: 0;
-  }
-
-  @media (max-width: 700px) {
-    .professor {
-      gap: 14px;
-      padding: 16px;
-    }
-
-    .quem {
-      flex: 1 1 100%;
-      flex-direction: row;
-      justify-content: flex-start;
-      gap: 12px;
-      text-align: left;
-      font-size: 17px;
-    }
-
-    .quem :global(img) {
-      width: 56px;
-      height: 56px;
-    }
-
-    .chamada .botao {
-      width: 100%;
-    }
-  }
-</style>
+  
