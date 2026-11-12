@@ -100,13 +100,13 @@ export const depoimentos: Depoimento[] = [
     foto2Alt: 'Carime Arcanjo sorrindo e segurando outra tela que pintou: uma praia com duas palmeiras, mar azul, um veleiro ao fundo e a sombra das palmeiras na areia',
   },
   {
-    // TODO(conteudo): nome da aluna (o relato veio sem assinatura).
+    nome: 'Sabrina Morais',
     texto:
       'Sempre tive dentro de mim uma pequena criança que ama arte e bagunça com tintas. Que tem vontade de criar, de aprender, de encantar e colocar um pouco de mim em tudo que eu me proponho a fazer.\n\nMas foi só após 28 anos que senti coragem de transformar isso em aprendizado de verdade.\n\nEm cinco meses sendo aluna do ateliê Artmisia, pude me jogar de verdade nessa paixão e aprender de forma leve e humana a observar, a pegar no pincel, a misturar cores. O que parece simples e infantil, na verdade foi algo transformador pra mim. Desenvolvi segurança, ousadia, capricho ao mesmo tempo que me divirto.\n\nNo primeiro olhar, aulas onlines pra mim pareciam distantes demais e eu tinha medo de não aprender ou não gostar, mas a Ana faz a gente se sentir "em casa" (literalmente?! Hahaha), nos passa confiança, ajuda cada aluno sem distinção, em cada problema que se pode ter ao longo do processo, é como se ela pegasse nas nossas mãos e nos orientasse a direção da pincelada.\n\nCada aula molda meu olhar, minha confiança e a artista que vive dentro de mim.\n\nSinto uma gratidão enorme pela Ana, me identifico com ela em muitas coisas e me inspiro muito nela. Ainda tenho tanto a aprender, mas já amo profundamente o lugar onde esse aprendizado começou.\n\nComo é bom dar voz e cor à menina dentro de mim que sempre soube o que queria.',
     foto: fotoDepoimento6,
-    fotoAlt: 'Aluna de vestido verde estampado sorrindo e segurando a tela que pintou: um chapim azul e amarelo em um galho, sobre fundo verde e lilás',
+    fotoAlt: 'Sabrina Morais, de vestido verde estampado sorrindo e segurando a tela que pintou: um chapim azul e amarelo em um galho, sobre fundo verde e lilás',
     foto2: fotoDepoimento7,
-    foto2Alt: 'A mesma aluna segurando outra tela que pintou: um veleiro no mar sob um céu nublado com o sol claro e seu reflexo na água',
+    foto2Alt: 'Sabrina Morais segurando outra tela que pintou: um veleiro no mar sob um céu nublado com o sol claro e seu reflexo na água',
   },
 ];
 
