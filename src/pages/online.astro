@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Destaque from '../components/Destaque.astro';
 import { cursosOnline, cursosOnlineDe, depoimentos, FORMATOS_ONLINE } from '../content/online';
@@ -92,8 +93,9 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
             <li class="depoimento">
               {d.foto && (
                 <div class="fotos-dep">
-                  <Image src={d.foto} alt={d.fotoAlt ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" />
-                  {d.foto2 && <Image src={d.foto2} alt={d.foto2Alt ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" />}
+                  {[[d.foto, d.fotoAlt], [d.foto2, d.foto2Alt], [d.foto3, d.foto3Alt]].map(([src, alt]) =>
+                    src ? <Image src={src as ImageMetadata} alt={(alt as string) ?? ''} widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 300px" quality={76} format="webp" loading="lazy" /> : null,
+                  )}
                 </div>
               )}
               <figure>

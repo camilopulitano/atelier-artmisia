@@ -8,6 +8,9 @@ import fotoDepoimento4 from '../assets/online/depoimento-aluna-4.jpg';
 import fotoDepoimento5 from '../assets/online/depoimento-aluna-5.jpg';
 import fotoDepoimento6 from '../assets/online/depoimento-aluna-6.jpg';
 import fotoDepoimento7 from '../assets/online/depoimento-aluna-7.jpg';
+import fotoDepoimento8 from '../assets/online/depoimento-aluna-8.jpg';
+import fotoDepoimento9 from '../assets/online/depoimento-aluna-9.jpg';
+import fotoDepoimento10 from '../assets/online/depoimento-aluna-10.jpg';
 import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
@@ -66,6 +69,8 @@ export interface Depoimento {
   /** Segunda foto, quando a aluna mandou mais de uma. */
   foto2?: ImageMetadata;
   foto2Alt?: string;
+  foto3?: ImageMetadata;
+  foto3Alt?: string;
 }
 
 export const depoimentos: Depoimento[] = [
@@ -108,6 +113,17 @@ export const depoimentos: Depoimento[] = [
     foto2: fotoDepoimento7,
     foto2Alt: 'Sabrina Morais segurando outra tela que pintou: um veleiro no mar sob um céu nublado com o sol claro e seu reflexo na água',
   },
+  {
+    nome: 'Yasmin Fernanda da Silva',
+    texto:
+      'Me chamo Yasmin, sou de Porto Ferreira e sempre fui apaixonada por qualquer tipo de arte. No ano passado, na cidade de São Pedro, no dia das crianças, tive a oportunidade de fazer maquiagem artística em MUITAS crianças... Eu nunca tinha tido uma experiência desse tamanho, eu só desenhava meus conhecidos nas épocas de carnavais ou algo do tipo, mas nunca tinha feito isso de forma "profissional". E ver o rostinho daquelas crianças felizes e encantadas com o desenho fez eu querer aprender cada vez mais sobre pintura.\n\nEntão pesquisei e encontrei a Ana. Estou com ela desde fevereiro e, mesmo não conseguindo estar presente em todas as aulas ao vivo, sempre que tenho dúvidas com as aulas gravadas ela sempre está lá para ajudar. Ela me ensinou a confiar no processo e que a perspectiva de cada pessoa é diferente em relação ao quadro.\n\nUma vez ela falou em aula que o quadro que estamos pintando tem vários sentimentos nossos... Um dia podemos estar pintando ele cansado, outro dia feliz, no outro triste... E achei isso muito bonito, porque mostra que, assim como nossos dias são instáveis, o quadro em questão de segundos também pode mudar completamente. Isso mostra que a arte nos completa mais do que imaginamos.',
+    foto: fotoDepoimento8,
+    fotoAlt: 'Yasmin, de cabelo cacheado com mechas rosa, sorrindo ao lado de duas telas que pintou: um veleiro no mar sob a lua, uma grande e uma pequena',
+    foto2: fotoDepoimento9,
+    foto2Alt: 'Yasmin ao ar livre, segurando duas telas: uma paisagem de campo amarelo com cerca e céu alaranjado, ao lado da imagem usada como referência',
+    foto3: fotoDepoimento10,
+    foto3Alt: 'Yasmin deitada na grama de uma praça, à noite, entre duas telas que pintou de um chapim azul e amarelo em um galho',
+  },
 ];
 
 export const cursosOnline: CursoOnline[] = [
@@ -135,6 +151,7 @@ export const cursosOnline: CursoOnline[] = [
     professor: 'ana-quintanas',
     publico: 'Iniciantes, a partir de 12 anos',
     formato: 'turma',
+    nivel: 'Para iniciantes: mesmo que você nunca tenha pegado em um pincel, ou se quer aprender mais técnica, a Ana ajuda no passo a passo.',
     descricao: 'Aprenda com acompanhamento da professora Ana Quintanas, tire dúvidas e desenvolva suas pinturas durante as aulas pelo Zoom. As aulas ficam gravadas por 30 dias para você rever ou assistir caso não consiga participar ao vivo.',
     dia: 'Segunda-feira',
     horario: '19h às 21h',
