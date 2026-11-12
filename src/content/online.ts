@@ -62,11 +62,11 @@ export interface Depoimento {
 
 export const depoimentos: Depoimento[] = [
   {
-    // TODO(conteudo): nome da aluna e se ela autoriza aparecer com a foto.
+    nome: 'Nathalia Hasckel',
     texto:
       'A arte é uma das formas mais lindas de libertação, é um crescimento para a vida. Pintar foi desde o começo onde eu pude me expressar e transformar em físico algo tão intangível quanto os sentimentos. Fazer esse curso com a Ana me trouxe e me traz cada vez mais segurança técnica para poder me expressar. Com técnicas novas, colorimetria, trocas e vivências pude ir vendo que o mundo da pintura pode ser muito mais explorado do que eu pensava. Ao olhar cada quadro que fiz no curso posso enxergar a evolução em cada pincelada, mas ainda mais especial que isso, é o prazer de pintar e alimentar a alma.',
     foto: fotoDepoimento1,
-    fotoAlt: 'Aluna de óculos e blusa rosa sorrindo ao lado da tela que pintou: uma flor rosa grande com folhas verdes, sobre fundo cinza-claro',
+    fotoAlt: 'Nathalia Hasckel, de óculos e blusa rosa, sorrindo ao lado da tela que pintou: uma flor rosa grande com folhas verdes, sobre fundo cinza-claro',
   },
   {
     nome: 'Fabíola Mayeda',
