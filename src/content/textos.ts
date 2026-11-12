@@ -103,6 +103,8 @@ export const TEXTOS = {
     titulo: 'Aulas *online*',
     intro: 'Aprenda a pintar de onde estiver! Há dois formatos de curso online com a Ana, indicados para iniciantes a partir de 12 anos, e também aulas online com outros professores do atelier.',
     botao: 'Consultar aulas online pelo WhatsApp',
+    grupoTitulo: 'Grupo de *apoio*',
+    grupoTexto: 'Quem faz as aulas ao vivo entra em um grupo no WhatsApp, onde as alunas compartilham o andamento dos quadros e trocam ideias e experiências com a professora e entre si. Nas aulas pelo Zoom, cada uma mostra o quadro que está pintando.',
     chamadaTitulo: 'Horários e *valores*',
     chamadaTexto: 'Horários, valores e vagas das aulas online, e o acesso aos cursos gravados, pelo WhatsApp.',
   },
