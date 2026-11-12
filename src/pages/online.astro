@@ -52,7 +52,7 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
               <h2 id={`online-${p.slug}`}>Com {p.artigo === 'a' ? 'a' : 'o'} <em>{p.primeiroNome}</em></h2>
               <ul class="cursos" role="list">
                 {cursosOnlineDe(p.slug).map((c) => (
-                  <li class:list={['curso', (relatosDoCurso[c.slug] || c.ofertas) && 'curso--largo']}>
+                  <li id={c.slug} class:list={['curso', (relatosDoCurso[c.slug] || c.ofertas) && 'curso--largo']}>
                     {c.capa && (
                       <Image
                         src={c.capa}
