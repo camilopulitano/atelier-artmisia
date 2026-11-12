@@ -2,6 +2,7 @@ import type { ImageMetadata } from 'astro';
 import { linkWhatsApp } from '../config/contato';
 import { professores } from './professores';
 import fotoDepoimento1 from '../assets/online/depoimento-aluna-1.jpg';
+import fotoDepoimento2 from '../assets/online/depoimento-aluna-2.jpg';
 import capaOleoGravado from '../assets/online/oleo-gravado-ana.jpg';
 
 /**
@@ -66,6 +67,13 @@ export const depoimentos: Depoimento[] = [
       'A arte é uma das formas mais lindas de libertação, é um crescimento para a vida. Pintar foi desde o começo onde eu pude me expressar e transformar em físico algo tão intangível quanto os sentimentos. Fazer esse curso com a Ana me trouxe e me traz cada vez mais segurança técnica para poder me expressar. Com técnicas novas, colorimetria, trocas e vivências pude ir vendo que o mundo da pintura pode ser muito mais explorado do que eu pensava. Ao olhar cada quadro que fiz no curso posso enxergar a evolução em cada pincelada, mas ainda mais especial que isso, é o prazer de pintar e alimentar a alma.',
     foto: fotoDepoimento1,
     fotoAlt: 'Aluna de óculos e blusa rosa sorrindo ao lado da tela que pintou: uma flor rosa grande com folhas verdes, sobre fundo cinza-claro',
+  },
+  {
+    nome: 'Fabíola Mayeda',
+    texto:
+      'Estou gostando muito do curso de pintura online. As aulas com a Ana são claras, tranquilas e me sinto mais confiante a cada quadro. O processo tem sido muito prazeroso e o resultado está ficando além do que eu esperava. Obrigada por compartilhar seu conhecimento com tanto carinho!',
+    foto: fotoDepoimento2,
+    fotoAlt: 'Fabíola Mayeda sorrindo e segurando a tela que pintou: dois limões amarelos com folhas verdes sobre listras laranja e brancas',
   },
 ];
 
