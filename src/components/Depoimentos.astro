@@ -105,29 +105,34 @@ const { titulo, itens, id } = Astro.props;
     flex: 0 0 100%;
     scroll-snap-align: start;
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 20px 32px;
+    flex-direction: column;
+    gap: 14px;
   }
 
   .fotos-dep {
-    flex: 0 1 300px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
     max-width: 100%;
   }
 
   .depoimento :global(img) {
-    width: 300px;
+    flex: 0 1 260px;
+    width: 260px;
     max-width: 100%;
     height: auto;
     border-radius: var(--raio);
   }
 
+  .legenda-linha {
+    flex: 1 1 100%;
+    max-width: 560px;
+  }
+
   .depoimento figure {
-    flex: 1 1 320px;
     min-width: 0;
+    max-width: 44em;
     margin: 0;
   }
 
