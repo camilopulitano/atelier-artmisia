@@ -59,6 +59,7 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                     <h3>{c.nome}</h3>
                     {c.publico && <p class="publico">{c.publico}</p>}
                     {c.nivel && <p class="nivel">{c.nivel}</p>}
+                    {c.descricao && <p class="descricao">{c.descricao}</p>}
                     {(c.dia || c.ritmo || c.valor) && (
                       <dl class="detalhes">
                         {c.dia && (<div><dt>Horário</dt><dd>{c.dia}{c.horario ? `, ${c.horario}` : ''}</dd></div>)}
@@ -66,8 +67,9 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
                         {c.valor && (<div><dt>Valor</dt><dd>{c.valor}</dd></div>)}
                       </dl>
                     )}
+                    {c.material && <p class="material">{c.material}</p>}
                     <a class="link-seta" href={c.link ?? linkOnline(c, p)} target="_blank" rel="noopener">
-                      {c.link ? 'Ver o curso' : c.emBreve ? 'Quero ser avisado' : 'Consultar pelo WhatsApp'} <span aria-hidden="true">→</span>
+                      {c.botao ?? (c.link ? 'Ver o curso' : c.emBreve ? 'Quero ser avisado' : 'Consultar pelo WhatsApp')} <span aria-hidden="true">→</span>
                       <span class="so-leitor"> — {c.nome}{c.publico ? `, ${c.publico}` : ''} (abre em nova aba)</span>
                     </a>
                   </li>
@@ -221,6 +223,15 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     object-fit: contain;
     border-radius: 4px;
     background: var(--secao);
+  }
+
+  .descricao {
+    font-size: 16px;
+  }
+
+  .material {
+    font-size: 14px;
+    color: var(--texto-suave);
   }
 
   .detalhes {
