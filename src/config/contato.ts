@@ -42,6 +42,14 @@ function validarE164(numero: string): string {
 
 export const WHATSAPP_E164 = validarE164(WHATSAPP_BRUTO);
 
+// WhatsApp pessoal do Camilo, para as aulas online e particulares dele (passado por ele em 12/11/2026).
+const WHATSAPP_CAMILO = validarE164('5516992919499');
+
+/** Link para o WhatsApp do Camilo (aulas online e particulares dele). */
+export function linkWhatsAppCamilo(mensagem: string): string {
+  return `https://wa.me/${WHATSAPP_CAMILO}?text=${encodeURIComponent(mensagem)}`;
+}
+
 /** Número para leitura humana: (45) 99859-3078 */
 export const WHATSAPP_LEGIVEL = `(${WHATSAPP_E164.slice(2, 4)}) ${WHATSAPP_E164.slice(4, 9)}-${WHATSAPP_E164.slice(9)}`;
 

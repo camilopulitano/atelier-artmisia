@@ -1,5 +1,5 @@
 import type { ImageMetadata } from 'astro';
-import { linkWhatsApp } from '../config/contato';
+import { linkWhatsApp, linkWhatsAppCamilo } from '../config/contato';
 import { professores } from './professores';
 import fotoDepoimento1 from '../assets/online/depoimento-aluna-1.jpg';
 import fotoDepoimento2 from '../assets/online/depoimento-aluna-2.jpg';
@@ -227,7 +227,7 @@ export const cursosOnline: CursoOnline[] = [
     descricao:
       'O professor Camilo oferece aulas on-line para crianças e aulas particulares para adultos, incentivando a criatividade e a expressão artística em todas as idades.\n\nAs aulas particulares têm acompanhamento personalizado, de acordo com os interesses, o nível e o ritmo de aprendizado de cada aluno.',
     botao: 'Falar com o Camilo sobre horários e valores',
-    link: linkWhatsApp('Olá! Vi no site do Atelier Artmisia as aulas online de arte com o professor Camilo e gostaria de saber horários, valores e como me inscrever.'),
+    link: linkWhatsAppCamilo('Olá, Camilo! Vi no site do Atelier Artmisia as suas aulas online de arte e gostaria de saber horários, valores e como me inscrever.'),
   },
 ];
 
