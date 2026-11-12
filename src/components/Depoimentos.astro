@@ -47,11 +47,22 @@ const { titulo, itens, id } = Astro.props;
 }
 
 <script>
-  document.addEventListener('click', (e) => {
-    const botao = (e.target as HTMLElement).closest<HTMLElement>('[data-anterior], [data-proximo]');
-    const lista = botao?.closest('.carrossel')?.querySelector<HTMLElement>('.lista-depoimentos');
-    if (!botao || !lista) return;
-    lista.scrollBy({ left: (botao.hasAttribute('data-proximo') ? 1 : -1) * lista.clientWidth, behavior: 'smooth' });
+  // Um depoimento por vez: o bloco tem a altura do depoimento que está aparecendo.
+  document.querySelectorAll<HTMLElement>('.carrossel').forEach((c) => {
+    const slides = Array.from(c.querySelectorAll<HTMLElement>('.depoimento'));
+    if (slides.length < 2) return;
+    let atual = 0;
+    const mostrar = (i: number) => {
+      atual = (i + slides.length) % slides.length;
+      slides.forEach((sl, n) => (sl.hidden = n !== atual));
+    };
+    mostrar(0);
+    c.addEventListener('click', (e) => {
+      const botao = (e.target as HTMLElement).closest('[data-anterior], [data-proximo]');
+      if (!botao) return;
+      mostrar(atual + (botao.hasAttribute('data-proximo') ? 1 : -1));
+      c.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
   });
 </script>
 
@@ -60,21 +71,20 @@ const { titulo, itens, id } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: 28px;
-    padding-top: 8px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    padding: clamp(16px, 2.5vw, 24px);
+    border-radius: var(--raio);
+    background: var(--secao);
   }
 
   .lista-depoimentos {
-    display: flex;
-    gap: 28px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .lista-depoimentos::-webkit-scrollbar {
+  .depoimento[hidden] {
     display: none;
   }
 
@@ -102,8 +112,6 @@ const { titulo, itens, id } = Astro.props;
   }
 
   .depoimento {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     gap: 14px;
