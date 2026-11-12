@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import grupoZoom from '../assets/online/grupo-zoom.jpg';
 import grupoLaranja from '../assets/online/grupo-laranja.jpg';
 import grupoVaca from '../assets/online/grupo-vaca.jpg';
 import type { ImageMetadata } from 'astro';
@@ -91,8 +92,9 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
       <p class="texto-suave">{TEXTOS.online.grupoTexto}</p>
     </div>
     <div class="fotos-grupo">
-      <Image src={grupoLaranja} alt="Duas fotos de quadros em andamento compartilhadas no grupo: uma laranja e metade de laranja pintadas sobre fundo azul, a tinta cobrindo só parte da tela" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 420px" quality={76} format="webp" loading="lazy" />
-      <Image src={grupoVaca} alt="Foto compartilhada no grupo de um quadro pronto: uma vaca branca e marrom de lenço azul sobre fundo xadrez azul e branco" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 260px" quality={76} format="webp" loading="lazy" />
+      <Image class="zoom" src={grupoZoom} alt="Aula ao vivo pelo Zoom: três alunas e um aluno sorrindo, cada um mostrando o quadro de um tucano que pintou, e no canto a mesa da professora com a referência, o quadro em andamento e a paleta" widths={[480, 640, 960]} sizes="(max-width: 700px) 90vw, 560px" quality={76} format="webp" loading="lazy" />
+      <Image class="laranja" src={grupoLaranja} alt="Duas fotos de quadros em andamento compartilhadas no grupo: uma laranja e metade de laranja pintadas sobre fundo azul, a tinta cobrindo só parte da tela" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 420px" quality={76} format="webp" loading="lazy" />
+      <Image class="vaca" src={grupoVaca} alt="Foto compartilhada no grupo de um quadro pronto: uma vaca branca e marrom de lenço azul sobre fundo xadrez azul e branco" widths={[320, 480, 640]} sizes="(max-width: 700px) 90vw, 260px" quality={76} format="webp" loading="lazy" />
     </div>
   </section>
 
@@ -339,14 +341,19 @@ const comOnline = professores.filter((p) => cursosOnlineDe(p.slug).length > 0);
     border-radius: var(--raio);
   }
 
-  .fotos-grupo :global(img:first-child) {
+  .fotos-grupo :global(.zoom) {
     width: 100%;
-    max-width: 420px;
+    max-width: 560px;
   }
 
-  .fotos-grupo :global(img:last-child) {
+  .fotos-grupo :global(.laranja) {
     width: 100%;
-    max-width: 200px;
+    max-width: 340px;
+  }
+
+  .fotos-grupo :global(.vaca) {
+    width: 100%;
+    max-width: 180px;
   }
 
   .depoimentos {
